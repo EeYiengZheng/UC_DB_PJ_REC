@@ -1,6 +1,6 @@
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="databaseBean" scope="page" class="beans.DatabaseBean"/>
+<jsp:useBean id="databaseBean" class="beans.DatabaseBean"/>
 <jsp:setProperty name="databaseBean" property="*"/>
 
 
