@@ -10,7 +10,7 @@ public class DBConnectionTest {
         ResultSetMetaData rsmd;
         try {
             // get connection with username = args[0] password = args[1]
-            Connection conn = DriverManager.getConnection(args[0], args[1], args[2]);
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+args[0], args[1], args[2]);
             DatabaseMetaData meta = conn.getMetaData();
             stmt = conn.createStatement();
             stmt.setFetchSize(1000);
@@ -37,6 +37,7 @@ public class DBConnectionTest {
             }
 
         } catch (SQLException ex) {
+            ex.printStackTrace();
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
