@@ -48,6 +48,7 @@ public class DatabaseBean {
 
     public void setConn() {
         try {
+			Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/publications?user=" + getUsername() + "&password=" + getPassword());
         } catch (Exception ex) {
             ex.printStackTrace();
