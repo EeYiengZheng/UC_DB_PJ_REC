@@ -25,3 +25,10 @@ hs_err_pid*
 .idea
 *.iml
 out
+
+#Eclipse EE
+.classpath
+.project
+.settings/
+WebContent/
+WEB-INF/classes/META-INF/
