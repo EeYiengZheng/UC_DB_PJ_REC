@@ -26,9 +26,12 @@ hs_err_pid*
 *.iml
 out
 
-#Eclipse EE
+# Eclipse EE
 .classpath
 .project
 .settings/
 WebContent/
 WEB-INF/classes/META-INF/
+
+# exclude java beans class folder
+!WEB-INF/classes/beans/*
