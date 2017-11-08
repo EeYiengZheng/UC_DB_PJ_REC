@@ -26,4 +26,21 @@ public class DatabaseConnector {
 		return null;
     }
 
+    public PreparedStatement getPreparedStatement(String queryString) {
+        try {
+            return con.prepareStatement(queryString);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void closeConnection() {
+        try {
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
