@@ -32,6 +32,7 @@ out
 .settings/
 WebContent/
 WEB-INF/classes/META-INF/
+/build/
 
 # exclude java beans class folder
 !WEB-INF/classes/beans/*
