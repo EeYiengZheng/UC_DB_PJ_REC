@@ -1,7 +1,5 @@
 package beans;
 
-import java.sql.*;
-
 public class DatabaseBean {
     private String databaseName;
     private String username;
