@@ -1,13 +1,13 @@
 <%@include file="databases.jsp" %>
 <%
 
-//Check user
 String username = request.getParameter( "username" );
 String password = request.getParameter( "password" );
-String query = "SELECT * FROM Users WHERE username='" + username + "' and password = sha2('"+ password + "', 256)";
 
-//Incorrect usage of preparedstatement. Will fix later.
+String query = "SELECT COUNT(*) FROM Users WHERE username=? and password = sha2(?, 256)";
 PreparedStatement stmt = con.prepareStatement(query);
+stmt.setString(1, username);
+stmt.setString(2, password);
 ResultSet rs = stmt.executeQuery();
 
 if (rs.next()) {
@@ -22,17 +22,4 @@ else {
 	request.setAttribute("errorMessage", "Invalid user or password");
 	rd.forward(request, response); 
 }
-
-/*
-
-			if (rs.first()) {
-				response.sendRedirect("index.jsp");
-			}
-			else {
-				RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-				request.setAttribute("errorMessage", "Invalid user or password");
-		        rd.forward(request, response); 
-			}
-*/
-
 %>
