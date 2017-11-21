@@ -4,7 +4,7 @@
 String username = request.getParameter( "username" );
 String password = request.getParameter( "password" );
 
-String query = "SELECT COUNT(*) FROM Users WHERE username=? and password = sha2(?, 256)";
+String query = "SELECT * FROM Users WHERE username=? and password = sha2(?, 256)";
 PreparedStatement stmt = con.prepareStatement(query);
 stmt.setString(1, username);
 stmt.setString(2, password);
