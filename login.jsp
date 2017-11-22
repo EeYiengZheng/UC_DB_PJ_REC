@@ -14,7 +14,7 @@
 </head>
 <body>
 <form method="POST" action="login_action.jsp">
-    <p>Username: <input type="text" name="username" size="20"></p>
+    <p>UserID: <input type="text" name="userID" size="20"></p>
     <p>Password: <input type="password" name="password" size="20"></p>
     <br>
     <p><input type="submit" value="Submit" name="B1"></p>
