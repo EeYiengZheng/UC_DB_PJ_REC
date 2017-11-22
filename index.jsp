@@ -1,23 +1,22 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id='user'
- scope='session'
- class='beans.UserBean'/>
-<jsp:setProperty name='user' property='*' />
+             scope='session'
+             class='beans.UserBean'/>
+<jsp:setProperty name='user' property='*'/>
 
 <html>
 <head>
-    <title>$Title$</title>
+    <title>CS157A Database Project</title>
 </head>
 <body>
-<h3 align="center">CS157A Database Project</h3>
-INDEX HERE
+<a href="<c:url value = "index.jsp"/>">CS157A Database Project</a>
 
-
-<!--Temporary Link-->
 <br>
-<a href="login.jsp">Login</a>
+<a href="<c:url value="account/login.jsp"/> ">Login</a>
 <br>
-<a href="register.jsp">Register</a>
+<a href="<c:url value="account/register.jsp"/> ">Register</a>
 
 
 </body>

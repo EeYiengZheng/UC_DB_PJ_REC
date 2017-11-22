@@ -20,7 +20,7 @@
     <p><input type="submit" value="Submit" name="B1"></p>
     <%	if(request.getAttribute("errorMessage") != null) {
     		out.println(request.getAttribute("errorMessage"));
-    	}	
+    	}
     %>
 </form>
 </body>
