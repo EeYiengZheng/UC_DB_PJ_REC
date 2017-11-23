@@ -37,4 +37,8 @@ public class AccountHelper {
         }
         return new byte[]{};
     }
+
+    public static String toHex(byte[] bytes) {
+        return javax.xml.bind.DatatypeConverter.printHexBinary(bytes).toLowerCase();
+    }
 }

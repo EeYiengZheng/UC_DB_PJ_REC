@@ -1,10 +1,13 @@
 <%@include file="databases.jsp" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<sql:query var="sal" dataSource="datasource">
+    SELECT salt FROM users WHERE id=?
+    <sql:param value="userId" />
+</sql:query>
 <%
 
     String userID = request.getParameter("userID");
     String password = request.getParameter("password");
+
 
     String query = "SELECT * FROM Users WHERE id=? AND password = sha2(?, 256)";
     PreparedStatement stmt = con.prepareStatement(query);

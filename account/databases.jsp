@@ -1,7 +1,6 @@
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-<%@ page import="java.sql.*, java.util.*, java.io.*" %>
+<%@include file="../taglibs.jsp" %>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@page import="java.sql.*, java.util.*, java.io.*" %>
 <%
     Connection con = null;
     try {
@@ -12,6 +11,6 @@
         return;
     }
 %>
-<sql:setDataSource var = "datasource" driver = "com.mysql.jdbc.Driver"
-                   url = "jdbc:mysql://localhost/cs157a"
-                   user = "root"  password = ""/>
+<sql:setDataSource var="datasource" driver="com.mysql.jdbc.Driver"
+                   url="jdbc:mysql://localhost/cs157a"
+                   user="root" password=""/>

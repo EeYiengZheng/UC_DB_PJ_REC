@@ -1,13 +1,14 @@
-<%@include file="databases.jsp" %>
+<%@ include file="databases.jsp" %>
+<%@ page errorPage="register_exception.jsp" %>
 
-
-<sql:update dataSource = "${datasource}" var = "count">
+<sql:update dataSource="${datasource}" var="count">
     INSERT INTO Users(id, email, name, password) VALUES (?, ?, ?, sha2(?, 256))
-    <sql:param value = "${param.userID}" />
-    <sql:param value = "${param.email}" />
-    <sql:param value = "${param.name}" />
-    <sql:param value = "${param.password}" />
+    <sql:param value="${param.userID}"/>
+    <sql:param value="${param.email}"/>
+    <sql:param value="${param.name}"/>
+    <sql:param value="${param.password}"/>
 </sql:update>
+<c:redirect url="login.jsp"/>
 <%--
 <%
     String userID = request.getParameter("userID");
