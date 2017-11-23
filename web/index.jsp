@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id='user' scope='session' class='beans.UserBean'/>
+<jsp:useBean id='user' scope='session' class="main.java.beans.UserBean"/>
 <jsp:setProperty name='user' property='*'/>
 
 <html>

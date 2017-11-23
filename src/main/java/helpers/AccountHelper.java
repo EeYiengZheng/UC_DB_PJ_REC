@@ -1,4 +1,4 @@
-package helpers;
+package main.java.helpers;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
