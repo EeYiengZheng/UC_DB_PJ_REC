@@ -1,8 +1,4 @@
 <%@include file="databases.jsp" %>
-<sql:query var="sal" dataSource="datasource">
-    SELECT salt FROM users WHERE id=?
-    <sql:param value="userId" />
-</sql:query>
 <%
 
     String userID = request.getParameter("userID");
