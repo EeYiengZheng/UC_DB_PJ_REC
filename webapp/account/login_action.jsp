@@ -14,7 +14,7 @@
     if (rs.next()) {
         stmt.close();
         con.close();
-        response.sendRedirect("../index.jsp");
+        response.sendRedirect("profile.jsp");
     } else {
         stmt.close();
         con.close();
