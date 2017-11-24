@@ -3,7 +3,10 @@ package main.java.beans;
 public class UserBean {
     private String username;
     private String password;
+    private boolean loggedIn;
 
+    public UserBean() {
+    }
 
     public String getUsername() {
         return username;
@@ -19,5 +22,13 @@ public class UserBean {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
     }
 }

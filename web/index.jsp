@@ -1,21 +1,17 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id='user' scope='session' class="main.java.beans.UserBean"/>
-<jsp:setProperty name='user' property='*'/>
+<%@include file="taglibs.jsp" %>
+<jsp:useBean id='user' class="main.java.beans.UserBean"/>
+<jsp:setProperty name='user' property='loggedIn' value="false"/>
 
-<html>
-<head>
-    <title>CS157A Database Project</title>
-</head>
-<body>
-<a href="<c:url value = "index.jsp"/>">CS157A Database Project</a>
-
-<br>
-<a href="<c:url value="account/login.jsp"/> ">Login</a>
-<br>
-<a href="<c:url value="account/register.jsp"/> ">Register</a>
-
-
-</body>
-</html>
+<t:genericpage>
+    <jsp:attribute name="header">
+      <h1 class="display-3">CS157A Database Project</h1>
+    </jsp:attribute>
+    <jsp:attribute name="footer">
+      <p id="copyright">Copyright 2017, and I hate JSP</p>
+    </jsp:attribute>
+    <jsp:body>
+        <br><br>
+        <p> Uhh, about this project...</p>
+    </jsp:body>
+</t:genericpage>

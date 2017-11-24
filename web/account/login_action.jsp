@@ -1,4 +1,6 @@
 <%@include file="databases.jsp" %>
+<jsp:useBean id='user' scope='session' class='main.java.beans.UserBean'/>
+
 <%
 
     String userID = request.getParameter("userID");
@@ -12,10 +14,13 @@
     ResultSet rs = stmt.executeQuery();
 
     if (rs.next()) {
+        user.setLoggedIn(true);
         stmt.close();
         con.close();
+
         response.sendRedirect("profile.jsp");
     } else {
+        user.setLoggedIn(false);
         stmt.close();
         con.close();
         RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
