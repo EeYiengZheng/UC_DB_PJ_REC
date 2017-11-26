@@ -29,6 +29,19 @@
         <ul class="nav navbar-nav navbar-right">
             <c:choose>
                 <c:when test="${user.loggedIn}">
+					<c:choose>
+						<c:when test="${user.getType().equals(UserBean.PROFESSOR)}">
+							<li class="nav-item">
+								<a class="nav-link" href="<c:url value="/courses/gradebook.jsp"/>">Gradebook</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li class="nav-item">
+								<a class="nav-link" href="<c:url value="/courses/grades.jsp"/>">Grades</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+					
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value="/account/profile.jsp"/>">Portal</a>
                     </li>
