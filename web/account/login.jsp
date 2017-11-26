@@ -3,26 +3,49 @@
 <jsp:useBean id='user' scope='session' class='main.java.beans.UserBean'/>
 <jsp:setProperty name='user' property='*'/>
 
+
 <c:set var="bodyContent">
-    <form method="POST" action="login_action.jsp">
-    <p>UserID: <input type="text" name="userID" size="20"></p>
-    <p>Password: <input type="password" name="password" size="20"></p>
-    <br>
-    <p><input type="submit" value="Submit" name="B1"></p>
+    <div class="container">
+        <div class="row centered-form">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please login <br>
+                            <small style="font-size: x-small"> (I hope it doesn't crash!)</small>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" name="username" id="user_name" class="form-control input-sm"
+                                       placeholder="Username">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password" id="password" class="form-control input-sm"
+                                       placeholder="Password" required>
+                            </div>
+
+                            <input type="submit" value="Login" class="btn btn-info btn-block" id="login_btn">
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <% if (request.getAttribute("errorMessage") != null) {
         out.println(request.getAttribute("errorMessage"));
     }
     %>
 </c:set>
+
 <t:genericpage>
     <jsp:attribute name="head">
         <title>Login</title>
     </jsp:attribute>
     <jsp:attribute name="header">
-      <h1 class="display-3">CS157A Database Project</h1>
     </jsp:attribute>
     <jsp:attribute name="footer">
-      <p id="copyright">Copyright 2017, and I hate JSP</p>
     </jsp:attribute>
     <jsp:body>
         ${bodyContent}

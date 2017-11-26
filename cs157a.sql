@@ -49,7 +49,10 @@ CREATE TABLE courses (
   course_description TEXT DEFAULT NULL,
   FULLTEXT idx_course_description (course_description),
   PRIMARY KEY (course_id),
-  UNIQUE KEY (dept_id)
+  INDEX (dept_id),
+  FOREIGN KEY (dept_id)
+    REFERENCES departments(dept_id)
+    ON UPDATE CASCADE ON DELETE CASCADE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS departments;

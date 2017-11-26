@@ -3,14 +3,14 @@
 
 <%
 
-    String userID = request.getParameter("userID");
+    String username = request.getParameter("username");
     String password = request.getParameter("password");
 
 
-    String query = "SELECT * FROM Users WHERE id=? AND password = sha2(?, 256)";
+    String query = "SELECT * FROM Users WHERE password = sha2(?, 256) AND username=?";
     PreparedStatement stmt = con.prepareStatement(query);
-    stmt.setString(1, userID);
-    stmt.setString(2, password);
+    stmt.setString(1, password);
+    stmt.setString(2, username);
     ResultSet rs = stmt.executeQuery();
 
     if (rs.next()) {

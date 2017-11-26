@@ -4,7 +4,7 @@
 <%@attribute name="footer" fragment="true" %>
 <%@include file="../../taglibs.jsp" %>
 
-<jsp:useBean id="user" class="main.java.beans.UserBean" scope="application"/>
+<jsp:useBean id="user" class="main.java.beans.UserBean" scope="session"/>
 <html>
 <head>
     <meta name="author" content="CS157A team 5">
@@ -58,6 +58,7 @@
         </div>
         <div id="pagefooter">
             <jsp:invoke fragment="footer"/>
+            <p id="copyright">Team 5 CS157A Database Project Copyright 2017, and I hate JSP</p>
         </div>
     </div>
 </div>

@@ -1,14 +1,35 @@
 <%@ include file="databases.jsp" %>
 <%@ page errorPage="register_exception.jsp" %>
 
+<%
+    String pass1 = request.getParameter("password");
+    String pass2 = request.getParameter("conf_password");
+
+    if (pass1 != null && pass2 != null && pass1.equals(pass2)) {
+%>
 <sql:update dataSource="${datasource}" var="count">
-    INSERT INTO Users(id, email, name, password) VALUES (?, ?, ?, sha2(?, 256))
-    <sql:param value="${param.userID}"/>
-    <sql:param value="${param.email}"/>
-    <sql:param value="${param.name}"/>
+    INSERT INTO Users(user_id, username, password, email, first_name, last_name) VALUES (NULL, ?, sha2(?, 256), ?, ?, ?)
+    <sql:param value="${param.username}"/>
     <sql:param value="${param.password}"/>
+    <sql:param value="${param.email}"/>
+    <sql:param value="${param.fname}"/>
+    <sql:param value="${param.lname}"/>
 </sql:update>
 <c:redirect url="login.jsp"/>
+<%
+    } else {
+        RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+        request.setAttribute("errorMessage", "Invalid password");
+        rd.forward(request, response);
+%>
+<br>
+<jsp:forward page="login.jsp"/>
+<c:out value="Please confirm your inputs"/>
+
+<%
+    }
+%>
+
 <%--
 <%
     String userID = request.getParameter("userID");
