@@ -1,4 +1,4 @@
-<%@include file="databases.jsp" %>
+<%@include file="../databases.jsp" %>
 <jsp:useBean id='user' scope='session' class='main.java.beans.UserBean'/>
 
 <%
