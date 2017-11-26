@@ -30,18 +30,18 @@
             <c:choose>
                 <c:when test="${user.loggedIn}">
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="../../account/profile.jsp"/>">Portal</a>
+                        <a class="nav-link" href="<c:url value="/account/profile.jsp"/>">Portal</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="../../account/logout_action.jsp"/>">Sign Out</a>
+                        <a class="nav-link" href="<c:url value="/account/logout_action.jsp"/>">Sign Out</a>
                     </li>
                 </c:when>
                 <c:otherwise>
                     <li class="nav-item ">
-                        <a class="nav-link" href="<c:url value="../../account/login.jsp"/>">Sign In</a>
+                        <a class="nav-link" href="<c:url value="/account/login.jsp"/>">Sign In</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="<c:url value="../../account/register.jsp"/>">Register</a>
+                        <a class="nav-link" href="<c:url value="/account/register.jsp"/>">Register</a>
                     </li>
                 </c:otherwise>
             </c:choose>
