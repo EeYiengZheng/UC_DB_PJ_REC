@@ -4,6 +4,11 @@ public class UserBean {
     private String username;
     private String password;
     private boolean loggedIn;
+    private String type;
+    public static final String PROFESSOR = "Professor";
+    public static final String STUDENT = "Student";
+    public static final String HEAD_OF_DEPARTMENT = "HeadOfDepartment";
+
 
     public UserBean() {
     }
@@ -30,5 +35,13 @@ public class UserBean {
 
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
+    }
+
+    public void setType(String type) {
+    	this.type = type;
+    }
+
+    public String getType() {
+    	return type;
     }
 }
