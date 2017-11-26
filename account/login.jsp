@@ -15,7 +15,7 @@
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
+                        <form role="form" action="login_action.jsp">
                             <div class="form-group">
                                 <input type="text" name="username" id="user_name" class="form-control input-sm"
                                        placeholder="Username">

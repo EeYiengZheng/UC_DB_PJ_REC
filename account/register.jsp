@@ -13,7 +13,7 @@
                             <small style="font-size: x-small"> (I hope it doesn't crash!)</small></h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
+                        <form role="form" action="register_action.jsp">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
