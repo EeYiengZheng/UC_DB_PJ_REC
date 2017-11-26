@@ -4,6 +4,9 @@
 <jsp:setProperty name='user' property='loggedIn' value="false"/>
 
 <t:genericpage>
+    <jsp:attribute name="head">
+        <title>Welcome</title>
+    </jsp:attribute>
     <jsp:attribute name="header">
         <h1 class="display-3">CS157A Database Project</h1>
     </jsp:attribute>

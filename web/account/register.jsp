@@ -57,7 +57,7 @@
 
 <t:genericpage>
     <jsp:attribute name="head">
-        <title>Login</title>
+        <title>Register</title>
     </jsp:attribute>
     <jsp:attribute name="header">
     </jsp:attribute>

@@ -45,10 +45,12 @@ DROP TABLE IF EXISTS courses;
 CREATE TABLE courses (
   course_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   dept_id INT UNSIGNED NOT NULL,
+  course_number VARCHAR(16) NOT NULL, 
   course_name VARCHAR(128) NOT NULL,
   course_description TEXT DEFAULT NULL,
   FULLTEXT idx_course_description (course_description),
   PRIMARY KEY (course_id),
+  UNIQUE KEY (course_number),
   INDEX (dept_id),
   FOREIGN KEY (dept_id)
     REFERENCES departments(dept_id)
@@ -59,8 +61,9 @@ DROP TABLE IF EXISTS departments;
 CREATE TABLE departments (
   dept_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   dept_short_name VARCHAR(8) NOT NULL,
-  dept_name VARCHAR(64) NOT NULL,
-  PRIMARY KEY (dept_id)
+  dept_name VARCHAR(128) NOT NULL,
+  PRIMARY KEY (dept_id),
+  UNIQUE KEY (dept_short_name)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
