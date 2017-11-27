@@ -5,7 +5,7 @@
 
 <c:set var="bodyContent">
     <div class="container">
-        <div class="row centered-form">
+        <div class="row justify-content-md-center">
             <div class="col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">

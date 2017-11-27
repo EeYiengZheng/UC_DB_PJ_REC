@@ -67,15 +67,15 @@
 </nav>
 <div class="jumbotron">
     <div class="container">
-        <div id="pageheader">
+        <div  class="row" id="pageheader">
             <jsp:invoke fragment="header"/>
         </div>
-        <div id="body">
+        <div  class="row" id="body">
             <jsp:doBody/>
         </div>
-        <div id="pagefooter">
+        <div class="row justify-content-center" id="pagefooter">
             <jsp:invoke fragment="footer"/>
-            <p id="copyright">Team 5 CS157A Database Project Copyright 2017, and I hate JSP</p>
+            <small id="copyright">Team 5 CS157A Database Project Copyright 2017, and I hate JSP</small>
         </div>
     </div>
 </div>

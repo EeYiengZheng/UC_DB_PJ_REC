@@ -6,8 +6,8 @@
 
 <c:set var="bodyContent">
     <div class="container">
-        <div class="row centered-form">
-            <div class="col-md-4">
+        <div class="row justify-content-md-center">
+            <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Please login <br>
