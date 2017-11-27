@@ -29,6 +29,20 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" name="nickname" id="nickname" class="form-control input-sm"
+                                               placeholder="Nickname">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="date" name="birthday" id="date" class="form-control input-sm"
+                                               placeholder="Date of Birth">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <input type="email" name="email" id="email" class="form-control input-sm"
                                        placeholder="Email Address">
@@ -51,7 +65,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <fieldset class="form-group">
                                 <div class="row">
                                     <div class="col-9">
@@ -91,10 +104,42 @@
 <t:genericpage>
     <jsp:attribute name="head">
         <title>Register</title>
+        <style>
+            input[type="date"]:before {
+                content: attr(placeholder) !important;
+                color: #aaa;
+                margin-right: 0.5em;
+            }
+
+            input[type="date"]:focus:before,
+            input[type="date"]:valid:before {
+                content: "";
+            }
+
+            #user_name::placeholder  {
+                color: #f66;
+            }
+
+            #password::placeholder  {
+                color: #f66;
+            }
+
+            #password_confirmation::placeholder  {
+                color: #f66;
+            }
+
+        </style>
     </jsp:attribute>
     <jsp:attribute name="header">
     </jsp:attribute>
     <jsp:attribute name="footer">
+        <script>
+            $(document).ready(function () {
+                var today = new Date();
+                var date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
+                $("#date").attr("placeholder", date.valueOf());
+            });
+        </script>
     </jsp:attribute>
     <jsp:body>
         ${bodyContent}
