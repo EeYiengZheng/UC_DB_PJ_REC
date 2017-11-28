@@ -1,6 +1,9 @@
 <%@ include file="../databases.jsp" %>
 <%@ page errorPage="register_exception.jsp" %>
 
+
+<%--
+<!--
 <%
     String pass1 = request.getParameter("password");
     String pass2 = request.getParameter("conf_password");
@@ -27,30 +30,52 @@
 <%
     }
 %>
-
-<%--
-<%
-    String userID = request.getParameter("userID");
-    String email = request.getParameter("email");
-    String name = request.getParameter("name");
-    String password = request.getParameter("password");
-
-
-    String query = "INSERT INTO Users(id, email, name, password) VALUES (?, ?, ?, sha2(?, 256))";
-    PreparedStatement stmt = con.prepareStatement(query);
-    stmt.setString(1, userID);
-    stmt.setString(2, email);
-    stmt.setString(3, name);
-    stmt.setString(4, password);
-    try {
-        stmt.executeUpdate();
-        stmt.close();
-        con.close();
-        response.sendRedirect("login.jsp");
-    } catch (Exception e) {
-        stmt.close();
-        con.close();
-        response.sendRedirect("register.jsp");
-    }
-%>
+-->
 --%>
+
+
+<%
+
+    String pass1 = request.getParameter("password");
+    String pass2 = request.getParameter("conf_password");
+
+    if (pass1 != null && pass2 != null && pass1.equals(pass2)) {
+		String query = "INSERT INTO Users(username, password) VALUES(?, sha2(?, 256))";
+    	String username = request.getParameter("username");
+		PreparedStatement stmt = con.prepareStatement(query);
+		stmt.setString(1, username);
+		stmt.setString(2, pass1);
+		stmt.executeUpdate();
+		stmt.close();
+		
+		query = "SELECT user_id FROM Users WHERE username=? AND password=sha2(?, 256)";
+		PreparedStatement idStmt = con.prepareStatement(query);
+		idStmt.setString(1, username);
+		idStmt.setString(2, pass1);
+		ResultSet rs = idStmt.executeQuery();
+		rs.next();
+		int userID = rs.getInt("user_id");
+		idStmt.close();
+		
+		String type = request.getParameter("user_type");
+		if (type.equals("Lecturer")) {
+			query = "INSERT INTO Professors(user_id) VALUES(?)";
+		}
+		else if (type.equals("Student")) {
+			query = "INSERT INTO Students(user_id) VALUES(?)";
+		}
+		PreparedStatement subclassStmt = con.prepareStatement(query);
+		subclassStmt.setInt(1, userID);
+		subclassStmt.executeUpdate();
+		subclassStmt.close();
+		
+		con.close();
+        response.sendRedirect("login.jsp");
+	}
+	else {
+		con.close();
+        RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
+        request.setAttribute("errorMessage", "Invalid password");
+        rd.forward(request, response);
+	}
+%>

@@ -27,6 +27,9 @@
         <ul class="navbar-nav mr-auto">
             <c:if test="${user.loggedIn}">
                 <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/userinfo/myInfo.jsp"/>">MyInfo</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/courses/search.jsp"/>">Search Courses</a>
                 </li>
                 <c:choose>
