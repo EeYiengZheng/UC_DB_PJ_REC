@@ -9,8 +9,7 @@
             <div class="col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Please register <br>
-                            <small style="font-size: x-small"> (I hope it doesn't crash!)</small>
+                        <h3 class="panel-title">Register for an Account<br>
                         </h3>
                     </div>
                     <div class="panel-body">

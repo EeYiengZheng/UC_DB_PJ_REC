@@ -7,6 +7,7 @@
 <jsp:useBean id="user" class="main.java.beans.UserBean" scope="session"/>
 <html>
 <head>
+    <link rel="shortcut icon" type="image/png" href="https://prometheus.atlas-sys.com/download/attachments/116130109/database02.png"/>
     <meta name="author" content="CS157A team 5">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,10 +15,38 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <jsp:invoke fragment="head"/>
+<style>
+.jumbotron {
+  line-height: 1;
+  background-image: linear-gradient(#011f4b, #03396c,#005b96,#6497b1, #b3cde0);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-color: #b3cde0;
+  border-radius: 0px;
+}
+#body-override .jumbotron {
+  line-height: 1;
+  background-color: #b3cde0;
+}
+body {
+    background-color: #b3cde0;
+}
+h1,h2,h3,p,footer,small,.nav-link,.navbar-toggler-icon
+{
+    color:white !important;
+}
+.display-3 {
+    color:white !important;
+}
+.bg-dark
+{
+    background-color: #011f4b !important;
+}
+</style>
 </head>
-<body>
+<body id = "body-override">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="<c:url value="/"/>">UCBD</a>
+    <a class="navbar-brand" href="<c:url value="/"/>">UCDB</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbar1"
             aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -50,7 +79,7 @@
             <c:choose>
                 <c:when test="${user.loggedIn}">
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/account/profile.jsp"/>">Portal</a>
+                        <a class="nav-link" href="<c:url value="/account/profile.jsp"/>">Dashboard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value="/account/logout_action.jsp"/>">Sign Out</a>
@@ -58,7 +87,7 @@
                 </c:when>
                 <c:otherwise>
                     <li class="nav-item ">
-                        <a class="nav-link" href="<c:url value="/account/login.jsp"/>">Sign In</a>
+                        <a class="nav-link" href="<c:url value="/account/login.jsp"/>">Login</a>
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="<c:url value="/account/register.jsp"/>">Register</a>
@@ -78,7 +107,7 @@
         </div>
         <div class="row justify-content-center" id="pagefooter">
             <jsp:invoke fragment="footer"/>
-            <small id="copyright">Team 5 CS157A Database Project Copyright 2017, and I hate JSP</small>
+            <small id="copyright">© Copyright Team 5: CS157A Database Project 2017</small>
         </div>
     </div>
 </div>
