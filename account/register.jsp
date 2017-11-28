@@ -14,7 +14,7 @@
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form" action="register_action.jsp">
+                        <form role="form" method="post" action="register_action.jsp">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -94,6 +94,12 @@
                             </fieldset>
                             <input type="submit" value="Register" class="btn btn-info btn-block">
                         </form>
+                        
+
+<% if (request.getAttribute("errorMessage") != null) {
+    out.println(request.getAttribute("errorMessage"));
+}
+%>
                     </div>
                 </div>
             </div>
@@ -146,8 +152,3 @@
     </jsp:body>
 
 </t:genericpage>
-
-<% if (request.getAttribute("errorMessage") != null) {
-    out.println(request.getAttribute("errorMessage"));
-}
-%>

@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <title>Registeration Error</title>
+    <title>Registration Error</title>
     <meta http-equiv="Refresh" content="5;url=register.jsp">
 </head>
 <body>
