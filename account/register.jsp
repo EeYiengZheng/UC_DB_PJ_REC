@@ -71,21 +71,21 @@
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label">
                                                 <input class="form-check-input" type="radio" name="user_type"
-                                                       id="user_type1" value="option1" checked>
+                                                       id="user_type1" value="Student" checked>
                                                 Student
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label">
                                                 <input class="form-check-input" type="radio" name="user_type"
-                                                       id="user_type2" value="option2">
+                                                       id="user_type2" value="Lecturer">
                                                 Lecturer
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline disabled">
                                             <label class="form-check-label">
                                                 <input class="form-check-input" type="radio" name="user_type"
-                                                       id="user_type3" value="option3" disabled>
+                                                       id="user_type3" value="VIP" disabled>
                                                 VIP
                                             </label>
                                         </div>

@@ -1,6 +1,7 @@
 <%@include file="../databases.jsp" %>
 <jsp:useBean id='user' scope='session' class='main.java.beans.UserBean'/>
 
+
 <%
 
     String username = request.getParameter("username");
@@ -15,6 +16,9 @@
 
     if (rs.next()) {
         user.setLoggedIn(true);
+		user.setUsername(username);
+		user.setPassword(password);
+		user.setType(rs.getString("type"));
         stmt.close();
         con.close();
 

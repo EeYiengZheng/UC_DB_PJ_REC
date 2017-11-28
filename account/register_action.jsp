@@ -8,9 +8,10 @@
     if (pass1 != null && pass2 != null && pass1.equals(pass2)) {
 %>
 <sql:update dataSource="${datasource}" var="count">
-    INSERT INTO Users(user_id, username, password) VALUES (NULL, ?, sha2(?, 256))
+    INSERT INTO Users(user_id, username, password, type) VALUES (NULL, ?, sha2(?, 256), ?)
     <sql:param value="${param.username}"/>
     <sql:param value="${param.password}"/>
+    <sql:param value="${param.user_type}"/>
 </sql:update>
 <c:redirect url="login.jsp"/>
 <%
