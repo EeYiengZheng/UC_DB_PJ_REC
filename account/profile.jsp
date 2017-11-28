@@ -8,19 +8,19 @@
             <p> Body content </p>
         </c:when>
         <c:otherwise>
-            <p> You are signed out </p>
+            <p> You are signed out. </p>
         </c:otherwise>
     </c:choose>
 </c:set>
 <t:genericpage>
     <jsp:attribute name="head">
-        <title>Portal</title>
+        <title>Dashboard</title>
     </jsp:attribute>
     <jsp:attribute name="header">
-      <h1 class="display-3">Your Portal Placeholder</h1>
+      <h1 class="display-3">Account</h1>
     </jsp:attribute>
     <jsp:attribute name="footer">
-      <p id="copyright">Yep, I still hate JSP</p>
+      <p id="copyright"></p>
     </jsp:attribute>
     <jsp:body>
         ${bodyContent}
