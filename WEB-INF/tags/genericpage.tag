@@ -30,7 +30,7 @@
                     <a class="nav-link" href="<c:url value="/courses/search.jsp"/>">Search Courses</a>
                 </li>
                 <c:choose>
-                    <c:when test="${user.getType().equals(UserBean.LECTURER)}">
+                    <c:when test="${user.getType().equals('Lecturer')}">
                         <li class="nav-item">
                             <a class="nav-link" href="<c:url value="/courses/gradebook.jsp"/>">Gradebook</a>
                         </li>

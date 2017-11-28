@@ -5,9 +5,6 @@ public class UserBean {
     private String password;
     private boolean loggedIn;
     private String type;
-    public static final String LECTURER = "Lecturer";
-    public static final String STUDENT = "Student";
-    public static final String VIP = "VIP";
 
 
     public UserBean() {
