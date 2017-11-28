@@ -31,6 +31,7 @@
 		else {
 			user.setType("Lecturer");
 		}
+		studentQuery.close();
 		
         con.close();
 
