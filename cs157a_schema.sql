@@ -165,8 +165,8 @@ CREATE TABLE teaches (
 --
 -- enrollment_capacity
 --
-DROP TABLE IF EXISTS entroll_capacity;
-CREATE TABLE entroll_capacity (
+DROP TABLE IF EXISTS enroll_capacity;
+CREATE TABLE enroll_capacity (
   course_id        INT UNSIGNED NOT NULL,
   capacity_current TINYINT UNSIGNED DEFAULT 0,
   capacity_max     TINYINT UNSIGNED DEFAULT 30, -- for now
