@@ -169,7 +169,7 @@ DROP TABLE IF EXISTS entroll_capacity;
 CREATE TABLE entroll_capacity (
   course_id        INT UNSIGNED NOT NULL,
   capacity_current TINYINT UNSIGNED DEFAULT 0,
-  capacity_max     TINYINT UNSIGNED DEFAULT 20, -- for now
+  capacity_max     TINYINT UNSIGNED DEFAULT 30, -- for now
   PRIMARY KEY (course_id),
   FOREIGN KEY (course_id)
   REFERENCES courses (course_id)
