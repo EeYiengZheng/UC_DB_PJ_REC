@@ -24,6 +24,22 @@ $(document).ready(function() {
 		$("#changeNameBtn").show();
 	});
 	
+	
+	
+	$("#saveEmailBtn").hide();
+	
+	$("#changeEmailBtn").on("click", function() {
+		$("#emailField").attr("readonly", false);
+		$("#changeEmailBtn").hide();
+		$("#saveEmailBtn").show();
+	});
+	
+	$("#saveEmailBtn").on("click", function() {
+		$("#emailField").attr("readonly", true);
+		$("#saveEmailBtn").hide();
+		$("#changeEmailBtn").show();
+	});
+	
 });
 </script>
 
@@ -33,7 +49,11 @@ PreparedStatement stmt = con.prepareStatement(query);
 stmt.setString(1, user.getUsername());
 ResultSet rs = stmt.executeQuery();
 rs.next();
-String nickname = rs.getString("nickname");
+String nickname = rs.getString("nickname") == null ? "" : rs.getString("nickname");
+String email = rs.getString("email") == null ? "" : rs.getString("email");
+String firstName = rs.getString("first_name");
+String lastName = rs.getString("last_name");
+String birthday = rs.getString("birthday");
 stmt.close();
 con.close();
 %>
@@ -42,12 +62,37 @@ con.close();
 
 <div class="field-group">
 	<form method="post" action="change_info.jsp">
+    
+    
+        <label>First Name</label>
+        <input id="firstNameField" name="firstName" type="text" readonly value=<%=firstName%>></input>
+        <br>
+        <label>Last Name</label>
+        <input id="lastNameField" name="lastName" type="text" readonly value=<%=lastName%>></input>
+        <br>
+        <label>Birthday</label>
+        <input id="birthdayField" name="birthday" type="text" readonly value=<%=birthday%>></input>
+    	<br>
+    
         <label>Nickname</label>
-        <input id="nameField" name="nickname" type="text" value=<%=nickname%> readonly="readonly" />
+        <input id="nameField" name="nickname" type="text" readonly value=<%=nickname%>></input>
         <button type="button" id="changeNameBtn">Edit</button>
         <button type="button" id="saveNameBtn">Save</button>
         
+        <br>
+		<% if (request.getAttribute("errorMessage") != null) {
+            out.println(request.getAttribute("errorMessage"));
+        }
+        %>
+        
+        <label>Email</label>
+        <input id="emailField" name="email" type="text" readonly value=<%=email%>></input>
+        <button type="button" id="changeEmailBtn">Edit</button>
+        <button type="button" id="saveEmailBtn">Save</button>
+        
         <input type="submit" value="Update Info" class="btn btn-info btn-block">
+        
+     
     </form>
 </div>
 </c:set>

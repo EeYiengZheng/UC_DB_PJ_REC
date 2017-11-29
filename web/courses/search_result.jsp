@@ -16,7 +16,7 @@
 		courseNum = "%";
 	}
 	
-	String query = "SELECT * FROM Courses WHERE dept_id IN (SELECT dept_id FROM Departments WHERE dept_short_name LIKE ?) AND course_number LIKE ?";
+	String query = "SELECT * FROM Courses WHERE dept_short_name LIKE ? AND course_number LIKE %?%";
 
     PreparedStatement stmt = con.prepareStatement(query);
     stmt.setString(1, subject);
