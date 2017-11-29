@@ -69,6 +69,24 @@
 		subclassStmt.executeUpdate();
 		subclassStmt.close();
 		
+		
+		query = "INSERT INTO Users_Detail(user_id, email, first_name, last_name, birthday, nickname) VALUES(?, ?, ?, ?, ?, ?)";
+		PreparedStatement detailStmt = con.prepareStatement(query);
+		detailStmt.setInt(1, userID);
+		String email = request.getParameter("email").equals("") ? null : request.getParameter("email");
+		String fname = request.getParameter("email").equals("") ? null : request.getParameter("fname");
+		String lname = request.getParameter("email").equals("") ? null : request.getParameter("lname");
+		String birthday = request.getParameter("email").equals("") ? null : request.getParameter("birthday");
+		String nickname = request.getParameter("email").equals("") ? null : request.getParameter("nickname");
+		
+		detailStmt.setString(2, email);
+		detailStmt.setString(3, fname);
+		detailStmt.setString(4, lname);
+		detailStmt.setString(5, birthday);
+		detailStmt.setString(6, nickname);
+		detailStmt.executeUpdate();
+		detailStmt.close();
+		
 		con.close();
         response.sendRedirect("login.jsp");
 	}

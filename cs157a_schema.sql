@@ -33,7 +33,7 @@ CREATE TABLE users_detail (
   email VARCHAR(128) DEFAULT NULL,
   first_name VARCHAR(64) DEFAULT NULL,
   last_name VARCHAR(64) DEFAULT NULL,
-  age TINYINT UNSIGNED DEFAULT NULL,
+  birthday VARCHAR(128) DEFAULT NULL,
   nickname VARCHAR(128) DEFAULT NULL,
   PRIMARY KEY (user_detail_id),
   UNIQUE KEY (email),
