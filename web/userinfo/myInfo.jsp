@@ -34,9 +34,12 @@ stmt.setString(1, user.getUsername());
 ResultSet rs = stmt.executeQuery();
 rs.next();
 String nickname = rs.getString("nickname");
+stmt.close();
+con.close();
 %>
 
 <c:set var="bodyContent">
+
 <div class="field-group">
 	<form method="post" action="change_info.jsp">
         <label>Nickname</label>
@@ -48,13 +51,6 @@ String nickname = rs.getString("nickname");
     </form>
 </div>
 </c:set>
-
-
-<%
-stmt.close();
-con.close();
-%>
-
 
 <t:genericpage>
     <jsp:attribute name="head">
