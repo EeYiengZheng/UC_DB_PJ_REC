@@ -82,7 +82,7 @@ CREATE TABLE professors (
 DROP TABLE IF EXISTS courses;
 CREATE TABLE courses (
   course_id          INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  dept_short_name VARCHAR(8)   NOT NULL,
+  dept_short_name    VARCHAR(8)   NOT NULL,
   course_number      VARCHAR(16)  NOT NULL,
   course_name        VARCHAR(128) NOT NULL,
   course_description TEXT                  DEFAULT NULL,
@@ -109,9 +109,9 @@ CREATE TABLE departments (
 
 DROP TABLE IF EXISTS classrooms;
 CREATE TABLE classrooms (
-  room_num      VARCHAR(8)   NOT NULL,
-  building_name VARCHAR(32)  NOT NULL,
-  floor         TINYINT UNSIGNED      DEFAULT NULL,
+  room_num      VARCHAR(8)  NOT NULL,
+  building_name VARCHAR(32) NOT NULL,
+  floor         TINYINT UNSIGNED DEFAULT NULL,
   PRIMARY KEY (room_num, building_name)
 )
   ENGINE = InnoDB
@@ -164,8 +164,8 @@ CREATE TABLE teaches (
 DROP TABLE IF EXISTS entroll_capacity;
 CREATE TABLE entroll_capacity (
   course_id        INT UNSIGNED NOT NULL,
-  capacity_current TINYINT UNSIGNED      DEFAULT 0,
-  capacity_max     TINYINT UNSIGNED      DEFAULT 20, -- for now
+  capacity_current TINYINT UNSIGNED DEFAULT 0,
+  capacity_max     TINYINT UNSIGNED DEFAULT 20, -- for now
   PRIMARY KEY (course_id),
   FOREIGN KEY (course_id)
   REFERENCES courses (course_id)
