@@ -156,7 +156,24 @@ CREATE TABLE teaches (
   REFERENCES courses (course_id)
     ON UPDATE CASCADE
     ON DELETE CASCADE
-);
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+
+DROP TABLE IF EXISTS taught_in;
+CREATE TABLE taught_in (
+  course_id     INT UNSIGNED NOT NULL,
+  room_num      VARCHAR(8)   NOT NULL,
+  building_name VARCHAR(32)  NOT NULL,
+  PRIMARY KEY (course_id),
+  FOREIGN KEY (room_num, building_name)
+  REFERENCES classrooms (room_num, building_name)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
 
 -- ------------------------------------
 
