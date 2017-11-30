@@ -16,11 +16,11 @@
 		courseNum = "%";
 	}
 	
-	String query = "SELECT * FROM Courses WHERE dept_short_name LIKE ? AND course_number LIKE %?%";
+	String query = "SELECT * FROM Courses WHERE dept_short_name LIKE ? AND course_number LIKE ?";
 
     PreparedStatement stmt = con.prepareStatement(query);
     stmt.setString(1, subject);
-    stmt.setString(2, courseNum);
+    stmt.setString(2, "%" + courseNum + "%");
     ResultSet rs = stmt.executeQuery();
 
     while (rs.next()) {
