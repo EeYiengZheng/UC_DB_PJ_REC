@@ -16,19 +16,33 @@
 	</c:choose>
 
 <%
-String query = "SELECT * FROM courses NATURAL JOIN enrolled_in WHERE student_id IN (SELECT student_id FROM Students NATURAL JOIN Users WHERE username=?)";
-PreparedStatement stmt = con.prepareStatement(query);
-stmt.setString(1, user.getUsername());
-ResultSet courseList = stmt.executeQuery();
-while (courseList.next()) {
-	out.println("<p>" + courseList.getString("dept_short_name") + " " + courseList.getString("course_number") + ":" + courseList.getString("course_name"));
-	out.println("<form action='drop_course.jsp' method='GET'><input type='hidden' name='course_id' value='" + courseList.getString("course_id") + "'><input name='student_id' type='hidden' value='" + courseList.getString("student_id") + "'><input type='Submit' value='Drop'></form>");
-	out.println("</p>");
+if (user.getType().equals("Student")) {
+	String query = "SELECT * FROM courses NATURAL JOIN enrolled_in WHERE student_id IN (SELECT student_id FROM Students NATURAL JOIN Users WHERE username=?)";
+	PreparedStatement stmt = con.prepareStatement(query);
+	stmt.setString(1, user.getUsername());
+	ResultSet courseList = stmt.executeQuery();
+	while (courseList.next()) {
+		out.println("<p>" + courseList.getString("dept_short_name") + " " + courseList.getString("course_number") + ":" + courseList.getString("course_name"));
+		out.println("<form action='drop_course.jsp' method='GET'><input type='hidden' name='course_id' value='" + courseList.getString("course_id") + "'><input name='student_id' type='hidden' value='" + courseList.getString("student_id") + "'><input type='Submit' value='Drop'></form>");
+		out.println("</p>");
+	}
+	stmt.close();
+	con.close();
+}
+else {
+	String query = "SELECT * FROM courses NATURAL JOIN teaches WHERE professor_id IN (SELECT professor_id FROM Professors NATURAL JOIN Users WHERE username=?)";
+	PreparedStatement stmt = con.prepareStatement(query);
+	stmt.setString(1, user.getUsername());
+	ResultSet courseList = stmt.executeQuery();
+	while (courseList.next()) {
+		out.println("<p>" + courseList.getString("dept_short_name") + " " + courseList.getString("course_number") + ":" + courseList.getString("course_name"));
+		out.println("<form action='drop_course.jsp' method='GET'><input type='hidden' name='course_id' value='" + courseList.getString("course_id") + "'><input name='professor_id' type='hidden' value='" + courseList.getString("professor_id") + "'><input type='Submit' value='Drop'></form>");
+		out.println("</p>");
+	}
+	stmt.close();
+	con.close();
 }
 
-
-stmt.close();
-con.close();
 %>
 
 <h3>Search for Courses</h3>
