@@ -27,8 +27,11 @@
 		//Very ugly...will deal with front end later
 		String courseNumber = rs.getString("course_number");
 		String courseName = rs.getString("course_name");
-		String courseDescription = rs.getString("course_description");
-		out.println(courseNumber + "-----" + courseName + "-----" + courseDescription);
+		String departmentShortName = rs.getString("dept_short_name");
+		//String courseDescription = rs.getString("course_description");
+		out.println(departmentShortName + " " + courseNumber + "-----" + courseName);
+		String className = departmentShortName + " " + courseNumber;
+		out.println("<form action='add_course.jsp' method='POST'><input type='hidden' name='" + className + "'><input type='Submit' value='Enroll'></form>");
 		out.println("<br>");
     }
 	
@@ -37,8 +40,6 @@
 %>
 
 <c:set var="bodyContent">
-Test
-
 </c:set>
 
 <t:genericpage>
