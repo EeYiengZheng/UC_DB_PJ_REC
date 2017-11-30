@@ -19,7 +19,7 @@
     <style>
         .jumbotron {
             line-height: 1;
-            background-image: linear-gradient(#011f4b, #03396c, #005b96, #6497b1, #b3cde0);
+            background-image: linear-gradient(#92d2ec, #71a6c0, #0071b4, #00488a, #011F4B);
             background-repeat: no-repeat;
             background-size: 100% 100%;
             background-color: #b3cde0;
@@ -33,7 +33,7 @@
         }
 
         body {
-            background-color: #b3cde0;
+            background-color: #ffffff;
         }
 
         h1, h2, h3, p, footer, small, .nav-link, .navbar-toggler-icon {
