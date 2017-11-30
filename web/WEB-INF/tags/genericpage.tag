@@ -69,12 +69,12 @@
                 <c:choose>
                     <c:when test="${user.getType().equals('Lecturer')}">
                         <li class="nav-item">
-                            <a class="nav-link" href="<c:url value="/courses/gradebook.jsp"/>">Gradebook</a>
+                            <a class="nav-link" href="<c:url value="/grades/gradebook.jsp"/>">Gradebook</a>
                         </li>
                     </c:when>
                     <c:otherwise>
                         <li class="nav-item">
-                            <a class="nav-link" href="<c:url value="/courses/grades.jsp"/>">Grades</a>
+                            <a class="nav-link" href="<c:url value="/grades/myGrades.jsp"/>">Grades</a>
                         </li>
                     </c:otherwise>
                 </c:choose>

@@ -6,33 +6,14 @@
 
 <%
 
-	String query = "SELECT student_id FROM Students NATURAL JOIN Users WHERE username=?";
+	String query = "DELETE FROM enrolled_in WHERE student_id=? AND course_id=?";
 	PreparedStatement stmt = con.prepareStatement(query);
-	stmt.setString(1, user.getUsername());
-	ResultSet idResult = stmt.executeQuery();
-	idResult.next();
-	int studentID = idResult.getInt("student_id");
-	stmt.close();
-	
-	query = "SELECT course_id FROM courses WHERE dept_short_name=? AND course_number=?";
-	stmt = con.prepareStatement(query);
-	stmt.setString(1, request.getParameter("dept_short_name"));
-	stmt.setString(2, request.getParameter("course_number"));
-	ResultSet courseResult = stmt.executeQuery();
-	courseResult.next();
-	int courseID = courseResult.getInt("course_id");
-	stmt.close();
-
-	query = "INSERT INTO enrolled_in(student_id, course_id, grade, is_taking) VALUES(?, ?, ?, ?)";
-	stmt = con.prepareStatement(query);
-	stmt.setInt(1, studentID);
-	stmt.setInt(2, courseID);
-	stmt.setString(3, null);
-	stmt.setBoolean(4, true);
+	stmt.setString(1, request.getParameter("student_id"));
+	stmt.setString(2, request.getParameter("course_id"));
 	
 	try {
 		stmt.executeUpdate();
-    	request.setAttribute("resultMessage", "Course added successfully!");
+    	request.setAttribute("resultMessage", "Course dropped successfully!");
 	}
 	catch(Exception e) {
 		request.setAttribute("resultMessage", "An error occurred while attempting to add the course. Please contact the system administrator.");
