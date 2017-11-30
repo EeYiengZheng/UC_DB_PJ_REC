@@ -8,7 +8,7 @@
         <title>Welcome</title>
     </jsp:attribute>
     <jsp:attribute name="header">
-        <h1 class="display-3"><img src="https://4erff29jo03b8uhp4b94vxhq-wpengine.netdna-ssl.com/wp-content/uploads/2015/05/caspio-features-illustr_cloud-data_3_2x.png" width="10%" height="15%">University Database Project</h1>
+        <h1 class="display-3"><img src="https://4erff29jo03b8uhp4b94vxhq-wpengine.netdna-ssl.com/wp-content/uploads/2015/05/caspio-features-illustr_cloud-data_3_2x.png" width="150px" height="120px">University Database Project</h1>
     </jsp:attribute>
     <jsp:attribute name="footer">
     </jsp:attribute>
