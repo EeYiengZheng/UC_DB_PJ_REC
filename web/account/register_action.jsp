@@ -72,10 +72,10 @@
 		PreparedStatement detailStmt = con.prepareStatement(query);
 		detailStmt.setInt(1, userID);
 		String email = request.getParameter("email").equals("") ? null : request.getParameter("email");
-		String fname = request.getParameter("email").equals("") ? null : request.getParameter("fname");
-		String lname = request.getParameter("email").equals("") ? null : request.getParameter("lname");
-		String birthday = request.getParameter("email").equals("") ? null : request.getParameter("birthday");
-		String nickname = request.getParameter("email").equals("") ? null : request.getParameter("nickname");
+		String fname = request.getParameter("fname").equals("") ? null : request.getParameter("fname");
+		String lname = request.getParameter("lname").equals("") ? null : request.getParameter("lname");
+		String birthday = request.getParameter("birthday").equals("") ? null : request.getParameter("birthday");
+		String nickname = request.getParameter("nickname").equals("") ? null : request.getParameter("nickname");
 		
 		detailStmt.setString(2, email);
 		detailStmt.setString(3, fname);
