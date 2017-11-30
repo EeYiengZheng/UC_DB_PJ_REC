@@ -32,14 +32,14 @@ DROP TABLE IF EXISTS users_detail;
 CREATE TABLE users_detail (
   user_detail_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   user_id        INT UNSIGNED NOT NULL,
-  email          VARCHAR(128)          DEFAULT NULL,
+  email          VARCHAR(255)          DEFAULT NULL,
   first_name     VARCHAR(64)           DEFAULT NULL,
   last_name      VARCHAR(64)           DEFAULT NULL,
-  birthday       VARCHAR(128)          DEFAULT NULL,
+  birthday       DATE                  DEFAULT NULL, -- default yyyy-mm-dd
   nickname       VARCHAR(128)          DEFAULT NULL,
   phone_number   VARCHAR(128)          DEFAULT NULL,
   address        VARCHAR(128)          DEFAULT NULL,
-  gender         VARCHAR(128)          DEFAULT NULL,
+  gender         VARCHAR(64)           DEFAULT NULL,
   ethnicity      VARCHAR(128)          DEFAULT NULL,
   PRIMARY KEY (user_detail_id),
   UNIQUE KEY (email),
@@ -131,8 +131,8 @@ CREATE TABLE enrolled_in (
   enrollment_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   student_id    INT UNSIGNED NOT NULL,
   course_id     INT UNSIGNED NOT NULL,
-  completed     BOOL                  DEFAULT FALSE,
   grade         ENUM ('A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F', 'CR', 'NC', 'W', 'I'),
+  completed     BOOL                  DEFAULT FALSE,
   is_taking     BOOL                  DEFAULT FALSE,
   PRIMARY KEY (enrollment_id),
   UNIQUE KEY (student_id, course_id),
@@ -171,6 +171,18 @@ CREATE TABLE taught_in (
   REFERENCES classrooms (room_num, building_name)
     ON UPDATE CASCADE
     ON DELETE CASCADE
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+DROP TABLE IF EXISTS hired_by;
+CREATE TABLE hired_by (
+  professor_id    INT UNSIGNED NOT NULL,
+  dept_short_name VARCHAR(8)   NOT NULL,
+  PRIMARY KEY (professor_id, dept_short_name),
+  FOREIGN KEY (professor_id)
+  REFERENCES professors (professor_id)
+    ON UPDATE CASCADE
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
