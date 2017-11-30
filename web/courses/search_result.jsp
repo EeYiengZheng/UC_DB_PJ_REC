@@ -30,8 +30,7 @@
 		String departmentShortName = rs.getString("dept_short_name");
 		//String courseDescription = rs.getString("course_description");
 		out.println(departmentShortName + " " + courseNumber + "-----" + courseName);
-		String className = departmentShortName + " " + courseNumber;
-		out.println("<form action='add_course.jsp' method='POST'><input type='hidden' name='" + className + "'><input type='Submit' value='Enroll'></form>");
+		out.println("<form action='add_course.jsp' method='POST'><input type='hidden' name='dept_short_name' value='" + departmentShortName + "'><input name='course_number' type='hidden' value='" + courseNumber + "'><input type='Submit' value='Enroll'></form>");
 		out.println("<br>");
     }
 	

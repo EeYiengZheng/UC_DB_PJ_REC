@@ -6,6 +6,11 @@
 
 <c:set var="bodyContent">
 
+    <% if (request.getAttribute("resultMessage") != null) {
+        out.println(request.getAttribute("resultMessage"));
+    }
+    %>
+    
 <form action="search_result.jsp">
   Subject:<br>
   <input type="text" name="subject"><br>
