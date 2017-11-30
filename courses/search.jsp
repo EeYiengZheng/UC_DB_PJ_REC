@@ -26,6 +26,7 @@
         <title>Search Courses</title>
     </jsp:attribute>
     <jsp:attribute name="header">
+        <h1 class="display-3">Search Courses</h1>
     </jsp:attribute>
     <jsp:attribute name="footer">
     </jsp:attribute>

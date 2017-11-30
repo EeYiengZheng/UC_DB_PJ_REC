@@ -36,7 +36,7 @@
             background-color: #b3cde0;
         }
 
-        h1, h2, h3, p, footer, small, .nav-link, .navbar-toggler-icon, label {
+        h1, h2, h3, h4, p, footer, small, .nav-link, .navbar-toggler-icon, label {
             color: white !important;
         }
 hr {
@@ -70,7 +70,12 @@ input[type=text]{
     padding: 5px 5px;
     margin: 0 0;
 }
-
+table, th, td {
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+}
 button {
     padding: 7px 7px;
     border-radius: 4px;

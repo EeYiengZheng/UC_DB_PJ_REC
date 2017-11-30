@@ -5,7 +5,7 @@
 
 
 <c:set var="bodyContent">
-Grades go here
+<p>Grades go here</p>
 </c:set>
 
 <t:genericpage>
@@ -13,6 +13,7 @@ Grades go here
         <title>Grades</title>
     </jsp:attribute>
     <jsp:attribute name="header">
+        <h1 class="display-3">Grades</h1>
     </jsp:attribute>
     <jsp:attribute name="footer">
     </jsp:attribute>

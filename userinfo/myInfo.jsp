@@ -107,7 +107,6 @@ con.close();
 %>
 
 <c:set var="bodyContent">
-
 <div class="field-group">
 	<form method="post" action="change_info.jsp">
     
@@ -169,6 +168,7 @@ con.close();
         <title>User Information</title>
     </jsp:attribute>
     <jsp:attribute name="header">
+        <h1 class="display-3">MyInfo</h1>
     </jsp:attribute>
     <jsp:attribute name="footer">
     </jsp:attribute>
