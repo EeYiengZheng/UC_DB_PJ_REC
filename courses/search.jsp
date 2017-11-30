@@ -46,7 +46,7 @@ else {
 %>		
 		<h3>Search for Courses</h3>		
 <% if (request.getAttribute("resultMessage") != null) {		
-	out.println("<p>" + request.getAttribute("resultMessage") + </p>");		
+	out.println("<p>" + request.getAttribute("resultMessage") + "</p>");		
 }		
 %> 
 <form action="search_result.jsp">
