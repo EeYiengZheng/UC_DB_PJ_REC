@@ -6,8 +6,15 @@
 
 
 <c:set var="bodyContent">
+	<c:choose>
+    	<c:when test="${user.getType().equals('Lecturer')}">
+			<h3>Courses Currently Teaching</h3>
+        </c:when>
+        <c:otherwise>
+			<h3>Courses Currently Taking</h3>
+        </c:otherwise>
+	</c:choose>
 
-<h3>Courses Currently Taking</h3>
 <%
 String query = "SELECT dept_short_name, course_number, course_name FROM courses WHERE course_id IN (SELECT course_id FROM enrolled_in WHERE student_id IN (SELECT user_id FROM Users WHERE username=?))";
 PreparedStatement stmt = con.prepareStatement(query);
