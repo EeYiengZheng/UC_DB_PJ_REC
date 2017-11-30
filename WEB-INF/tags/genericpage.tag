@@ -19,7 +19,7 @@
     <style>
         .jumbotron {
             line-height: 1;
-            background-image: linear-gradient(#011f4b, #03396c, #005b96, #6497b1, #b3cde0);
+            background-image: linear-gradient(#92d2ec, #71a6c0, #0071b4, #00488a, #011F4B);
             background-repeat: no-repeat;
             background-size: 100% 100%;
             background-color: #b3cde0;
@@ -28,12 +28,12 @@
 
         #body-override .jumbotron {
             line-height: 1;
-            background-color: #b3cde0;
+            background-color: #011F4B;
             height: 100vh;
         }
 
         body {
-            background-color: #b3cde0;
+            background-color: #011F4B;
         }
 
         h1, h2, h3, h4, p, footer, small, .nav-link, .navbar-toggler-icon, label {
@@ -64,8 +64,10 @@ label {
   width: 75%;
   margin-top: 6px;
 }
-input[type=text]{
+#emailField, #phoneField, #addressField, #ethnicityField, #genderField {
     width:140%;
+}
+input[type=text]{
     border-radius: 4px;
     padding: 5px 5px;
     margin: 0 0;
@@ -84,9 +86,12 @@ button {
         .display-3 {
             color: white !important;
         }
-
+input[type=submit].btn-block {
+    width: 113%;
+    margin-top: 120px;
+}
         .bg-dark {
-            background-color: #011f4b !important;
+            background-color: #00488a !important;
         }
     </style>
 </head>

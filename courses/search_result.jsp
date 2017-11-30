@@ -26,7 +26,6 @@
     ResultSet rs = stmt.executeQuery();
 
     while (rs.next()) {
-		//Very ugly...will deal with front end later
 		String courseNumber = rs.getString("course_number");
 		String courseName = rs.getString("course_name");
 		String departmentShortName = rs.getString("dept_short_name");
