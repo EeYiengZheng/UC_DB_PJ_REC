@@ -95,9 +95,9 @@ ResultSet rs = stmt.executeQuery();
 rs.next();
 String nickname = rs.getString("nickname") == null ? "" : rs.getString("nickname");
 String email = rs.getString("email") == null ? "" : rs.getString("email");
-String firstName = rs.getString("first_name");
-String lastName = rs.getString("last_name");
-String birthday = rs.getString("birthday");
+String firstName = rs.getString("first_name") == null ? "" : rs.getString("first_name");
+String lastName = rs.getString("last_name") == null ? "" : rs.getString("last_name");
+String birthday = rs.getString("birthday") == null ? "" : rs.getString("birthday");
 String phone_number = rs.getString("phone_number") == null ? "" : rs.getString("phone_number");
 String address = rs.getString("address") == null ? "" : rs.getString("address");
 String ethnicity = rs.getString("ethnicity") == null ? "" : rs.getString("ethnicity");
@@ -113,17 +113,17 @@ con.close();
     
     
         <label>First Name</label>
-        <input id="firstNameField" name="firstName" type="text" readonly value="<%=firstName%>"></input>
+        <input id="firstNameField" name="firstName" type="text" readonly value="<%=firstName%>"/>
         <br>
         <label>Last Name</label>
-        <input id="lastNameField" name="lastName" type="text" readonly value="<%=lastName%>"></input>
+        <input id="lastNameField" name="lastName" type="text" readonly value="<%=lastName%>"/>
         <br>
         <label>Birthday</label>
-        <input id="birthdayField" name="birthday" type="text" readonly value="<%=birthday%>"></input>
+        <input id="birthdayField" name="birthday" type="text" readonly value="<%=birthday%>"/>
     	<br>
     
         <label>Nickname</label>
-        <input id="nameField" name="nickname" type="text" readonly value="<%=nickname%>"></input>
+        <input id="nameField" name="nickname" type="text" readonly value="<%=nickname%>"/>
         <button type="button" id="changeNameBtn">Edit</button>
         <button type="button" id="saveNameBtn">Save</button>
         

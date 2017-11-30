@@ -1,15 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="../taglibs.jsp" %>
+<%@include file="../databases.jsp" %>
 <jsp:useBean id='user' scope='session' class='main.java.beans.UserBean'/>
 <jsp:setProperty name='user' property='*'/>
 
 
 <c:set var="bodyContent">
 
-    <% if (request.getAttribute("resultMessage") != null) {
-        out.println(request.getAttribute("resultMessage"));
-    }
-    %>
+<h3>Courses Currently Taking</h3>
+<%
+String query = "SELECT dept_short_name, course_number, course_name FROM courses WHERE course_id IN (SELECT course_id FROM enrolled_in WHERE student_id IN (SELECT user_id FROM Users WHERE username=?))";
+PreparedStatement stmt = con.prepareStatement(query);
+stmt.setString(1, user.getUsername());
+ResultSet courseList = stmt.executeQuery();
+while (courseList.next()) {
+	out.println(courseList.getString("dept_short_name") + " " + courseList.getString("course_number") + ":" + courseList.getString("course_name"));
+	out.println("<br>");
+}
+
+
+stmt.close();
+con.close();
+%>
+
+
+
+<h3>Search for Courses</h3>
+<% if (request.getAttribute("resultMessage") != null) {
+	out.println(request.getAttribute("resultMessage"));
+}
+%>
     
 <form action="search_result.jsp">
   Subject:<br>
