@@ -28,24 +28,70 @@
 
         #body-override .jumbotron {
             line-height: 1;
-            background-color: #b3cde0;
+            background-color: #011F4B;
             height: 100vh;
         }
 
         body {
-            background-color: #ffffff;
+            background-color: #011F4B;
         }
 
-        h1, h2, h3, p, footer, small, .nav-link, .navbar-toggler-icon {
+        h1, h2, h3, h4, p, footer, small, .nav-link, .navbar-toggler-icon, label {
             color: white !important;
         }
-
+hr {
+    color: white;
+    border-color: white;
+    background-color: white;
+}
+.col-25 {
+  float: left;
+  width: 40%;
+  margin-top: 6px;
+    padding: 5px 5px;
+}
+.col-50 {
+  float: right;
+  width: 0%;
+  margin-top: 5px;
+    padding: 5px 5px;
+}
+label {
+    padding: 4px 0px;
+}
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+#emailField, #phoneField, #addressField, #ethnicityField, #genderField {
+    width:140%;
+}
+input[type=text]{
+    border-radius: 4px;
+    padding: 5px 5px;
+    margin: 0 0;
+}
+table, th, td {
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+}
+button {
+    padding: 7px 7px;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
         .display-3 {
             color: white !important;
         }
-
+input[type=submit].btn-block {
+    width: 113%;
+    margin-top: 120px;
+}
         .bg-dark {
-            background-color: #011f4b !important;
+            background-color: #00488a !important;
         }
     </style>
 </head>
@@ -69,12 +115,12 @@
                 <c:choose>
                     <c:when test="${user.getType().equals('Lecturer')}">
                         <li class="nav-item">
-                            <a class="nav-link" href="<c:url value="/grades/gradebook.jsp"/>">Gradebook</a>
+                            <a class="nav-link" href="<c:url value="/courses/gradebook.jsp"/>">Gradebook</a>
                         </li>
                     </c:when>
                     <c:otherwise>
                         <li class="nav-item">
-                            <a class="nav-link" href="<c:url value="/grades/myGrades.jsp"/>">Grades</a>
+                            <a class="nav-link" href="<c:url value="/courses/grades.jsp"/>">Grades</a>
                         </li>
                     </c:otherwise>
                 </c:choose>

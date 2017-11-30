@@ -95,9 +95,9 @@ ResultSet rs = stmt.executeQuery();
 rs.next();
 String nickname = rs.getString("nickname") == null ? "" : rs.getString("nickname");
 String email = rs.getString("email") == null ? "" : rs.getString("email");
-String firstName = rs.getString("first_name") == null ? "" : rs.getString("first_name");
-String lastName = rs.getString("last_name") == null ? "" : rs.getString("last_name");
-String birthday = rs.getString("birthday") == null ? "" : rs.getString("birthday");
+String firstName = rs.getString("first_name");
+String lastName = rs.getString("last_name");
+String birthday = rs.getString("birthday");
 String phone_number = rs.getString("phone_number") == null ? "" : rs.getString("phone_number");
 String address = rs.getString("address") == null ? "" : rs.getString("address");
 String ethnicity = rs.getString("ethnicity") == null ? "" : rs.getString("ethnicity");
@@ -107,66 +107,57 @@ con.close();
 %>
 
 <c:set var="bodyContent">
-
 <div class="field-group">
 	<form method="post" action="change_info.jsp">
     
     
-        <label>First Name</label>
-        <input id="firstNameField" name="firstName" type="text" readonly value="<%=firstName%>"/>
+        <div class="col-25"><label>First Name</label></div>
+        <div class="col-25"><input id="firstNameField" name="firstName" type="text" readonly value="<%=firstName%>"></div><br>
         <br>
-        <label>Last Name</label>
-        <input id="lastNameField" name="lastName" type="text" readonly value="<%=lastName%>"/>
+        <div class="col-25"><label>Last Name</label></div>
+        <div class="col-25"><input id="lastNameField" name="lastName" type="text" readonly value="<%=lastName%>"></div><br>
         <br>
-        <label>Birthday</label>
-        <input id="birthdayField" name="birthday" type="text" readonly value="<%=birthday%>"/>
-    	<br>
-    
-        <label>Nickname</label>
-        <input id="nameField" name="nickname" type="text" readonly value="<%=nickname%>"/>
-        <button type="button" id="changeNameBtn">Edit</button>
-        <button type="button" id="saveNameBtn">Save</button>
+        <br>
+        <div class="col-25"><label>Birthday</label></div>
+        <div class="col-25"><input id="birthdayField" name="birthday" type="text" readonly value="<%=birthday%>"></div><br>
+        <br><br><br>
+    <hr>
+        <div class="col-25"><label>Nickname</label></div>
+        <div class="col-25"><input id="nameField" name="nickname" type="text" readonly value="<%=nickname%>"></div>
+        <div class="col-50"><button type="button" id="changeNameBtn">Edit</button><button type="button" id="saveNameBtn">Save</button></div>
         
         <br>
 		<% if (request.getAttribute("errorMessage") != null) {
             out.println(request.getAttribute("errorMessage"));
         }
         %>
-        
-        <label>Email</label>
-        <input id="emailField" name="email" type="text" readonly value="<%=email%>"></input>
-        <button type="button" id="changeEmailBtn">Edit</button>
-        <button type="button" id="saveEmailBtn">Save</button>
-        
         <br>
+        <div class="col-25"><label>Email</label></div>
+        <div class="col-25"><input id="emailField" name="email" type="text" readonly value="<%=email%>"></div>
+        <div class="col-50"><button type="button" id="changeEmailBtn">Edit</button><button type="button" id="saveEmailBtn">Save</button></div>
+        <br><br>
     
-        <label>Phone Number</label>
-        <input id="phoneField" name="phone_number" type="text" readonly value="<%=phone_number%>"></input>
-        <button type="button" id="changePhoneBtn">Edit</button>
-        <button type="button" id="savePhoneBtn">Save</button>
-        <br>
+        <div class="col-25"><label>Phone</label></div>
+        <div class="col-25"><input id="phoneField" name="phone_number" type="text" readonly value="<%=phone_number%>"></div>
+        <div class="col-50"><button type="button" id="changePhoneBtn">Edit</button><button type="button" id="savePhoneBtn">Save</button></div>
+        <br><br>
     
-        <label>Address</label>
-        <input id="addressField" name="address" type="text" readonly value="<%=address%>"></input>
-        <button type="button" id="changeAddressBtn">Edit</button>
-        <button type="button" id="saveAddressBtn">Save</button>
-        <br>
+        <div class="col-25"><label>Address</label></div>
+        <div class="col-25"><input id="addressField" name="address" type="text" readonly value="<%=address%>"></div>
+        <div class="col-50"><button type="button" id="changeAddressBtn">Edit</button><button type="button" id="saveAddressBtn">Save</button></div>
+        <br><br>
     
-        <label>Ethnicity</label>
-        <input id="ethnicityField" name="ethnicity" type="text" readonly value="<%=ethnicity%>"></input>
-        <button type="button" id="changeEthnicityBtn">Edit</button>
-        <button type="button" id="saveEthnicityBtn">Save</button>
-        <br>
+        <div class="col-25"><label>Ethnicity</label></div>
+        <div class="col-25"><input id="ethnicityField" name="ethnicity" type="text" readonly value="<%=ethnicity%>"></div>
+        <div class="col-50"><button type="button" id="changeEthnicityBtn">Edit</button><button type="button" id="saveEthnicityBtn">Save</button></div>
+        <br><br>
     
-        <label>Gender</label>
-        <input id="genderField" name="gender" type="text" readonly value="<%=gender%>"></input>
-        <button type="button" id="changeGenderBtn">Edit</button>
-        <button type="button" id="saveGenderBtn">Save</button>
-        
-        
-        
+        <div class="col-25"><label>Gender</label></div>
+        <div class="col-25"><input id="genderField" name="gender" type="text" readonly value="<%=gender%>"></div>
+        <div class="col-50"><button type="button" id="changeGenderBtn">Edit</button>
+            <button type="button" id="saveGenderBtn">Save</button></div><br>
         <input type="submit" value="Update Info" class="btn btn-info btn-block">
-        
+        <br><br><br><br>
      
     </form>
 </div>
@@ -177,6 +168,7 @@ con.close();
         <title>User Information</title>
     </jsp:attribute>
     <jsp:attribute name="header">
+        <h1 class="display-3">MyInfo</h1>
     </jsp:attribute>
     <jsp:attribute name="footer">
     </jsp:attribute>

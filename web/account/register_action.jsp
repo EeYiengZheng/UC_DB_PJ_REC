@@ -1,6 +1,4 @@
 <%@ include file="../databases.jsp" %>
-<%@ page errorPage="register_exception.jsp" %>
-
 
 <%--
 <!--
