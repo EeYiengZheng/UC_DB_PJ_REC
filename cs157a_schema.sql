@@ -30,7 +30,6 @@ CREATE TABLE users (
 
 DROP TABLE IF EXISTS users_detail;
 CREATE TABLE users_detail (
-  user_detail_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   user_id        INT UNSIGNED NOT NULL,
   email          VARCHAR(255)          DEFAULT NULL,
   first_name     VARCHAR(64)           DEFAULT NULL,
@@ -41,11 +40,10 @@ CREATE TABLE users_detail (
   address        VARCHAR(128)          DEFAULT NULL,
   gender         VARCHAR(64)           DEFAULT NULL,
   ethnicity      VARCHAR(128)          DEFAULT NULL,
-  PRIMARY KEY (user_detail_id),
+  PRIMARY KEY (user_id),
   UNIQUE KEY (email),
-  INDEX (user_id),
   FOREIGN KEY (user_id)
-  REFERENCES users (user_id)
+    REFERENCES users (user_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
@@ -58,7 +56,7 @@ CREATE TABLE students (
   user_id    INT UNSIGNED NOT NULL,
   PRIMARY KEY (student_id),
   FOREIGN KEY (user_id)
-  REFERENCES users (user_id)
+    REFERENCES users (user_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
@@ -95,7 +93,7 @@ CREATE TABLE courses (
   UNIQUE KEY (course_number, dept_short_name),
   INDEX (dept_short_name),
   FOREIGN KEY (dept_short_name)
-  REFERENCES departments (dept_short_name)
+    REFERENCES departments (dept_short_name)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
@@ -138,10 +136,10 @@ CREATE TABLE enrolled_in (
   UNIQUE KEY (student_id, course_id),
   INDEX (student_id, course_id),
   FOREIGN KEY (student_id)
-  REFERENCES students (student_id)
+    REFERENCES students (student_id)
     ON UPDATE CASCADE,
   FOREIGN KEY (course_id)
-  REFERENCES courses (course_id)
+    REFERENCES courses (course_id)
     ON UPDATE CASCADE
 )
   ENGINE = InnoDB
@@ -153,7 +151,7 @@ CREATE TABLE teaches (
   course_id    INT UNSIGNED NOT NULL,
   PRIMARY KEY (course_id),
   FOREIGN KEY (course_id)
-  REFERENCES courses (course_id)
+    REFERENCES courses (course_id)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
@@ -168,7 +166,7 @@ CREATE TABLE taught_in (
   building_name VARCHAR(32)  NOT NULL,
   PRIMARY KEY (course_id),
   FOREIGN KEY (room_num, building_name)
-  REFERENCES classrooms (room_num, building_name)
+    REFERENCES classrooms (room_num, building_name)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
@@ -181,7 +179,7 @@ CREATE TABLE hired_by (
   dept_short_name VARCHAR(8)   NOT NULL,
   PRIMARY KEY (professor_id, dept_short_name),
   FOREIGN KEY (professor_id)
-  REFERENCES professors (professor_id)
+    REFERENCES professors (professor_id)
     ON UPDATE CASCADE
 )
   ENGINE = InnoDB
@@ -201,7 +199,7 @@ CREATE TABLE enroll_capacity (
   capacity_max     TINYINT UNSIGNED DEFAULT 30, -- for now
   PRIMARY KEY (course_id),
   FOREIGN KEY (course_id)
-  REFERENCES courses (course_id)
+    REFERENCES courses (course_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
