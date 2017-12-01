@@ -33,10 +33,10 @@
         }
 
         body {
-            background-color: #011F4B;
+            background-color: #ffffff;
         }
 
-        h1, h2, h3, h4, p, footer, small, .nav-link, .navbar-toggler-icon, label {
+        h1, h2, h3, p, footer, small, .nav-link, .navbar-toggler-icon {
             color: white !important;
         }
 
@@ -45,13 +45,12 @@
             background-color: white;
             border-color: white;
         }
-
         .display-3 {
             color: white !important;
         }
 
         .bg-dark {
-            background-color: #00488a !important;
+            background-color: #011f4b !important;
         }
 
         #pagefooter {
