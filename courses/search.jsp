@@ -6,12 +6,20 @@
 
 
 <c:set var="bodyContent">
+    <form action="search_result.jsp">
+    <div class="col-25"><label>Subject:</label></div>
+    <div class="col-25"><input type="text" name="subject"><br></div>
+    <div class="col-25"><label>Course Number:</label></div><br>
+    <div class="col-25"><input type="text" name="courseNum"></div><br><br>
+    <div class="col-75"><input type="submit" class="btn btn-info btn-search" value="Search" id="search_btn"></div>
+</form><br>
+    <hr>
 <c:choose>		
     	<c:when test="${user.getType().equals('Lecturer')}">		
-			<h3>Courses Currently Teaching</h3>		
+            <div class="col-75"><h4>Courses Currently Teaching</h4></div>	
         </c:when>		
         <c:otherwise>		
-			<h3>Courses Currently Taking</h3>		
+            <div class="col-75"><h4>Courses Currently Taking</h4></div>
         </c:otherwise>		
 	</c:choose>
 <%
@@ -21,10 +29,12 @@ if (user.getType().equals("Student")) {
 	PreparedStatement stmt = con.prepareStatement(query);    
 	stmt.setString(1, user.getUsername());
 	ResultSet courseList = stmt.executeQuery();	
+      out.println("<table style='width:100%'><tr><th></th><th></th></tr>");
 	while (courseList.next()) {	
-		out.println("<p>" + courseList.getString("dept_short_name") + " " + courseList.getString("course_number") + ":" + courseList.getString("course_name"));		
-		out.println("<form action='drop_course.jsp' method='GET'><input type='hidden' name='course_id' value='" + courseList.getString("course_id") + "'><input name='student_id' type='hidden' value='" + courseList.getString("student_id") + "'><input type='Submit' value='Drop'></form>");		
-		out.println("</p>");		
+		out.println("<tr><td><p><b>" + courseList.getString("dept_short_name") + " " + courseList.getString("course_number") + ": " + courseList.getString("course_name") + "</b><br>" +
+        courseList.getString("course_description")+ "</p></td>");		
+		out.println("<td><form action='drop_course.jsp' method='GET'><input type='hidden' name='course_id' value='" + courseList.getString("course_id") + "'><input name='student_id' type='hidden' value='" + courseList.getString("student_id") + "'><input type='Submit' value='Drop'></form>");		
+   out.println("</td></tr></p>");		
 	}		
 	stmt.close();		
 	con.close();		
@@ -33,29 +43,22 @@ else {
 	String query = "SELECT * FROM courses NATURAL JOIN teaches WHERE professor_id IN (SELECT professor_id FROM Professors NATURAL JOIN Users WHERE username=?)";		
     PreparedStatement stmt = con.prepareStatement(query);		
 	stmt.setString(1, user.getUsername());		
-	ResultSet courseList = stmt.executeQuery();		
+	ResultSet courseList = stmt.executeQuery();
+   out.println("<table style='width:100%'><tr><th></th><th></th></tr>");
 	while (courseList.next()) {		
-		out.println("<p>" + courseList.getString("dept_short_name") + " " + courseList.getString("course_number") + ":" + courseList.getString("course_name"));		
-		out.println("<form action='drop_course.jsp' method='GET'><input type='hidden' name='course_id' value='" + courseList.getString("course_id") + "'><input name='professor_id' type='hidden' value='" + courseList.getString("professor_id") + "'><input type='Submit' value='Drop'></form>");		
-		out.println("</p>");		
+		out.println("<tr><td><p><b>" + courseList.getString("dept_short_name") + " " + courseList.getString("course_number") + ": " + courseList.getString("course_name") + "</b><br>");		
+		out.println("<td><form action='drop_course.jsp' method='GET'><input type='hidden' name='course_id' value='" + courseList.getString("course_id") + "'><input name='professor_id' type='hidden' value='" + courseList.getString("professor_id") + "'><input type='Submit' value='Drop'></form>");		
+		out.println("</td></tr></p>");		
 	}		
 	stmt.close();		
 	con.close();		
 }		
 		
-%>		
-		<h3>Search for Courses</h3>		
+%>			
 <% if (request.getAttribute("resultMessage") != null) {		
-	out.println("<p>" + request.getAttribute("resultMessage") + "</p>");		
+	out.println("<table style='width:100%'><tr><th><h4>Course</h4></th><th><h4>Drop</h4></th></tr>" + request.getAttribute("resultMessage") + "</p>");		
 }		
 %> 
-<form action="search_result.jsp">
-    <div class="col-25"><label>Subject:</label></div>
-    <div class="col-25"><input type="text" name="subject"><br></div>
-    <div class="col-25"><label>Course Number:</label></div><br>
-    <div class="col-25"><input type="text" name="courseNum"></div><br><br>
-    <div class="col-25"><input type="submit" value="Search" id="search_btn"></div>
-</form>
 
 </c:set>
 
@@ -67,6 +70,7 @@ else {
         <h1 class="display-3">Search Courses</h1>
     </jsp:attribute>
     <jsp:attribute name="footer">
+        <style>#footer{margin-top:140px;}</style>
     </jsp:attribute>
     <jsp:body>
         ${bodyContent}
