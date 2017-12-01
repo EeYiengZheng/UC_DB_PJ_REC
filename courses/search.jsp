@@ -6,7 +6,6 @@
 
 
 <c:set var="bodyContent">
-<<<<<<< HEAD
     <% if (request.getAttribute("resultMessage") != null) {
         out.println("<p>" + request.getAttribute("resultMessage") + "</p>");
     }
@@ -23,7 +22,7 @@
         <div class="col-25"><input type="submit" value="Search" id="search_btn" class="btn btn-info btn-search"></div>
     </form>
     <br><br>
-=======
+
     <form action="search_result.jsp">
     <div class="col-25"><label>Subject:</label></div>
     <div class="col-25"><input type="text" name="subject"><br></div>

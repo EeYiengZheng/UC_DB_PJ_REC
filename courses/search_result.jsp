@@ -105,7 +105,6 @@
 	
     con.close();
 %>
->>>>>>> 32ba71f5a12b54d0e4042e31294a8becacb04377
     </table>
 </c:set>
 
