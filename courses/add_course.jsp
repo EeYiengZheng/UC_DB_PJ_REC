@@ -4,6 +4,8 @@
 <jsp:useBean id='user' scope='session' class='main.java.beans.UserBean'/>
 <jsp:setProperty name='user' property='*'/>
 
+
+<c:set var="bodyContent">
 <%
 	String query = "";
 	int id = 0;
@@ -55,7 +57,7 @@
     	request.setAttribute("resultMessage", "<p>Course added successfully!</p>");
 	}
 	catch(Exception e) {
-		request.setAttribute("resultMessage", "<p>An error occurred while attempting to add the course. Please contact the system administrator.</p>");
+   request.setAttribute("resultMessage", "<p>An error occurred while attempting to add the course. Please contact the system administrator.</p>");
 	}
 	finally {
 		stmt.close();
@@ -64,9 +66,6 @@
 	RequestDispatcher rd = request.getRequestDispatcher("search.jsp");
     rd.forward(request, response);
 %>
-
-<c:set var="bodyContent">
-
 </c:set>
 
 <t:genericpage>
