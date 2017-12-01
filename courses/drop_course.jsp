@@ -13,10 +13,10 @@
 		
 		try {
 			stmt.executeUpdate();
-			request.setAttribute("resultMessage", "Course dropped successfully!");
+   request.setAttribute("resultMessage", "<p>Course dropped successfully!</p>");
 		}
 		catch(Exception e) {
-			request.setAttribute("resultMessage", "An error occurred while attempting to add the course. Please contact the system administrator.");
+			request.setAttribute("resultMessage", "<p>An error occurred while attempting to add the course. Please contact the system administrator.</p>");
 		}
 		finally {
 			stmt.close();

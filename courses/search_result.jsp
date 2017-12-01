@@ -5,7 +5,7 @@
 <jsp:setProperty name='user' property='*'/>
 
     <c:set var="bodyContent">
-        <table style='width:100%'><tr><th><h4>Course</h4></th><th><h4>Enroll</h4></th></tr>
+        <table style='width:100%'><tr><th><h4>Course</h4></th><th><h4>Add</h4></th></tr>
 <%
 
     String subject = request.getParameter("subject");
