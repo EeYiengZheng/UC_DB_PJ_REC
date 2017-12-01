@@ -135,8 +135,8 @@
             </div>
 
             <br>
-            <% if (request.getAttribute("errorMessage") != null) {
-                out.println(request.getAttribute("errorMessage"));
+            <% if (request.getAttribute("resultMessage") != null) {
+                out.println(request.getAttribute("resultMessage"));
             }
             %>
             <br>
@@ -185,6 +185,26 @@
             <br><br><br><br>
 
         </form>
+    </div>
+    
+    <!--Pls help-->
+    <div class ="field-group">
+    			<form method="post" action="change_password.jsp">
+                    <div class="col-25"><label>Current Password:</label></div>
+                    <div class="col-25"><input id="currentPWField" name="current_password" type="password">
+                    </div>
+                    <br>
+                    <br>
+                    <div class="col-25"><label>New Password:</label></div>
+                    <div class="col-25"><input id="newPWField" name="new_password" type="password">
+                    </div>
+                    <br>
+                    <br>
+                    <div class="col-25"><label>Reenter New Password:</label></div>
+                    <div class="col-25"><input id="rePWField" name="reenter_password" type="password">
+                    </div>
+            		<input type="submit" value="Change Password" class="btn btn-info btn-update">
+                </form>
     </div>
 </c:set>
 
