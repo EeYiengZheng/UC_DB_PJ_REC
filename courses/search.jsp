@@ -35,13 +35,13 @@
     <%
 
         if (user.getType().equals("Student")) {
-            String query = "SELECT * FROM courses NATURAL JOIN enrolled_in WHERE student_id IN (SELECT student_id FROM Students NATURAL JOIN Users WHERE username=?)";
+            String query = "SELECT * FROM courses NATURAL JOIN enrolled_in NATURAL JOIN teaches NATURAL JOIN professors NATURAL JOIN users NATURAL JOIN users_detail WHERE student_id IN (SELECT student_id FROM Students NATURAL JOIN Users WHERE username=?)";
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, user.getUsername());
             ResultSet courseList = stmt.executeQuery();
             out.println("<div class='col-25'></div><div class='col-25'></div><table style='width:100%'><tr><th></th><th></th></tr>");
             while (courseList.next()) {
-                out.println("<tr><td><p><b>" + courseList.getString("dept_short_name") + " " + courseList.getString("course_number") + ": " + courseList.getString("course_name") + "<br></b>" + courseList.getString("course_description"));
+                out.println("<tr><td><p><b>" + courseList.getString("dept_short_name") + " " + courseList.getString("course_number") + ": " + courseList.getString("course_name") + "<br></b>" + courseList.getString("course_description") + "<br>Instructor: " + courseList.getString("first_name") + " " + courseList.getString("last_name"));
                 out.println("</td><td><form action='drop_course.jsp' method='GET'><input type='hidden' name='course_id' value='" + courseList.getString("course_id") + "'><input name='student_id' type='hidden' value='" + courseList.getString("student_id") + "'><input type='Submit' value='Drop'></form>");
                 out.println("</td></tr></p></div>");
             }
