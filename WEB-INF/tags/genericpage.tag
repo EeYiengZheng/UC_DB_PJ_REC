@@ -70,9 +70,9 @@
 
         .col-50 {
             float: right;
-            width: 0%;
-            left: 25px;
-            margin-left: 20px;
+            width: 10%;
+            left: 0px;
+            margin-left: 0px;
         }
 
         button {
@@ -86,8 +86,8 @@
         }
 
         input[type=submit].btn-update {
-            width: 120%;
-            margin-top: 50px;
+            width: 100%;
+            margin-top: 20px;
         }
 
         input[type=text] {

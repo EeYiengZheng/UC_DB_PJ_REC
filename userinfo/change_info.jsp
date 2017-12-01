@@ -16,10 +16,10 @@ stmt.setString(6, request.getParameter("gender") == "" ? null : request.getParam
 stmt.setString(7, user.getUsername());
 try {
 	stmt.executeUpdate();
-	request.setAttribute("resultMessage", "Info successfully updated");
+   request.setAttribute("resultMessage", "<p>Info successfully updated.</p>");
 }
 catch(Exception e) {
-	request.setAttribute("resultMessage", "Email taken");
+   request.setAttribute("resultMessage", "<p>Email taken.</p>");
 }
 finally {
 	stmt.close();

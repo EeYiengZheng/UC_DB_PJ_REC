@@ -16,19 +16,19 @@ if (new_password != "" && reenter_password != "" && current_password != "" && ne
 	stmt.setString(3, current_password);
 	int rows = stmt.executeUpdate();
 	if (rows == 0) {
-		request.setAttribute("resultMessage", "Incorrect password");
+   request.setAttribute("resultMessage", "<p>Incorrect password. Try again.</p>");
 	}
 	else if (rows == 1) {
-		request.setAttribute("resultMessage", "Password changed successfully");
+   request.setAttribute("resultMessage", "<p>Password changed successfully!</p>");
 	}
 	else {
-		request.setAttribute("resultMessage", "A serious error has occurred. Please contact the system administrator");
+		request.setAttribute("resultMessage", "<p>A serious error has occurred. Please contact the system administrator.</p>");
 	}
 	stmt.close();
 	con.close();
 }
 else {
-	request.setAttribute("resultMessage", "Passwords did not match");
+   request.setAttribute("resultMessage", "<p>Passwords did not match.</p>");
 }
 
 RequestDispatcher rd = request.getRequestDispatcher("myInfo.jsp");
