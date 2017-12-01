@@ -28,70 +28,24 @@
 
         #body-override .jumbotron {
             line-height: 1;
-            background-color: #011F4B;
+            background-color: #b3cde0;
             height: 100vh;
         }
 
         body {
-            background-color: #011F4B;
+            background-color: #ffffff;
         }
 
-        h1, h2, h3, h4, p, footer, small, .nav-link, .navbar-toggler-icon, label {
+        h1, h2, h3, p, footer, small, .nav-link, .navbar-toggler-icon {
             color: white !important;
         }
-hr {
-    color: white;
-    border-color: white;
-    background-color: white;
-}
-.col-25 {
-  float: left;
-  width: 40%;
-  margin-top: 6px;
-    padding: 5px 5px;
-}
-.col-50 {
-  float: right;
-  width: 0%;
-  margin-top: 5px;
-    padding: 5px 5px;
-}
-label {
-    padding: 4px 0px;
-}
-.col-75 {
-  float: left;
-  width: 75%;
-  margin-top: 6px;
-}
-#emailField, #phoneField, #addressField, #ethnicityField, #genderField {
-    width:140%;
-}
-input[type=text]{
-    border-radius: 4px;
-    padding: 5px 5px;
-    margin: 0 0;
-}
-table, th, td {
-    border-collapse: collapse;
-}
-th, td {
-    padding: 5px;
-}
-button {
-    padding: 7px 7px;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
+
         .display-3 {
             color: white !important;
         }
-input[type=submit].btn-block {
-    width: 113%;
-    margin-top: 120px;
-}
+
         .bg-dark {
-            background-color: #00488a !important;
+            background-color: #011f4b !important;
         }
     </style>
 </head>
@@ -120,7 +74,7 @@ input[type=submit].btn-block {
                     </c:when>
                     <c:otherwise>
                         <li class="nav-item">
-                            <a class="nav-link" href="<c:url value="/grades/grades.jsp"/>">Grades</a>
+                            <a class="nav-link" href="<c:url value="/grades/myGrades.jsp"/>">Grades</a>
                         </li>
                     </c:otherwise>
                 </c:choose>
