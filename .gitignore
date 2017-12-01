@@ -35,4 +35,4 @@ WEB-INF/classes/META-INF/
 /build/
 
 # exclude java beans class folder
-!web/WEB-INF/classes/beans/*
+!WEB-INF\classes\main\java\beans\*.class

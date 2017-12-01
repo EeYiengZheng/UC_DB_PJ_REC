@@ -33,10 +33,10 @@
         }
 
         body {
-            background-color: #011F4B;
+            background-color: #ffffff;
         }
 
-        h1, h2, h3, h4, p, footer, small, .nav-link, .navbar-toggler-icon, label {
+        h1, h2, h3, p, footer, small, .nav-link, .navbar-toggler-icon {
             color: white !important;
         }
 
@@ -45,13 +45,12 @@
             background-color: white;
             border-color: white;
         }
-
         .display-3 {
             color: white !important;
         }
 
         .bg-dark {
-            background-color: #00488a !important;
+            background-color: #011f4b !important;
         }
 
         #pagefooter {
@@ -70,9 +69,9 @@
 
         .col-50 {
             float: right;
-            width: 0%;
-            left: 25px;
-            margin-left: 20px;
+            width: 10%;
+            left: 0px;
+            margin-left: 0px;
         }
 
         button {
@@ -86,8 +85,8 @@
         }
 
         input[type=submit].btn-update {
-            width: 120%;
-            margin-top: 50px;
+            width: 100%;
+            margin-top: 20px;
         }
 
         input[type=text] {

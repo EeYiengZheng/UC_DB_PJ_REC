@@ -107,8 +107,10 @@
 
 <c:set var="bodyContent">
     <div class="field-group">
-        <form method="post" action="change_info.jsp">
-
+             <div class="col-75"><% if (request.getAttribute("resultMessage") != null) {
+                out.println(request.getAttribute("resultMessage"));
+            }
+                                    %><br></div>
 
             <div class="col-25"><label>First Name</label></div>
             <div class="col-25"><input id="firstNameField" name="firstName" type="text" readonly value="<%=firstName%>">
@@ -124,9 +126,26 @@
             <div class="col-25"><label>Birthday</label></div>
             <div class="col-25"><input id="birthdayField" name="birthday" type="text" readonly value="<%=birthday%>">
             </div>
-            <br>
-            <br><br><br>
+            <br><br>
             <hr>
+            <form method="post" action="change_password.jsp">
+                    <div class="col-25"><label>Current Password:</label></div>
+                    <div class="col-25"><input id="currentPWField" name="current_password" type="password">
+                    </div>
+                    <br>
+                    <br>
+                    <div class="col-25"><label>New Password:</label></div>
+                    <div class="col-25"><input id="newPWField" name="new_password" type="password">
+                    </div>
+                    <br>
+                    <br>
+                    <div class="col-25"><label>Re-enter New Password:</label></div>
+                    <div class="col-25"><input id="rePWField" name="reenter_password" type="password">
+                    </div>
+            		<input type="submit" value="Change Password" class="btn btn-info btn-update">
+                </form>
+            <hr>
+                 <form method="post" action="change_info.jsp">
             <div class="col-25"><label>Nickname</label></div>
             <div class="col-25"><input id="nameField" name="nickname" type="text" readonly value="<%=nickname%>"></div>
             <div class="col-50">
@@ -135,10 +154,6 @@
             </div>
 
             <br>
-            <% if (request.getAttribute("resultMessage") != null) {
-                out.println(request.getAttribute("resultMessage"));
-            }
-            %>
             <br>
             <div class="col-25"><label>Email</label></div>
             <div class="col-25"><input id="emailField" name="email" type="text" readonly value="<%=email%>"></div>
@@ -185,26 +200,6 @@
             <br><br><br><br>
 
         </form>
-    </div>
-    
-    <!--Pls help-->
-    <div class ="field-group">
-    			<form method="post" action="change_password.jsp">
-                    <div class="col-25"><label>Current Password:</label></div>
-                    <div class="col-25"><input id="currentPWField" name="current_password" type="password">
-                    </div>
-                    <br>
-                    <br>
-                    <div class="col-25"><label>New Password:</label></div>
-                    <div class="col-25"><input id="newPWField" name="new_password" type="password">
-                    </div>
-                    <br>
-                    <br>
-                    <div class="col-25"><label>Reenter New Password:</label></div>
-                    <div class="col-25"><input id="rePWField" name="reenter_password" type="password">
-                    </div>
-            		<input type="submit" value="Change Password" class="btn btn-info btn-update">
-                </form>
     </div>
 </c:set>
 
