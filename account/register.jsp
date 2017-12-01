@@ -93,12 +93,12 @@
                             </fieldset>
                             <input type="submit" value="Register" class="btn btn-info btn-block">
                         </form>
-                        
 
-<% if (request.getAttribute("errorMessage") != null) {
-    out.println(request.getAttribute("errorMessage"));
-}
-%>
+
+                        <% if (request.getAttribute("errorMessage") != null) {
+                            out.println(request.getAttribute("errorMessage"));
+                        }
+                        %>
                     </div>
                 </div>
             </div>
@@ -121,15 +121,15 @@
                 content: "";
             }
 
-            #user_name::placeholder  {
+            #user_name::placeholder {
                 color: #f66;
             }
 
-            #password::placeholder  {
+            #password::placeholder {
                 color: #f66;
             }
 
-            #password_confirmation::placeholder  {
+            #password_confirmation::placeholder {
                 color: #f66;
             }
 
