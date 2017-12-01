@@ -76,6 +76,19 @@ CREATE TABLE professors (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
+DROP TABLE IF EXISTS dept_heads;
+CREATE TABLE dept_heads (
+  dept_head_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  user_id      INT UNSIGNED NOT NULL,
+  PRIMARY KEY (dept_head_id),
+  FOREIGN KEY (user_id)
+  REFERENCES users (user_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+  
 -- ----------------------------------------
 
 --
@@ -185,6 +198,21 @@ CREATE TABLE hired_by (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
+  
+DROP TABLE IF EXISTS head_of;
+CREATE TABLE head_of (
+  dept_head_id    INT UNSIGNED NOT NULL,
+  dept_short_name VARCHAR(8)   NOT NULL,
+  PRIMARY KEY (dept_head_id, dept_short_name),
+  FOREIGN KEY (dept_short_name)
+    REFERENCES departments (dept_short_name)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+  
+  
 -- ------------------------------------
 
 -- ---------- NEW NEW NEW NEW ---------
