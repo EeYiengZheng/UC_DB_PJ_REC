@@ -156,7 +156,7 @@ con.close();
         <div class="col-25"><input id="genderField" name="gender" type="text" readonly value="<%=gender%>"></div>
         <div class="col-50"><button type="button" id="changeGenderBtn">Edit</button>
             <button type="button" id="saveGenderBtn">Save</button></div><br>
-        <input type="submit" value="Update Info" class="btn btn-info btn-update">
+        <input type="submit" value="Update Info" class="btn btn-info btn-block">
         <br><br><br><br>
      
     </form>
