@@ -5,3 +5,7 @@ See proposal for project information (located under /Documentation/Proposal).
 
 ## Requirements
 This project requires Apache Tomcat as a web server to run.
+
+## Live Demo
+Live demo located at: https://ucdb-rec.herokuapp.com/
+(may not be up all the time)
