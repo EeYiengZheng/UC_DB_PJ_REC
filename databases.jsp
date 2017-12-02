@@ -5,7 +5,7 @@
     Connection con = null;
    try{
     Class.forName("org.mariadb.jdbc.Driver");
-    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cs157a", "root", "");
+    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/cs157a_sec3_team5", "root", "");
    } catch (Exception e) {
         out.print("An error occurred while connecting to the database");
         return;
@@ -13,5 +13,5 @@
 
 %>
 <sql:setDataSource var="datasource" driver="org.mariadb.jdbc.Driver"
-                   url="jdbc:mysql://localhost/cs157a"
+                   url="jdbc:mysql://localhost/cs157a_sec3_team5"
                    user="root" password=""/>
