@@ -11,8 +11,10 @@ SET @OLD_UNIQUE_CHECKS = @@UNIQUE_CHECKS, UNIQUE_CHECKS = 0;
 SET @OLD_FOREIGN_KEY_CHECKS = @@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS = 0;
 SET @OLD_SQL_MODE = @@SQL_MODE, SQL_MODE = 'TRADITIONAL';
 
-CREATE DATABASE IF NOT EXISTS cs157a;
-USE cs157a;
+CREATE DATABASE IF NOT EXISTS cs157a_sec3_team5 -- new name. drop cs157a database if exist
+  DEFAULT CHARACTER SET utf8
+  DEFAULT COLLATE utf8_general_ci;
+USE cs157a_sec3_team5;
 
 --
 -- users: students, teachers, dept chair, etc.
@@ -25,8 +27,8 @@ CREATE TABLE users (
   PRIMARY KEY (user_id),
   UNIQUE KEY (username)
 )
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB;
+
 
 DROP TABLE IF EXISTS users_detail;
 CREATE TABLE users_detail (
@@ -47,8 +49,9 @@ CREATE TABLE users_detail (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB;
+
+
 
 DROP TABLE IF EXISTS students;
 CREATE TABLE students (
@@ -60,8 +63,8 @@ CREATE TABLE students (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB;
+
 
 DROP TABLE IF EXISTS professors;
 CREATE TABLE professors (
@@ -73,8 +76,8 @@ CREATE TABLE professors (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB;
+
 
 DROP TABLE IF EXISTS dept_heads;
 CREATE TABLE dept_heads (
@@ -86,8 +89,8 @@ CREATE TABLE dept_heads (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB;
+
   
 -- ----------------------------------------
 
@@ -97,7 +100,7 @@ CREATE TABLE dept_heads (
 DROP TABLE IF EXISTS courses;
 CREATE TABLE courses (
   course_id          INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  dept_short_name    VARCHAR(8)   NOT NULL,
+  dept_short_name VARCHAR(8)   NOT NULL,
   course_number      VARCHAR(16)  NOT NULL,
   course_name        VARCHAR(128) NOT NULL,
   course_description TEXT                  DEFAULT NULL,
@@ -110,8 +113,8 @@ CREATE TABLE courses (
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB;
+
 
 DROP TABLE IF EXISTS departments;
 CREATE TABLE departments (
@@ -119,8 +122,8 @@ CREATE TABLE departments (
   dept_name       VARCHAR(128) NOT NULL,
   PRIMARY KEY (dept_short_name, dept_name)
 )
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB;
+
 
 DROP TABLE IF EXISTS classrooms;
 CREATE TABLE classrooms (
@@ -129,8 +132,8 @@ CREATE TABLE classrooms (
   floor         TINYINT UNSIGNED DEFAULT NULL,
   PRIMARY KEY (room_num, building_name)
 )
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB;
+
 
 -- ----------------------------------------
 
@@ -139,14 +142,12 @@ CREATE TABLE classrooms (
 --
 DROP TABLE IF EXISTS enrolled_in;
 CREATE TABLE enrolled_in (
-  enrollment_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   student_id    INT UNSIGNED NOT NULL,
   course_id     INT UNSIGNED NOT NULL,
   grade         ENUM ('A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F', 'CR', 'NC', 'W', 'I'),
   completed     BOOL                  DEFAULT FALSE,
   is_taking     BOOL                  DEFAULT FALSE,
-  PRIMARY KEY (enrollment_id),
-  UNIQUE KEY (student_id, course_id),
+  PRIMARY KEY (student_id, course_id),
   INDEX (student_id, course_id),
   FOREIGN KEY (student_id)
     REFERENCES students (student_id)
@@ -155,8 +156,8 @@ CREATE TABLE enrolled_in (
     REFERENCES courses (course_id)
     ON UPDATE CASCADE
 )
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB;
+
 
 DROP TABLE IF EXISTS teaches;
 CREATE TABLE teaches (
@@ -168,8 +169,8 @@ CREATE TABLE teaches (
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB;
+
 
 
 DROP TABLE IF EXISTS taught_in;
@@ -183,8 +184,8 @@ CREATE TABLE taught_in (
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB;
+
 
 DROP TABLE IF EXISTS hired_by;
 CREATE TABLE hired_by (
@@ -195,8 +196,8 @@ CREATE TABLE hired_by (
     REFERENCES professors (professor_id)
     ON UPDATE CASCADE
 )
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB;
+
 
   
 DROP TABLE IF EXISTS head_of;
@@ -209,8 +210,8 @@ CREATE TABLE head_of (
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB;
+
   
   
 -- ------------------------------------
@@ -231,5 +232,5 @@ CREATE TABLE enroll_capacity (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8;
+  ENGINE = InnoDB;
+
