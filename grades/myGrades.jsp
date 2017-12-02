@@ -5,7 +5,14 @@
 
 
 <c:set var="bodyContent">
-<p>Grades go here</p>
+    <c:choose>
+        <c:when test="${user.loggedIn}">
+            <p> grades go here </p>
+        </c:when>
+        <c:otherwise>
+            <p> You are signed out. </p>
+        </c:otherwise>
+    </c:choose>
 </c:set>
 
 <t:genericpage>

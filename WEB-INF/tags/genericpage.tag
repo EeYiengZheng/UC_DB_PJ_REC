@@ -2,6 +2,7 @@
 <%@attribute name="head" fragment="true" %>
 <%@attribute name="header" fragment="true" %>
 <%@attribute name="footer" fragment="true" %>
+<%@attribute name="scripts" fragment="true" %>
 <%@include file="../../taglibs.jsp" %>
 
 <jsp:useBean id="user" class="main.java.beans.UserBean" scope="session"/>
@@ -171,5 +172,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
         integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
         crossorigin="anonymous"></script>
+<jsp:invoke fragment="scripts"/>
 </body>
 </html>
