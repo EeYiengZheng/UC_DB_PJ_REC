@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="../taglibs.jsp" %>
+<%@include file="../databases.jsp" %>
 <jsp:useBean id='user' scope='session' class='main.java.beans.UserBean'/>
 <jsp:setProperty name='user' property='*'/>
 
@@ -7,7 +8,37 @@
 <c:set var="bodyContent">
     <c:choose>
         <c:when test="${user.loggedIn}">
-            <p> grades go here </p>
+        	<%
+				String query = "SELECT * FROM enrolled_in NATURAL JOIN courses NATURAL JOIN students NATURAL JOIN users WHERE username=? AND is_taking=true";
+				PreparedStatement stmt = con.prepareStatement(query);
+				stmt.setString(1, user.getUsername());
+				ResultSet currentGrades = stmt.executeQuery();
+				stmt.close();
+			%>
+            <h4>Currently Taking</h4>
+            <%
+				while(currentGrades.next()) {
+					String courseName = currentGrades.getString("course_name");
+					String grade = currentGrades.getString("grade") == null ? "N/A" : currentGrades.getString("grade");
+					out.println(courseName + ":" + grade + "<br>");
+				}
+				
+				query = "SELECT * FROM enrolled_in NATURAL JOIN courses NATURAL JOIN students NATURAL JOIN users WHERE username=? AND is_taking=false";
+				stmt = con.prepareStatement(query);
+				stmt.setString(1, user.getUsername());
+				ResultSet pastGrades = stmt.executeQuery();
+				stmt.close();
+			%>
+            <h4>Previously Taken</h4>
+            <%
+				while(pastGrades.next()) {
+					String courseName = pastGrades.getString("course_name");
+					String grade = pastGrades.getString("grade") == null ? "N/A" : pastGrades.getString("grade");
+					out.println(courseName + ":" + grade + "<br>");
+				}
+				
+				con.close();
+			%>
         </c:when>
         <c:otherwise>
             <p> You are signed out. </p>
