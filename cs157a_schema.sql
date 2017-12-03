@@ -44,8 +44,7 @@ CREATE TABLE users_detail (
   ethnicity    VARCHAR(128) DEFAULT NULL,
   PRIMARY KEY (user_id),
   UNIQUE KEY (email),
-  FOREIGN KEY (user_id)
-  REFERENCES users (user_id)
+  FOREIGN KEY (user_id) REFERENCES users (user_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
@@ -57,8 +56,7 @@ CREATE TABLE students (
   student_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   user_id    INT UNSIGNED NOT NULL,
   PRIMARY KEY (student_id),
-  FOREIGN KEY (user_id)
-  REFERENCES users (user_id)
+  FOREIGN KEY (user_id) REFERENCES users (user_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
@@ -70,8 +68,7 @@ CREATE TABLE professors (
   professor_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   user_id      INT UNSIGNED NOT NULL,
   PRIMARY KEY (professor_id),
-  FOREIGN KEY (user_id)
-  REFERENCES users (user_id)
+  FOREIGN KEY (user_id) REFERENCES users (user_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
@@ -83,8 +80,7 @@ CREATE TABLE dept_heads (
   dept_head_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   user_id      INT UNSIGNED NOT NULL,
   PRIMARY KEY (dept_head_id),
-  FOREIGN KEY (user_id)
-  REFERENCES users (user_id)
+  FOREIGN KEY (user_id) REFERENCES users (user_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )
@@ -105,9 +101,7 @@ CREATE TABLE courses (
   FULLTEXT idx_course_description (course_description),
   PRIMARY KEY (course_id),
   UNIQUE KEY (course_number, dept_short_name),
-  INDEX (dept_short_name),
-  FOREIGN KEY (dept_short_name)
-  REFERENCES departments (dept_short_name)
+  FOREIGN KEY (dept_short_name) REFERENCES departments (dept_short_name)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
@@ -125,10 +119,10 @@ CREATE TABLE departments (
 
 DROP TABLE IF EXISTS classrooms;
 CREATE TABLE classrooms (
-  room_num      VARCHAR(8)  NOT NULL,
-  building_name VARCHAR(32) NOT NULL,
+  building_name VARCHAR(32)       NOT NULL,
+  room_num      SMALLINT UNSIGNED NOT NULL,
   floor         TINYINT UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (room_num, building_name)
+  PRIMARY KEY (building_name, room_num)
 )
   ENGINE = InnoDB;
 
@@ -145,12 +139,9 @@ CREATE TABLE enrolled_in (
   completed  BOOL DEFAULT FALSE,
   is_taking  BOOL DEFAULT FALSE,
   PRIMARY KEY (student_id, course_id),
-  INDEX (student_id, course_id),
-  FOREIGN KEY (student_id)
-  REFERENCES students (student_id)
+  FOREIGN KEY (student_id) REFERENCES students (student_id)
     ON UPDATE CASCADE,
-  FOREIGN KEY (course_id)
-  REFERENCES courses (course_id)
+  FOREIGN KEY (course_id) REFERENCES courses (course_id)
     ON UPDATE CASCADE
 )
   ENGINE = InnoDB;
@@ -161,8 +152,7 @@ CREATE TABLE teaches (
   professor_id INT UNSIGNED NOT NULL,
   course_id    INT UNSIGNED NOT NULL,
   PRIMARY KEY (course_id),
-  FOREIGN KEY (course_id)
-  REFERENCES courses (course_id)
+  FOREIGN KEY (course_id) REFERENCES courses (course_id)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
@@ -171,14 +161,14 @@ CREATE TABLE teaches (
 
 DROP TABLE IF EXISTS taught_in;
 CREATE TABLE taught_in (
-  course_id     INT UNSIGNED NOT NULL,
-  room_num      VARCHAR(8)   NOT NULL,
-  building_name VARCHAR(32)  NOT NULL,
-  session_date  DATE         NOT NULL,
-  session_time  TIME         NOT NULL,
+  course_id     INT UNSIGNED                                   NOT NULL,
+  building_name VARCHAR(32)                                    NOT NULL,
+  room_num      SMALLINT UNSIGNED                              NOT NULL,
+  session_date  ENUM ('Mo', 'Tu', 'We', 'Th', 'F', 'Sa', 'Su') NOT NULL,
+  session_time  TIME                                           NOT NULL,
   PRIMARY KEY (course_id),
-  FOREIGN KEY (room_num, building_name)
-  REFERENCES classrooms (room_num, building_name)
+  UNIQUE KEY (building_name, room_num, session_date, session_time),
+  FOREIGN KEY (building_name, room_num) REFERENCES classrooms (building_name, room_num)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
@@ -190,8 +180,7 @@ CREATE TABLE hired_by (
   professor_id    INT UNSIGNED NOT NULL,
   dept_short_name VARCHAR(8)   NOT NULL,
   PRIMARY KEY (professor_id, dept_short_name),
-  FOREIGN KEY (professor_id)
-  REFERENCES professors (professor_id)
+  FOREIGN KEY (professor_id) REFERENCES professors (professor_id)
     ON UPDATE CASCADE
 )
   ENGINE = InnoDB;
@@ -202,8 +191,7 @@ CREATE TABLE head_of (
   dept_head_id    INT UNSIGNED NOT NULL,
   dept_short_name VARCHAR(8)   NOT NULL,
   PRIMARY KEY (dept_head_id, dept_short_name),
-  FOREIGN KEY (dept_short_name)
-  REFERENCES departments (dept_short_name)
+  FOREIGN KEY (dept_short_name) REFERENCES departments (dept_short_name)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 )
@@ -222,8 +210,7 @@ CREATE TABLE enroll_capacity (
   capacity_current TINYINT UNSIGNED DEFAULT 0,
   capacity_max     TINYINT UNSIGNED DEFAULT 30, -- for now
   PRIMARY KEY (course_id),
-  FOREIGN KEY (course_id)
-  REFERENCES courses (course_id)
+  FOREIGN KEY (course_id) REFERENCES courses (course_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 )

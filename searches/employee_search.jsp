@@ -82,7 +82,7 @@
         <title>Search Employee</title>
     </jsp:attribute>
     <jsp:attribute name="header">
-        <h1 class="display-3">Filter Employees</h1>
+        <h1 class="display-3">Find Employees</h1>
     </jsp:attribute>
     <jsp:attribute name="footer">
         <style>#footer {
