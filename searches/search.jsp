@@ -24,13 +24,13 @@
                     <input type="hidden" name="search_submitted" value="submitted" id="submit_flag">
                     <div class="row">
                         <div class="col">
-                            <label style="color: #fff;">Subject:<br>
+                            <label>Subject:<br>
                                 <input type="text" name="subject"></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <label style="color: #fff;">Course Number:<br>
+                            <label>Course Number:<br>
                                 <input type="text" name="courseNum"></label>
                         </div>
                     </div>

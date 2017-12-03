@@ -24,7 +24,7 @@
             String query = "";
             String btnName = "";
             if (user.getType().equals("Student")) {
-                query = "SELECT * FROM Courses NATURAL JOIN teaches NATURAL JOIN professors NATURAL JOIN users NATURAL JOIN users_detail WHERE dept_short_name LIKE ? AND course_number LIKE ?";
+                query = "SELECT * FROM Courses NATURAL JOIN taught_in NATURAL JOIN teaches NATURAL JOIN professors NATURAL JOIN users NATURAL JOIN users_detail WHERE dept_short_name LIKE ? AND course_number LIKE ?";
                 btnName = "Enroll";
             } else if (user.getType().equals("Lecturer")) {
                 query = "SELECT * FROM Courses NATURAL LEFT JOIN taught_in NATURAL LEFT JOIN teaches NATURAL LEFT JOIN professors NATURAL LEFT JOIN users NATURAL LEFT JOIN users_detail WHERE dept_short_name LIKE ? AND course_number LIKE ?";
@@ -36,28 +36,31 @@
             stmt.setString(1, subject.trim() + "%");
             stmt.setString(2, "%" + courseNum.trim() + "%");
             ResultSet rs = stmt.executeQuery();
-
+            int i = 1;
             while (rs.next()) {
-				String courseID = rs.getString("course_id");
+                String anchID = "anchID" + i;
+                i++;
+                String courseID = rs.getString("course_id");
                 String courseNumber = rs.getString("course_number");
                 String courseName = rs.getString("course_name");
                 String departmentShortName = rs.getString("dept_short_name");
                 String courseDescription = rs.getString("course_description");
-				String buildingName = rs.getString("building_name");
-				String roomNum = rs.getString("room_num");
-				String location = "N/A";
-				if (buildingName != null && roomNum != null) {
-					location = buildingName + " " + roomNum;
-				}
-				String sessionDate = rs.getString("session_date");
-				String sessionTime = rs.getString("session_time");
-				String time = "N/A";
-				if (sessionDate != null && sessionTime != null) {
-					time = sessionDate + " " + sessionTime;	
-				}
+                String buildingName = rs.getString("building_name");
+                String roomNum = rs.getString("room_num");
+                String location = "N/A";
+                if (buildingName != null && roomNum != null) {
+                    location = buildingName + " " + roomNum;
+                }
+                String sessionDate = rs.getString("session_date");
+                String sessionTime = rs.getString("session_time");
+                String time = "N/A";
+                if (sessionDate != null && sessionTime != null) {
+                    time = sessionDate + " " + sessionTime;
+                }
                 String professorName = rs.getString("first_name") == null ? "None" : rs.getString("first_name") + " " + rs.getString("last_name");
-                out.println("<tr><td><p><b>" + departmentShortName + " " + courseNumber + "<br>" + courseName + "</b><br>" + courseDescription + "<br>Instructor: " + professorName + "<br>" + "Classroom: " + location + "<br>" + "Time: " + time + "</p></td>");
-                out.println("<td><form action='add_course.jsp' method='POST'><input type='hidden' name='courseID' value='" + courseID + "'><input type='hidden' name='time' value='" + time + "'><input type='Submit' value='" + btnName + "'></form></td></tr><br>");
+                out.println("<tr><td><p id='" + anchID + "'><b>" + departmentShortName + " " + courseNumber + "<br>" + courseName + "</b><br>" + courseDescription + "<br>Instructor: " + professorName + "<br>" + "Classroom: " + location + "<br>" + "Time: " + time + "</p></td>");
+                out.println("<td><form action='add_course.jsp' method='POST'><input type='hidden' name='courseID' value='" + courseID + "'><input type='hidden' name='time' value='" + time + "'><input type='hidden' name='rd_url' value='" +
+                        request.getRequestURL() + "?" + request.getQueryString() + "#" + anchID + "'><input class='action_btn_anchor btn btn-danger' type='Submit' value='" + btnName + "'></form></td></tr><br>");
                 out.println("<br>");
             }
 

@@ -87,8 +87,10 @@
                     stmt.close();
                     con.close();
                 }
-                RequestDispatcher rd = request.getRequestDispatcher("search.jsp");
-                rd.forward(request, response);
+//                RequestDispatcher rd = request.getRequestDispatcher("search.jsp");
+//                rd.forward(request, response);
+                String rd_url = request.getParameter("rd_url");
+				response.sendRedirect(rd_url);
             %>
 
         </c:when>

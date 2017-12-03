@@ -4,6 +4,7 @@
 
 
 <c:set var="bodyContent">
+    result
 </c:set>
 <t:genericpage>
     <jsp:attribute name="head">

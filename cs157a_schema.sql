@@ -152,6 +152,10 @@ CREATE TABLE teaches (
   professor_id INT UNSIGNED NOT NULL,
   course_id    INT UNSIGNED NOT NULL,
   PRIMARY KEY (course_id),
+  INDEX (professor_id),
+  FOREIGN KEY (professor_id) REFERENCES professors (professor_id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
   FOREIGN KEY (course_id) REFERENCES courses (course_id)
     ON UPDATE CASCADE
     ON DELETE CASCADE

@@ -18,17 +18,17 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col">
-                                <label style="color: #fff;">First Name:<br><input type="text" name="lec_fname"></label>
+                                <label>First Name:<br><input type="text" name="lec_fname"></label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <label style="color: #fff;">Last Name:<br><input type="text" name="lec_lname"></label>
+                                <label>Last Name:<br><input type="text" name="lec_lname"></label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <label style="color: #fff;">Employee ID:<br><input type="text" name="lec_id"></label>
+                                <label>Employee ID:<br><input type="text" name="lec_id"></label>
                             </div>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
     </div>
     <br><br>
     <% if (request.getAttribute("resultMessage") != null) {
-        out.println("<table style='width:100%'><tr><th><h4>Course</h4></th><th><h4>Drop</h4></th></tr>" + request.getAttribute("resultMessage") + "</p>");
+        out.println("<table style='width:100%'><tr><th><h4>Employee</h4></th><th><h4 align='right'>Fire</h4></th></tr>" + request.getAttribute("resultMessage") + "</p>");
     }
     %>
     <div class="container">
@@ -52,36 +52,43 @@
             <h3>Employees</h3>
         </div>
         <div class="row">
+            <%
+                // user is dept head. user type = "Head"
+                if (user.getType().equals("Head")) {
+                    String query = "SELECT * FROM users_detail NATURAL JOIN professors WHERE professor_id IN (SELECT professor_id FROM hired_by NATURAL JOIN head_of NATURAL JOIN dept_heads NATURAL JOIN users WHERE username=?)";
+                    PreparedStatement stmt = con.prepareStatement(query);
+                    stmt.setString(1, user.getUsername());
+                    ResultSet profList = stmt.executeQuery();
+                    if (profList.next()) {
+                        out.println("<table style='width:100%'><tr><th></th><th></th></tr>");
+                        while (profList.next()) {
+                            String firstName = profList.getString("first_name");
+                            String lastName = profList.getString("last_name");
+                            String profID = profList.getString("professor_id");
+                            String user_id = profList.getString("user_id");
 
-
+            %>
+            <div class="d-flex flex-row">
+                <div class="p-2"> Name: ${firstName} ${lastName} </div>
+                <div class="p-2"> Emp ID: ${profID} </div>
+                <form action='fire_employee.jsp' method='GET'>
+                    <input name='prof_user_id' type='hidden' value="${user_id}">
+                    <div class="ml-auto p-2">
+                        <input type='Submit' value='Fire'>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
     <%
-        // user is dept head. user type = "Head"
-        if (user.getType().equals("Head")) {
-            String query = "SELECT * FROM users_detail NATURAL JOIN professors WHERE professor_id IN (SELECT professor_id FROM hired_by NATURAL JOIN head_of NATURAL JOIN dept_heads NATURAL JOIN users WHERE username=?)";
-            PreparedStatement stmt = con.prepareStatement(query);
-            stmt.setString(1, user.getUsername());
-            ResultSet profList = stmt.executeQuery();
-            if (profList.next()) {
-                out.println("<table style='width:100%'><tr><th></th><th></th></tr>");
-                while (profList.next()) {
-
-    %>
-
-    <form action='fire_prof.jsp' method='GET'><input type='hidden' name='course_id'
-                                                       value='" + courseList.getString("course_id") + "'><input
-            name='student_id' type='hidden' value='" + courseList.getString("student_id") + "'><input type='Submit'
-                                                                                                      value='Drop'>
-    </form>
-
-    <% }
-        stmt.close();
-        con.close();
-    } else {
-        // someone else
-    }
+                }
+                stmt.close();
+                con.close();
+            } else {
+                // someone else
+            }
+        }
     %>
 </c:set>
 
