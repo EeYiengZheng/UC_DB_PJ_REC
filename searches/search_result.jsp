@@ -5,7 +5,7 @@
 <jsp:setProperty name='user' property='*'/>
 
 <c:set var="bodyContent">
-    <table style='width:100%'>
+    <table style='color: #fff; width:100%'>
         <tr>
             <th><h4>Course</h4></th>
             <th><h4>Add</h4></th>
@@ -30,7 +30,6 @@
                 query = "SELECT * FROM Courses NATURAL LEFT JOIN teaches NATURAL LEFT JOIN professors NATURAL LEFT JOIN users NATURAL LEFT JOIN users_detail WHERE dept_short_name LIKE ? AND course_number LIKE ?";
                 btnName = "Teach";
             } else {
-
             }
 
             PreparedStatement stmt = con.prepareStatement(query);

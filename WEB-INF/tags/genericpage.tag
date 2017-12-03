@@ -41,6 +41,9 @@
             color: white !important;
         }
 
+        label {
+            color: #fff;
+        }
         hr {
             color: white;
             background-color: white;
@@ -129,14 +132,14 @@
                     </c:when>
                     <c:when test="${user.getType().equals('Head')}">
                         <li class="nav-item">
-                            <a class="nav-link" href="<c:url value="/userinfo/employees.jsp"/>">Employees</a>
+                            <a class="nav-link" href="<c:url value="/searches/employee_search.jsp"/>">Employees</a>
                         </li>
                     </c:when>
                     <c:when test="${user.getType().equals('Other')}">
                         <%--
                         reserved for others. Admin?
                         <li class="nav-item">
-                            <a class="nav-link" href="<c:url value="/userinfo/employees.jsp"/>">???</a>
+                            <a class="nav-link" href="<c:url value="??"/>">???</a>
                         </li>
                         --%>
                     </c:when>
