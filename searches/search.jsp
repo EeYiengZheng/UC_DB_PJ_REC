@@ -88,7 +88,7 @@
             while (courseList.next()) {
                 out.println("<tr><td><p><b>" + courseList.getString("dept_short_name") + " " + courseList.getString("course_number") + ": " + courseList.getString("course_name"));
 
-                out.println("</b></td><td><form action='drop_course.jsp' method='GET'><input type='hidden' name='course_id' value='" + courseList.getString("course_id") + "'><input name='professor_id' type='hidden' value='" + courseList.getString("professor_id") + "'><input type='Submit' value='Drop'></form>");
+                out.println("</b></td><td><form action='drop_course.jsp' method='POST'><input type='hidden' name='course_id' value='" + courseList.getString("course_id") + "'><input name='professor_id' type='hidden' value='" + courseList.getString("professor_id") + "'><input type='Submit' value='Drop'></form>");
                 out.println("</td></tr></p></div>");
             }
             stmt.close();

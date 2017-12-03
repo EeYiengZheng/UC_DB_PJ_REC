@@ -23,7 +23,12 @@
                             String dept_short_name = courseList.getString("dept_short_name");
                             String courseNum = courseList.getString("course_number");
 							String courseID = courseList.getString("course_id");
-                            out.println("<option value='" + courseID + "'>" + dept_short_name + " " + courseNum + "</option>");
+							if (courseID.equals(request.getParameter("course"))) {
+                            	out.println("<option selected value='" + courseID + "'>" + dept_short_name + " " + courseNum + "</option>");
+							}
+							else {
+                            	out.println("<option value='" + courseID + "'>" + dept_short_name + " " + courseNum + "</option>");
+							}
                     }
                 %>
                 </select>
@@ -40,8 +45,9 @@
 					
 					while (studentGrades.next()) {
 						String studentName = studentGrades.getString("first_name") + " " + studentGrades.getString("last_name");
-						String studentGrade = studentGrades.getString("grade");
+						String studentGrade = studentGrades.getString("grade") == null ? "N/A" : studentGrades.getString("grade");
 						out.print(studentName + "---Grade:" + studentGrade + "<br>");
+						out.print("<form action='drop_student.jsp' method='POST'><input type='hidden' name='student_id' value='" + studentGrades.getInt("student_id") + "'><input type='hidden' name='course_id' value='" + course + "'><input type='Submit' value='Drop Student'></form>");
 					}
 				}
 				con.close();
