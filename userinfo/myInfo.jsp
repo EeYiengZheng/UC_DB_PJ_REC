@@ -9,18 +9,32 @@
     PreparedStatement stmt = con.prepareStatement(query);
     stmt.setString(1, user.getUsername());
     ResultSet rs = stmt.executeQuery();
-    rs.next();
-    String nickname = rs.getString("nickname") == null ? "" : rs.getString("nickname");
-    String email = rs.getString("email") == null ? "" : rs.getString("email");
-    String firstName = rs.getString("first_name") == null ? "" : rs.getString("first_name");
-    String lastName = rs.getString("last_name") == null ? "" : rs.getString("last_name");
-    String birthday = rs.getString("birthday") == null ? "" : rs.getString("birthday");
-    String phone_number = rs.getString("phone_number") == null ? "" : rs.getString("phone_number");
-    String address = rs.getString("address") == null ? "" : rs.getString("address");
-    String ethnicity = rs.getString("ethnicity") == null ? "" : rs.getString("ethnicity");
-    String gender = rs.getString("gender") == null ? "" : rs.getString("gender");
-    stmt.close();
-    con.close();
+    String nickname = "";
+    String email = "";
+    String firstName = "";
+    String lastName = "";
+    String birthday = "";
+    String phone_number = "";
+    String address = "";
+    String ethnicity = "";
+    String gender = "";
+
+    if (rs.next()) {
+        nickname = rs.getString("nickname") == null ? "" : rs.getString("nickname");
+        email = rs.getString("email") == null ? "" : rs.getString("email");
+        firstName = rs.getString("first_name") == null ? "" : rs.getString("first_name");
+        lastName = rs.getString("last_name") == null ? "" : rs.getString("last_name");
+        birthday = rs.getString("birthday") == null ? "" : rs.getString("birthday");
+        phone_number = rs.getString("phone_number") == null ? "" : rs.getString("phone_number");
+        address = rs.getString("address") == null ? "" : rs.getString("address");
+        ethnicity = rs.getString("ethnicity") == null ? "" : rs.getString("ethnicity");
+        gender = rs.getString("gender") == null ? "" : rs.getString("gender");
+
+        stmt.close();
+        con.close();
+    } else {
+        // error
+    }
 %>
 
 <c:set var="bodyContent">

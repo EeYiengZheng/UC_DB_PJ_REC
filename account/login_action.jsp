@@ -8,7 +8,7 @@
     String password = request.getParameter("password");
 
 
-    String query = "SELECT user_id FROM Users WHERE password = sha2(?, 256) AND username=?";
+    String query = "SELECT user_id FROM users WHERE password = sha2(?, 256) AND username=?";
     PreparedStatement stmt = con.prepareStatement(query);
     stmt.setString(1, password);
     stmt.setString(2, username);
@@ -21,7 +21,7 @@
 		user.setUsername(username);
 		user.setPassword(password);
 		
-		query = "SELECT * FROM Students WHERE user_id=?";
+		query = "SELECT * FROM students WHERE user_id=?";
 		PreparedStatement studentQuery = con.prepareStatement(query);
 		studentQuery.setInt(1, user_id);
 		ResultSet studentSet = studentQuery.executeQuery();
@@ -29,7 +29,23 @@
 			user.setType("Student");
 		}
 		else {
-			user.setType("Lecturer");
+		    query = "SELECT * FROM professors WHERE user_id=?";
+		    PreparedStatement lecturerQuery = con.prepareStatement(query);
+            lecturerQuery.setInt(1, user_id);
+		    ResultSet lqrs = lecturerQuery.executeQuery();
+		    if (lqrs.next()){
+                user.setType("Lecturer");
+            } else {
+                query = "SELECT * FROM dept_heads WHERE user_id=?";
+                PreparedStatement headQuery = con.prepareStatement(query);
+                headQuery.setInt(1, user_id);
+                ResultSet dhrs = headQuery.executeQuery();
+                if (dhrs.next()){
+                    user.setType("Head");
+                } else {
+                    user.setType("Other");
+                }
+            }
 		}
 		studentQuery.close();
 		

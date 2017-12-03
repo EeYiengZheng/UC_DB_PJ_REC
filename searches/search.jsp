@@ -9,7 +9,7 @@
     <% if (request.getAttribute("resultMessage") != null) {
         out.println("<p>" + request.getAttribute("resultMessage") + "</p>");
     }
-    %></div>
+    %>
     <h3>Search for Courses</h3>
     <div class='col-25'></div>
     <form action="search_result.jsp">
@@ -32,9 +32,9 @@
         <c:when test="${user.getType().equals('Lecturer')}">
             <h3>Courses Currently Teaching</h3>
         </c:when>
-        <c:otherwise>
+        <c:when test="${user.getType().equals('Student')}">
             <h3>Courses Currently Taking</h3>
-        </c:otherwise>
+        </c:when>
     </c:choose>
     <%
 
@@ -51,7 +51,7 @@
             }
             stmt.close();
             con.close();
-        } else {
+        } else if (user.getType().equals("Lecturer")){
             String query = "SELECT * FROM courses NATURAL JOIN teaches WHERE professor_id IN (SELECT professor_id FROM Professors NATURAL JOIN Users WHERE username=?)";
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, user.getUsername());
@@ -65,6 +65,8 @@
             }
             stmt.close();
             con.close();
+        } else {
+            // someone else
         }
     %>
 </c:set>

@@ -34,7 +34,7 @@
         }
 
         body {
-			background-color: #011F4B
+            background-color: #011F4B
         }
 
         h1, h2, h3, p, footer, small, .nav-link, .navbar-toggler-icon {
@@ -46,6 +46,7 @@
             background-color: white;
             border-color: white;
         }
+
         .display-3 {
             color: white !important;
         }
@@ -109,20 +110,36 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/userinfo/myInfo.jsp"/>">MyInfo</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/courses/search.jsp"/>">Search Courses</a>
-                </li>
                 <c:choose>
+                    <c:when test="${user.getType().equals('Student')}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/searches/search.jsp"/>">Search Courses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/grades/myGrades.jsp"/>">Grades</a>
+                        </li>
+                    </c:when>
                     <c:when test="${user.getType().equals('Lecturer')}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/searches/search.jsp"/>">Search Courses</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<c:url value="/grades/gradebook.jsp"/>">Gradebook</a>
                         </li>
                     </c:when>
-                    <c:otherwise>
+                    <c:when test="${user.getType().equals('Head')}">
                         <li class="nav-item">
-                            <a class="nav-link" href="<c:url value="/grades/myGrades.jsp"/>">Grades</a>
+                            <a class="nav-link" href="<c:url value="/userinfo/employees.jsp"/>">Employees</a>
                         </li>
-                    </c:otherwise>
+                    </c:when>
+                    <c:when test="${user.getType().equals('Other')}">
+                        <%--
+                        reserved for others. Admin?
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/userinfo/employees.jsp"/>">???</a>
+                        </li>
+                        --%>
+                    </c:when>
                 </c:choose>
             </c:if>
         </ul>

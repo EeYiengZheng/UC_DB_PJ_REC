@@ -1,3 +1,6 @@
 <jsp:useBean id='user' scope='session' class='main.java.beans.UserBean'/>
-<jsp:setProperty name="user" property="loggedIn"  value="false"/>
-<% response.sendRedirect("../"); %>
+<% user.setUsername(null);
+    user.setType(null);
+    user.setLoggedIn(false);
+    user.setPassword(null);
+    response.sendRedirect("../"); %>

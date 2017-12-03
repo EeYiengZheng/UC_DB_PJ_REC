@@ -26,9 +26,11 @@
             if (user.getType().equals("Student")) {
                 query = "SELECT * FROM Courses NATURAL JOIN teaches NATURAL JOIN professors NATURAL JOIN users NATURAL JOIN users_detail WHERE dept_short_name LIKE ? AND course_number LIKE ?";
                 btnName = "Enroll";
-            } else {
+            } else if (user.getType().equals("Lecturer")) {
                 query = "SELECT * FROM Courses NATURAL LEFT JOIN teaches NATURAL LEFT JOIN professors NATURAL LEFT JOIN users NATURAL LEFT JOIN users_detail WHERE dept_short_name LIKE ? AND course_number LIKE ?";
                 btnName = "Teach";
+            } else {
+
             }
 
             PreparedStatement stmt = con.prepareStatement(query);
