@@ -232,7 +232,9 @@
         </script>
     </jsp:attribute>
     <jsp:body>
+        <div class="container justify-content-center" style="width: auto">
         ${bodyContent}
+        </div>
     </jsp:body>
 
 </t:genericpage>
