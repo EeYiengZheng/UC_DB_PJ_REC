@@ -57,7 +57,7 @@
 				}
                 String professorName = rs.getString("first_name") == null ? "None" : rs.getString("first_name") + " " + rs.getString("last_name");
                 out.println("<tr><td><p><b>" + departmentShortName + " " + courseNumber + "<br>" + courseName + "</b><br>" + courseDescription + "<br>Instructor: " + professorName + "<br>" + "Classroom: " + location + "<br>" + "Time: " + time + "</p></td>");
-                out.println("<td><form action='add_course.jsp' method='POST'><input type='hidden' name='courseID' value='" + courseID + "'><input type='Submit' value='" + btnName + "'></form></td></tr><br>");
+                out.println("<td><form action='add_course.jsp' method='POST'><input type='hidden' name='courseID' value='" + courseID + "'><input type='hidden' name='time' value='" + time + "'><input type='Submit' value='" + btnName + "'></form></td></tr><br>");
                 out.println("<br>");
             }
 

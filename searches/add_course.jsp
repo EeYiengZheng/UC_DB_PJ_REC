@@ -29,9 +29,24 @@
                     stmt.close();
                 }
 				
-				PreparedStatement stmt = null;
+				String classTime = request.getParameter("time");
+				boolean collisionFound = false;
 				
-                if (user.getType().equals("Student")) {
+				PreparedStatement stmt = null;
+				if (user.getType().equals("Student")) {
+					//Check for time collisions
+					if (!classTime.equals("N/A")) {
+						query = "SELECT session_date, session_time FROM enrolled_in NATURAL JOIN taught_in";
+						stmt = con.prepareStatement(query);
+						ResultSet rs = stmt.executeQuery();
+						while (!collisionFound && rs.next()) {
+							String time = rs.getString("session_date") + " " + rs.getString("session_time");
+							collisionFound = time.equals(classTime);	
+						}
+						stmt.close();
+					}
+					
+					
                     query = "INSERT INTO enrolled_in(student_id, course_id, grade, is_taking) VALUES(?, ?, ?, ?)";
                     stmt = con.prepareStatement(query);
                     stmt.setInt(1, id);
@@ -39,6 +54,19 @@
                     stmt.setString(3, null);
                     stmt.setBoolean(4, true);
                 } else {
+					//Check for time collisions
+					if (!classTime.equals("N/A")) {
+						query = "SELECT session_date, session_time FROM teaches NATURAL JOIN taught_in";
+						stmt = con.prepareStatement(query);
+						ResultSet rs = stmt.executeQuery();
+						while (!collisionFound && rs.next()) {
+							String time = rs.getString("session_date") + " " + rs.getString("session_time");
+							collisionFound = time.equals(classTime);	
+						}
+						stmt.close();
+					}
+					
+					
                     query = "INSERT INTO teaches(professor_id, course_id) VALUES(?, ?)";
                     stmt = con.prepareStatement(query);
                     stmt.setInt(1, id);
@@ -46,8 +74,13 @@
                 }
 
                 try {
-                    stmt.executeUpdate();
-                    request.setAttribute("resultMessage", "<p align='center'>Course added successfully!</p>");
+					if (collisionFound) {
+						request.setAttribute("resultMessage", "<p>You already have a course that occupies the same time slot!</p>");
+					}
+					else {
+                    	stmt.executeUpdate();
+                    	request.setAttribute("resultMessage", "<p align='center'>Course added successfully!</p>");	
+					}
                 } catch (Exception e) {
                     request.setAttribute("resultMessage", "<p>An error occurred while attempting to add the course. Please contact the system administrator.</p>");
                 } finally {
