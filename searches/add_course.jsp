@@ -28,28 +28,21 @@
                     id = idResult.getInt("professor_id");
                     stmt.close();
                 }
-
-                query = "SELECT course_id FROM courses WHERE dept_short_name=? AND course_number=?";
-                PreparedStatement stmt = con.prepareStatement(query);
-                stmt.setString(1, request.getParameter("dept_short_name"));
-                stmt.setString(2, request.getParameter("course_number"));
-                ResultSet courseResult = stmt.executeQuery();
-                courseResult.next();
-                int courseID = courseResult.getInt("course_id");
-                stmt.close();
-
+				
+				PreparedStatement stmt = null;
+				
                 if (user.getType().equals("Student")) {
                     query = "INSERT INTO enrolled_in(student_id, course_id, grade, is_taking) VALUES(?, ?, ?, ?)";
                     stmt = con.prepareStatement(query);
                     stmt.setInt(1, id);
-                    stmt.setInt(2, courseID);
+                    stmt.setString(2, request.getParameter("courseID"));
                     stmt.setString(3, null);
                     stmt.setBoolean(4, true);
                 } else {
                     query = "INSERT INTO teaches(professor_id, course_id) VALUES(?, ?)";
                     stmt = con.prepareStatement(query);
                     stmt.setInt(1, id);
-                    stmt.setInt(2, courseID);
+                    stmt.setString(2, request.getParameter("courseID"));
                 }
 
                 try {

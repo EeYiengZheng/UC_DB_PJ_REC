@@ -38,6 +38,7 @@
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
+				String courseID = rs.getString("course_id");
                 String courseNumber = rs.getString("course_number");
                 String courseName = rs.getString("course_name");
                 String departmentShortName = rs.getString("dept_short_name");
@@ -56,7 +57,7 @@
 				}
                 String professorName = rs.getString("first_name") == null ? "None" : rs.getString("first_name") + " " + rs.getString("last_name");
                 out.println("<tr><td><p><b>" + departmentShortName + " " + courseNumber + "<br>" + courseName + "</b><br>" + courseDescription + "<br>Instructor: " + professorName + "<br>" + "Classroom: " + location + "<br>" + "Time: " + time + "</p></td>");
-                out.println("<td><form action='add_course.jsp' method='POST'><input type='hidden' name='dept_short_name' value='" + departmentShortName + "'><input name='course_number' type='hidden' value='" + courseNumber + "'><input type='Submit' value='" + btnName + "'></form></td></tr><br>");
+                out.println("<td><form action='add_course.jsp' method='POST'><input type='hidden' name='courseID' value='" + courseID + "'><input type='Submit' value='" + btnName + "'></form></td></tr><br>");
                 out.println("<br>");
             }
 
