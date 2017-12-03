@@ -16,6 +16,11 @@
 				stmt.close();
 			%>
             <h4>My Courses</h4>
+            
+            <% if (request.getAttribute("resultMessage") != null) {
+                out.println("<p>" + request.getAttribute("resultMessage") + "</p>");
+            }
+            %>
             <form action="gradebook.jsp" method="GET">
                 <select name="course">
                 <%
@@ -47,6 +52,7 @@
 						String studentName = studentGrades.getString("first_name") + " " + studentGrades.getString("last_name");
 						String studentGrade = studentGrades.getString("grade") == null ? "N/A" : studentGrades.getString("grade");
 						out.print(studentName + "---Grade:" + studentGrade + "<br>");
+						out.print("<form action='set_grade.jsp' method='POST'><select name='grade'><option value='A+'>A+</option><option value='A'>A</option><option value='A-'>A-</option><option value='B+'>B+</option><option value='B'>B</option><option value='B-'>B-</option><option value='C+'>C+</option><option value='C'>C</option><option value='C-'>C-</option><option value='D+'>D+</option><option value='D'>D</option><option value='D-'>D-</option><option value='F'>F</option><option value='W'>W</option><option value='NC'>NC</option><option value='CR'>CR</option><option value='I'>I</option></select><input type='hidden' name='student_id' value='" + studentGrades.getInt("student_id") + "'><input type='hidden' name='course_id' value='" + course + "'><input type='Submit' value='Set Grade'></form>");
 						out.print("<form action='drop_student.jsp' method='POST'><input type='hidden' name='student_id' value='" + studentGrades.getInt("student_id") + "'><input type='hidden' name='course_id' value='" + course + "'><input type='Submit' value='Drop Student'></form>");
 					}
 				}

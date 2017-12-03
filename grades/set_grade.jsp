@@ -9,21 +9,24 @@
     <c:choose>
         <c:when test="${user.loggedIn}">
         	<%
-				String query = "DELETE FROM enrolled_in WHERE student_id=? AND course_id=?";
+				String query = "UPDATE enrolled_in SET grade=? WHERE student_id=? AND course_id=?";
 				PreparedStatement stmt = con.prepareStatement(query);
-				stmt.setString(1, request.getParameter("student_id"));
-				stmt.setString(2, request.getParameter("course_id"));
+				stmt.setString(1, request.getParameter("grade"));
+				stmt.setString(2, request.getParameter("student_id"));
+				stmt.setString(3, request.getParameter("course_id"));
                 try {
                     stmt.executeUpdate();
-                    request.setAttribute("resultMessage", "Student dropped successfully!");
+                    request.setAttribute("resultMessage", "Student grade updated!");
                 } catch (Exception e) {
-                    request.setAttribute("resultMessage", "An error occurred while attempting to remove the student. Please contact the system administrator.");
+                    request.setAttribute("resultMessage", "An error occurred while attempting to update the student's grade. Please contact the system administrator.");
                 } finally {
                     stmt.close();
                     con.close();
                 }
                 RequestDispatcher rd = request.getRequestDispatcher("gradebook.jsp");
                 rd.forward(request, response);
+				stmt.close();
+				con.close();
 			%>
         </c:when>
         <c:otherwise>

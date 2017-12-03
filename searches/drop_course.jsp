@@ -16,7 +16,7 @@
                     stmt.executeUpdate();
                     request.setAttribute("resultMessage", "<p>Course dropped successfully!</p>");
                 } catch (Exception e) {
-                    request.setAttribute("resultMessage", "<p>An error occurred while attempting to add the course. Please contact the system administrator.</p>");
+                    request.setAttribute("resultMessage", "<p>An error occurred while attempting to drop the course. Please contact the system administrator.</p>");
                 } finally {
                     stmt.close();
                     con.close();
