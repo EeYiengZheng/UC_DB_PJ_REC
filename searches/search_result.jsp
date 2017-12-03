@@ -33,8 +33,8 @@
             }
 
             PreparedStatement stmt = con.prepareStatement(query);
-            stmt.setString(1, subject);
-            stmt.setString(2, "%" + courseNum + "%");
+            stmt.setString(1, subject.trim() + "%");
+            stmt.setString(2, "%" + courseNum.trim() + "%");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -42,7 +42,7 @@
                 String courseName = rs.getString("course_name");
                 String departmentShortName = rs.getString("dept_short_name");
                 String courseDescription = rs.getString("course_description");
-				String professorName = rs.getString("first_name") == null ? "None" : rs.getString("first_name") + " " + rs.getString("last_name");
+                String professorName = rs.getString("first_name") == null ? "None" : rs.getString("first_name") + " " + rs.getString("last_name");
                 out.println("<tr><td><p><b>" + departmentShortName + " " + courseNumber + "<br>" + courseName + "</b><br>" + courseDescription + "<br>Instructor: " + professorName + "</p></td>");
                 out.println("<td><form action='add_course.jsp' method='POST'><input type='hidden' name='dept_short_name' value='" + departmentShortName + "'><input name='course_number' type='hidden' value='" + courseNumber + "'><input type='Submit' value='" + btnName + "'></form></td></tr><br>");
                 out.println("<br>");

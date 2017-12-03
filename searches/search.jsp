@@ -21,6 +21,7 @@
         <div class="row justify-content-center">
             <div class="form-group">
                 <form action="search_result.jsp">
+                    <input type="hidden" name="search_submitted" value="submitted" id="submit_flag">
                     <div class="row">
                         <div class="col">
                             <label style="color: #fff;">Subject:<br>

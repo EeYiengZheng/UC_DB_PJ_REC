@@ -28,7 +28,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <label style="color: #fff;">Lecturer ID:<br><input type="text" name="lec_id"></label></div>
+                            <label style="color: #fff;">Employee ID:<br><input type="text" name="lec_id"></label></div>
                     </div>
                 </div>
                 <div class="row justify-content-center">
