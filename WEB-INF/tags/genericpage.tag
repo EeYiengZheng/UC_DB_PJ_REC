@@ -132,7 +132,7 @@
                     </c:when>
                     <c:when test="${user.getType().equals('Head')}">
                         <li class="nav-item">
-                            <a class="nav-link" href="<c:url value="/searches/employee_search.jsp"/>">Employees</a>
+                            <a class="nav-link" href="<c:url value="/employees/employee_search.jsp"/>">Employees</a>
                         </li>
                     </c:when>
                     <c:when test="${user.getType().equals('Other')}">
