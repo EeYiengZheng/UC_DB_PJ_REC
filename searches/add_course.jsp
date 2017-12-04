@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="../databases.jsp" %>
 <%@include file="../taglibs.jsp" %>
+<%@include file="../constants.jsp" %>
 <jsp:useBean id='user' scope='session' class='main.java.beans.UserBean'/>
 <jsp:setProperty name='user' property='*'/>
 
@@ -12,6 +13,10 @@
                 String query = "";
                 int id = 0;
                 if (user.getType().equals("Student")) {
+					if (request.getParameter("count") >= CLASS_CAP) {
+						con.close();
+						request.setAttribute("resultMessage", "<p>The class you are trying to add is full.</p>");
+					}
                     query = "SELECT student_id FROM Students NATURAL JOIN Users WHERE username=?";
                     PreparedStatement stmt = con.prepareStatement(query);
                     stmt.setString(1, user.getUsername());
