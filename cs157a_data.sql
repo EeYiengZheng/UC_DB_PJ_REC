@@ -10785,3 +10785,29 @@ UPDATE courses SET ge='A1D2' WHERE dept_short_name = 'HUM' AND course_number = '
 UPDATE courses SET ge='A3C2' WHERE dept_short_name = 'HUM' AND course_number = '002B';
 
 
+-- Refactor
+
+CREATE TABLE tempTable (
+  user_id  INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  username VARCHAR(128) NOT NULL,
+  password VARCHAR(128) NOT NULL,
+  email        VARCHAR(255) DEFAULT NULL,
+  first_name   VARCHAR(64)  DEFAULT NULL,
+  last_name    VARCHAR(64)  DEFAULT NULL,
+  birthday     DATE         DEFAULT NULL, -- default yyyy-mm-dd
+  nickname     VARCHAR(128) DEFAULT NULL,
+  phone_number VARCHAR(128) DEFAULT NULL,
+  address      VARCHAR(128) DEFAULT NULL,
+  gender       VARCHAR(64)  DEFAULT NULL,
+  ethnicity    VARCHAR(128) DEFAULT NULL,
+  PRIMARY KEY (user_id),
+  UNIQUE KEY (username, email)
+)
+  ENGINE = InnoDB;
+
+INSERT INTO tempTable(user_id, username, password, email, first_name, last_name, birthday, nickname, phone_number, address, gender, ethnicity) SELECT * FROM users NATURAL LEFT JOIN users_detail;
+
+DROP TABLE users;
+DROP TABLE users_detail;
+
+ALTER TABLE tempTable RENAME users;
