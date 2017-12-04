@@ -48,7 +48,7 @@
     <%
         // user is dept head. user type = "Head"
         if (user.getType().equals("Head")) {
-            String query = "SELECT * FROM users_detail NATURAL JOIN professors WHERE professor_id IN (SELECT professor_id FROM hired_by NATURAL JOIN head_of NATURAL JOIN dept_heads NATURAL JOIN users WHERE username=?)";
+            String query = "SELECT * FROM users NATURAL JOIN professors WHERE professor_id IN (SELECT professor_id FROM hired_by NATURAL JOIN head_of NATURAL JOIN dept_heads NATURAL JOIN users WHERE username=?)";
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, user.getUsername());
             ResultSet profList = stmt.executeQuery();

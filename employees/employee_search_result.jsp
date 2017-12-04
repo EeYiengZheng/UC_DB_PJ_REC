@@ -8,7 +8,7 @@
         String fname = request.getParameter("lec_fname") == "" ? "%" : "%" + request.getParameter("lec_fname") + "%";
         String lname = request.getParameter("lec_lname") == "" ? "%" : "%" + request.getParameter("lec_lname") + "%";
 
-        String query = "SELECT user_id, professor_id, first_name, last_name, gender FROM (SELECT * FROM professors NATURAL JOIN users_detail WHERE first_name LIKE ? AND last_name LIKE ?) pf WHERE professor_id NOT IN (SELECT professor_id FROM hired_by)";
+        String query = "SELECT user_id, professor_id, first_name, last_name, gender FROM (SELECT * FROM professors NATURAL JOIN users WHERE first_name LIKE ? AND last_name LIKE ?) pf WHERE professor_id NOT IN (SELECT professor_id FROM hired_by)";
         PreparedStatement stmt = con.prepareStatement(query);
         stmt.setString(1, fname);
         stmt.setString(2, lname);
