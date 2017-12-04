@@ -122,7 +122,6 @@ DROP TABLE IF EXISTS classrooms;
 CREATE TABLE classrooms (
   building_name VARCHAR(32)       NOT NULL,
   room_num      SMALLINT UNSIGNED NOT NULL,
-  floor         TINYINT UNSIGNED DEFAULT NULL,
   PRIMARY KEY (building_name, room_num)
 )
   ENGINE = InnoDB;
