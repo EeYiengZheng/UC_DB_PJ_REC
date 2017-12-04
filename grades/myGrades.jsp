@@ -15,14 +15,15 @@
 				ResultSet currentGrades = stmt.executeQuery();
 				stmt.close();
 			%>
-            <h4>Currently Taking</h4>
+            <h3>Currently Taking</h3>
             <%
+               out.println("<table style='width:100%'><tr><th><p>Class</p></th><th><p>Grade</th></tr></p>");
 				while(currentGrades.next()) {
 					String dept_short_name = currentGrades.getString("dept_short_name");
 					String courseNum = currentGrades.getString("course_number");
 					String courseName = currentGrades.getString("course_name");
 					String grade = currentGrades.getString("grade") == null ? "N/A" : currentGrades.getString("grade");
-					out.println(dept_short_name + " " + courseNum + ":" + courseName + "-" + grade + "<br>");
+					out.println("<tr><td><p>" + dept_short_name + " " + courseNum + ": " + courseName + "</td><td><p>" + grade + "</td></tr></p>");
 				}
 				
 				query = "SELECT * FROM enrolled_in NATURAL JOIN courses NATURAL JOIN students NATURAL JOIN users WHERE username=? AND is_taking=false";
@@ -30,15 +31,15 @@
 				stmt.setString(1, user.getUsername());
 				ResultSet pastGrades = stmt.executeQuery();
 				stmt.close();
-			%>
-            <h4>Previously Taken</h4>
+               %>
             <%
+               out.println("<table style='width:100%'><tr><th><p>Class</th><th><p>Grade</th></tr>");
 				while(pastGrades.next()) {
 					String dept_short_name = pastGrades.getString("dept_short_name");
 					String courseNum = pastGrades.getString("course_number");
 					String courseName = pastGrades.getString("course_name");
 					String grade = pastGrades.getString("grade") == null ? "N/A" : pastGrades.getString("grade");
-					out.println(dept_short_name + " " + courseNum + ":" + courseName + "-" + grade + "<br>");
+					out.println("<tr><td><p>" + dept_short_name + " " + courseNum + ": " + courseName + "</td><td><p>" + grade + "</td></tr></p>");
 				}
 				
 				con.close();
@@ -60,7 +61,10 @@
     <jsp:attribute name="footer">
     </jsp:attribute>
     <jsp:body>
+        <div class="container justify-content-center">
         ${bodyContent}
+            <h3>Previously Taken</h3>
+        </div>
     </jsp:body>
 
 </t:genericpage>
