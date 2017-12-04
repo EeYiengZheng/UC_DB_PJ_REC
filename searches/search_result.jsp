@@ -62,7 +62,7 @@
                 out.println("<tr><td><p id='" + anchID + "'><b>" + departmentShortName + " " + courseNumber + "<br>" + courseName + "</b><br>" + courseDescription + "<br>Instructor: " + professorName + "<br>" + "Classroom: " + location + "<br>" + "Time: " + time + "<br>Class capacity: " + count + "/" +CLASS_CAP + "</p></td>");
 				
 				
-				//Check for time collisions
+				//Check for time collisions or duplicate classes
 				boolean collisionFound = false;
 				if (!time.equals("N/A")) {
 					String timeQuery = "";
@@ -81,6 +81,24 @@
 						collisionFound = time.equals(classTime);	
 					}
 					timeStmt.close();
+				}
+				else {
+					String duplicateQuery = "";
+					if (user.getType().equals("Student")) {
+						duplicateQuery = "SELECT course_id FROM enrolled_in NATURAL JOIN students NATURAL JOIN users WHERE username=? AND course_id=?";
+					}
+					else if (user.getType().equals("Lecturer")) {
+						duplicateQuery = "SELECT course_id FROM teaches NATURAL JOIN professors NATURAL JOIN users WHERE username=? AND course_id=?";
+					}
+					
+					PreparedStatement duplicateStmt = con.prepareStatement(duplicateQuery);
+					duplicateStmt.setString(1, user.getUsername());
+					duplicateStmt.setString(2, courseID);
+					ResultSet duplicateResult = duplicateStmt.executeQuery();
+					if (duplicateResult.next()) {
+						collisionFound = true;	
+					}
+					duplicateStmt.close();	
 				}
 					
 					
