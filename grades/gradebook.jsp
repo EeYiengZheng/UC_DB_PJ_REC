@@ -15,7 +15,7 @@
             	ResultSet courseList = stmt.executeQuery();
 				stmt.close();
 			%>
-            <h4>My Courses</h4>
+            <h1 class="display-3">My Courses</h1>
             
             <% if (request.getAttribute("resultMessage") != null) {
                 out.println("<p>" + request.getAttribute("resultMessage") + "</p>");
@@ -29,10 +29,10 @@
                             String courseNum = courseList.getString("course_number");
 							String courseID = courseList.getString("course_id");
 							if (courseID.equals(request.getParameter("course"))) {
-                            	out.println("<option selected value='" + courseID + "'>" + dept_short_name + " " + courseNum + "</option>");
+                            	out.println("<div class='col-25'><p><option selected value='" + courseID + "'>" + dept_short_name + " " + courseNum + "</option></div>");
 							}
 							else {
-                            	out.println("<option value='" + courseID + "'>" + dept_short_name + " " + courseNum + "</option>");
+                            	out.println("<div class='col-25'><p><option value='" + courseID + "'>" + dept_short_name + " " + courseNum + "</option></p></div>");
 							}
                     }
                 %>
@@ -74,7 +74,9 @@
     <jsp:attribute name="footer">
     </jsp:attribute>
     <jsp:body>
+        <div class="container justify-content-center" style="width: auto">
         ${bodyContent}
+        </div>
     </jsp:body>
 
 </t:genericpage>

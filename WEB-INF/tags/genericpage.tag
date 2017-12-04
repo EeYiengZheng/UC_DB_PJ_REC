@@ -37,7 +37,7 @@
             background-color: #011f52
         }
 
-        h1, h2, h3, p, footer, small, .nav-link, .navbar-toggler-icon {
+        h1, h2, h3, h4, p, li, footer, small, .nav-link, .navbar-toggler-icon {
             color: white;
         }
 
