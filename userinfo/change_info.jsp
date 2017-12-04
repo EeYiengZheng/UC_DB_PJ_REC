@@ -6,7 +6,7 @@
 	<c:when test="${user.loggedIn}">
         <%
 
-            String query = "UPDATE Users_Detail SET nickname=?, email=?, phone_number=?, address=?, ethnicity=?, gender=? WHERE user_id IN (SELECT user_id FROM Users WHERE username=?)";
+            String query = "UPDATE users SET nickname=?, email=?, phone_number=?, address=?, ethnicity=?, gender=? WHERE user_id IN (SELECT user_id FROM Users WHERE username=?)";
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, request.getParameter("nickname") == "" ? null : request.getParameter("nickname"));
             stmt.setString(2, request.getParameter("email") == "" ? null : request.getParameter("email"));
