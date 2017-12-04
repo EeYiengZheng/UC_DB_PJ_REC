@@ -2,7 +2,6 @@
 <%@include file="../taglibs.jsp" %>
 <%@include file="../databases.jsp" %>
 <jsp:useBean id='user' scope='session' class='main.java.beans.UserBean'/>
-<jsp:setProperty name='user' property='*'/>
 
 <c:set var="bodyContent">
     <% if (request.getAttribute("resultMessage") != null) {
@@ -66,6 +65,7 @@
                             String lastName = profList.getString("last_name");
                             String profID = profList.getString("professor_id");
                             String user_id = profList.getString("user_id");
+                            String gender = profList.getString("gender");
 
             %>
             <div class="d-flex flex-row">
