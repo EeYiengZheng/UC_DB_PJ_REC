@@ -14,9 +14,16 @@
     stmt.setString(1, user.getUsername());
     ResultSet rs = stmt.executeQuery();
 
-   out.println("<p>Welcome back, " + user.getUsername() + "!<br><br> You are using a(n) <b>" + user.getType() + "</b> account. <br><br> You can do the following things with your account: ");
-   
-   out.println("<li></li>");
+   out.println("<p>Welcome back, " + user.getUsername() + "! You are using a <b>" + user.getType() + "</b> account. <br><br> You can do the following things with your account: ");
+   if (user.getType().equals("Student")) {
+   out.println("<li>Edit your personal information</li><li>Search for courses</li><li>Enroll in or drop courses</li><li>View grades</li>");
+   }
+   else if (user.getType().equals("Lecturer")) {
+   out.println("<li>Edit your personal information</li><li>Search for courses</li><li>Pick courses to teach</li><li>Edit grades</li>");
+   }
+   else { //"admin"
+   out.println("<li>Edit your personal information</li><li>Find available employees</li><li>Hire and fire employees</li><li> View employee data</li>");
+   }
 %>
         </c:when>
         <c:otherwise>
