@@ -80,14 +80,13 @@
             stmt.close();
             con.close();
         } else if (user.getType().equals("Lecturer")) {
-            String query = "SELECT * FROM courses NATURAL JOIN teaches WHERE professor_id IN (SELECT professor_id FROM Professors NATURAL JOIN Users WHERE username=?)";
+            String query = "SELECT * FROM courses NATURAL JOIN teaches NATURAL JOIN professors NATURAL JOIN users WHERE username=?";
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, user.getUsername());
             ResultSet courseList = stmt.executeQuery();
             out.println("<div class='col-25'></div><div class='col-25'></div><table style='width:100%'><tr><th></th><th></th></tr>");
             while (courseList.next()) {
                 out.println("<tr><td><p><b>" + courseList.getString("dept_short_name") + " " + courseList.getString("course_number") + ": " + courseList.getString("course_name"));
-
                 out.println("</b></td><td><form action='drop_course.jsp' method='POST'><input type='hidden' name='course_id' value='" + courseList.getString("course_id") + "'><input name='professor_id' type='hidden' value='" + courseList.getString("professor_id") + "'><input type='Submit' value='Drop'></form>");
                 out.println("</td></tr></p></div>");
             }
