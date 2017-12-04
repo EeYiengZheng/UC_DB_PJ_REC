@@ -24,12 +24,17 @@
                 RequestDispatcher rd = request.getRequestDispatcher("search.jsp");
                 rd.forward(request, response);
             } else if(user.getType().equals("Lecturer")) {
+				String studentQuery = "DELETE FROM enrolled_in WHERE course_id=?";
+				PreparedStatement studentStmt = con.prepareStatement(studentQuery);
+				studentStmt.setString(1, request.getParameter("course_id"));
+				
                 String query = "DELETE FROM teaches WHERE professor_id=? AND course_id=?";
                 PreparedStatement stmt = con.prepareStatement(query);
                 stmt.setString(1, request.getParameter("professor_id"));
                 stmt.setString(2, request.getParameter("course_id"));
 
                 try {
+					studentStmt.executeUpdate();
                     stmt.executeUpdate();
                     request.setAttribute("resultMessage", "Course dropped successfully!");
                 } catch (Exception e) {
