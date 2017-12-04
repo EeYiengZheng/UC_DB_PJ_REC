@@ -15,20 +15,15 @@
 
             String subject = request.getParameter("subject");
             String courseNum = request.getParameter("courseNum");
-
-            if (subject == "") {
-                subject = "%";
-            } else if (courseNum == "") {
-                courseNum = "%";
-            }
-
+			String ge = request.getParameter("ge");
+			
             String query = "";
             String btnName = "";
             if (user.getType().equals("Student")) {
-                query = "SELECT *, COUNT(student_id) as count FROM courses NATURAL LEFT JOIN enrolled_in NATURAL JOIN taught_in NATURAL JOIN teaches NATURAL JOIN professors NATURAL JOIN users NATURAL JOIN users_detail WHERE dept_short_name LIKE ? AND course_number LIKE ? GROUP BY course_id";
+                query = "SELECT *, COUNT(student_id) as count FROM courses NATURAL LEFT JOIN enrolled_in NATURAL JOIN taught_in NATURAL JOIN teaches NATURAL JOIN professors NATURAL JOIN users NATURAL JOIN users_detail WHERE dept_short_name LIKE ? AND course_number LIKE ? AND ge LIKE ? GROUP BY course_id";
                 btnName = "Enroll";
             } else if (user.getType().equals("Lecturer")) {
-                query = "SELECT *, COUNT(student_id) AS count FROM courses NATURAL LEFT JOIN enrolled_in NATURAL LEFT JOIN taught_in NATURAL LEFT JOIN teaches NATURAL LEFT JOIN professors NATURAL LEFT JOIN users NATURAL LEFT JOIN users_detail WHERE dept_short_name LIKE ? AND course_number LIKE ? GROUP BY course_id";
+                query = "SELECT *, COUNT(student_id) AS count FROM courses NATURAL LEFT JOIN enrolled_in NATURAL LEFT JOIN taught_in NATURAL LEFT JOIN teaches NATURAL LEFT JOIN professors NATURAL LEFT JOIN users NATURAL LEFT JOIN users_detail WHERE dept_short_name LIKE ? AND course_number LIKE ? AND ge LIKE ? GROUP BY course_id";
                 btnName = "Teach";
             } else {
             }
@@ -36,6 +31,7 @@
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, subject.trim() + "%");
             stmt.setString(2, "%" + courseNum.trim() + "%");
+			stmt.setString(3, "%" + ge + "%");
             ResultSet rs = stmt.executeQuery();
             int i = 1;
             while (rs.next()) {
