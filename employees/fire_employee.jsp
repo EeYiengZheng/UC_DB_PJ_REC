@@ -14,9 +14,20 @@
         ResultSet rs = stmt.executeQuery();
         request.setAttribute("resultMessage", "<p>Employee " + employee_id + " was fired.</p>");
         stmt.close();
+
+        stmt = con.prepareStatement("DELETE FROM enrolled_in WHERE course_id IN (SELECT course_id FROM teaches WHERE professor_id=?)");
+        stmt.setInt(1, Integer.parseInt(employee_id));
+        stmt.executeUpdate();
+        stmt.close();
+
+        stmt = con.prepareStatement("DELETE FROM teaches WHERE professor_id=?");
+        stmt.setInt(1, Integer.parseInt(employee_id));
+        stmt.executeUpdate();
+        stmt.close();
+
         con.close();
     } catch (Exception e) {
-        request.setAttribute("resultMessage", "<p>An error occurred while attempting to add the course. Please contact the system administrator.</p>");
+        request.setAttribute("resultMessage", "<p>An error occurred while attempting to FIRE the employee. The employee was defiant. Please contact the police.</p>");
     } finally {
         RequestDispatcher rd = request.getRequestDispatcher("employee_search.jsp");
         rd.forward(request, response);
