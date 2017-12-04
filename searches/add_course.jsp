@@ -17,7 +17,7 @@
 						con.close();
 						request.setAttribute("resultMessage", "<p>The class you are trying to add is full.</p>");
 					}
-                    query = "SELECT student_id FROM Students NATURAL JOIN Users WHERE username=?";
+                    query = "SELECT student_id FROM students NATURAL JOIN users WHERE username=?";
                     PreparedStatement stmt = con.prepareStatement(query);
                     stmt.setString(1, user.getUsername());
                     ResultSet idResult = stmt.executeQuery();
@@ -25,7 +25,7 @@
                     id = idResult.getInt("student_id");
                     stmt.close();
                 } else {
-                    query = "SELECT professor_id FROM Professors NATURAL JOIN Users WHERE username=?";
+                    query = "SELECT professor_id FROM professors NATURAL JOIN users WHERE username=?";
                     PreparedStatement stmt = con.prepareStatement(query);
                     stmt.setString(1, user.getUsername());
                     ResultSet idResult = stmt.executeQuery();
