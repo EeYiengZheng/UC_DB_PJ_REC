@@ -11,16 +11,11 @@
             <th><h4>Course</h4></th>
             <th><h4>Add</h4></th>
         </tr>
-        <%
-
-            String subject = request.getParameter("subject");
-            String courseNum = request.getParameter("courseNum");
-			String ge = request.getParameter("ge");
-			
+        <%			
             String query = "";
             String btnName = "";
             if (user.getType().equals("Student")) {
-                query = "SELECT *, COUNT(student_id) as count FROM courses NATURAL LEFT JOIN enrolled_in NATURAL JOIN taught_in NATURAL JOIN teaches NATURAL JOIN professors NATURAL JOIN users NATURAL JOIN users_detail WHERE dept_short_name LIKE ? AND course_number LIKE ? AND ge LIKE ? GROUP BY course_id";
+                query = "SELECT *, COUNT(student_id) as count FROM courses NATURAL LEFT JOIN enrolled_in NATURAL LEFT JOIN taught_in NATURAL JOIN teaches NATURAL JOIN professors NATURAL JOIN users NATURAL JOIN users_detail WHERE dept_short_name LIKE ? AND course_number LIKE ? AND ge LIKE ? GROUP BY course_id";
                 btnName = "Enroll";
             } else if (user.getType().equals("Lecturer")) {
                 query = "SELECT *, COUNT(student_id) AS count FROM courses NATURAL LEFT JOIN enrolled_in NATURAL LEFT JOIN taught_in NATURAL LEFT JOIN teaches NATURAL LEFT JOIN professors NATURAL LEFT JOIN users NATURAL LEFT JOIN users_detail WHERE dept_short_name LIKE ? AND course_number LIKE ? AND ge LIKE ? GROUP BY course_id";
@@ -28,11 +23,16 @@
             } else {
             }
 
+            String subject = request.getParameter("subject");
+            String courseNum = request.getParameter("courseNum");
+			String ge = request.getParameter("ge");
+			
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, subject.trim() + "%");
             stmt.setString(2, "%" + courseNum.trim() + "%");
 			stmt.setString(3, "%" + ge + "%");
             ResultSet rs = stmt.executeQuery();
+            stmt.close();
             int i = 1;
             while (rs.next()) {
                 String anchID = "anchID" + i;
@@ -42,27 +42,69 @@
                 String courseName = rs.getString("course_name");
                 String departmentShortName = rs.getString("dept_short_name");
                 String courseDescription = rs.getString("course_description");
-                String buildingName = rs.getString("building_name");
-                String roomNum = rs.getString("room_num");
 				String count = rs.getString("count");
 				
                 String location = "N/A";
+                String buildingName = rs.getString("building_name");
+                String roomNum = rs.getString("room_num");
                 if (buildingName != null && roomNum != null) {
                     location = buildingName + " " + roomNum;
                 }
+				
+                String time = "N/A";
                 String sessionDate = rs.getString("session_date");
                 String sessionTime = rs.getString("session_time");
-                String time = "N/A";
                 if (sessionDate != null && sessionTime != null) {
                     time = sessionDate + " " + sessionTime;
                 }
-                String professorName = rs.getString("first_name") == null ? "None" : rs.getString("first_name") + " " + rs.getString("last_name");
+				
+                String professorName = rs.getString("first_name") == null ? NO_PROFESSOR : rs.getString("first_name") + " " + rs.getString("last_name");
                 out.println("<tr><td><p id='" + anchID + "'><b>" + departmentShortName + " " + courseNumber + "<br>" + courseName + "</b><br>" + courseDescription + "<br>Instructor: " + professorName + "<br>" + "Classroom: " + location + "<br>" + "Time: " + time + "<br>Class capacity: " + count + "/" +CLASS_CAP + "</p></td>");
-                out.println("<td><form action='add_course.jsp' method='POST'><input type='hidden' name='courseID' value='" + courseID + "'><input type='hidden' name='time' value='" + time + "'><input type='hidden' name='count' value='" + count + "'><input type='hidden' name='dept_short_name' value='" + departmentShortName + "'><input type='hidden' name='rd_url' value='" + request.getRequestURL() + "?" + request.getQueryString() + "#" + anchID + "'><input class='action_btn_anchor btn btn-danger' type='Submit' value='" + btnName + "'></form></td></tr><br>");
+				
+				
+				//Check for time collisions
+				boolean collisionFound = false;
+				if (!time.equals("N/A")) {
+					String timeQuery = "";
+					if (user.getType().equals("Student")) {
+						timeQuery = "SELECT session_date, session_time FROM enrolled_in NATURAL JOIN students NATURAL JOIN users NATURAL JOIN taught_in WHERE username=?";
+					}
+					else if (user.getType().equals("Lecturer")) {
+						timeQuery = "SELECT session_date, session_time FROM teaches NATURAL JOIN professors NATURAL JOIN users NATURAL JOIN taught_in WHERE username=?";
+					}
+					
+					PreparedStatement timeStmt = con.prepareStatement(timeQuery);
+					timeStmt.setString(1, user.getUsername());
+					ResultSet timeResult = timeStmt.executeQuery();
+					while (!collisionFound && timeResult.next()) {
+						String classTime = timeResult.getString("session_date") + " " + timeResult.getString("session_time");
+						collisionFound = time.equals(classTime);	
+					}
+					timeStmt.close();
+				}
+					
+					
+				
+				if (user.getType().equals("Student") && Integer.parseInt(count) <= CLASS_CAP && !collisionFound) {
+					out.println("<td><form action='add_course.jsp' method='POST'><input type='hidden' name='courseID' value='" + courseID + "'><input type='hidden' name='rd_url' value='" + request.getRequestURL() + "?" + request.getQueryString() + "#" + anchID + "'><input class='action_btn_anchor btn btn-danger' type='Submit' value='" + btnName + "'></form></td></tr><br>");
+				}
+				else if (user.getType().equals("Lecturer") && !collisionFound) {
+					
+					String profQuery = "SELECT * FROM professors NATURAL JOIN hired_by NATURAL JOIN users WHERE username = ?";
+					PreparedStatement profStmt = con.prepareStatement(profQuery);
+					profStmt.setString(1, user.getUsername());
+					ResultSet profResult = profStmt.executeQuery();
+					profResult.next();
+					String professorDepartment = profResult.getString("dept_short_name");
+					
+					
+					if (departmentShortName.equals(professorDepartment) && professorName == NO_PROFESSOR) {
+						out.println("<td><form action='add_course.jsp' method='POST'><input type='hidden' name='courseID' value='" + courseID + "'><input type='hidden' name='rd_url' value='" + request.getRequestURL() + "?" + request.getQueryString() + "#" + anchID + "'><input class='action_btn_anchor btn btn-danger' type='Submit' value='" + btnName + "'></form></td></tr><br>");	
+					}
+				}
                 out.println("<br>");
             }
 
-            stmt.close();
             con.close();
         %>
     </table>
