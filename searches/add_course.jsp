@@ -13,7 +13,7 @@
                 String query = "";
                 int id = 0;
                 if (user.getType().equals("Student")) {
-					if (request.getParameter("count") >= CLASS_CAP) {
+					if (Integer.parseInt(request.getParameter("count")) >= CLASS_CAP) {
 						con.close();
 						request.setAttribute("resultMessage", "<p>The class you are trying to add is full.</p>");
 					}
