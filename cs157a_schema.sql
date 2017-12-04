@@ -98,7 +98,7 @@ CREATE TABLE courses (
   course_number      VARCHAR(16)  NOT NULL,
   course_name        VARCHAR(128) NOT NULL,
   course_description TEXT                  DEFAULT NULL,
-  ge VARCHAR(16) DEFAULT 'N/A',
+  ge                 VARCHAR(16)  DEFAULT 'N/A',
   FULLTEXT idx_course_description (course_description),
   PRIMARY KEY (course_id),
   UNIQUE KEY (course_number, dept_short_name),

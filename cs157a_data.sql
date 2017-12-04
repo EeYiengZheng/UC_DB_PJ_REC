@@ -10723,7 +10723,7 @@ INSERT INTO taught_in (course_id, building_name, room_num, session_date, session
 (4578,'Z',29,'We','10:30');
 
 
---GE Courses
+-- GE Courses
 UPDATE courses SET ge='A1' WHERE course_description LIKE '%GE Area: A1%';
 UPDATE courses SET ge='A2' WHERE course_description LIKE '%GE Area: A2%';
 UPDATE courses SET ge='A3' WHERE course_description LIKE '%GE Area: A3%';
@@ -10739,7 +10739,7 @@ UPDATE courses SET ge='D3' WHERE course_description LIKE '%GE Area: D3%';
 UPDATE courses SET ge='E' WHERE course_description LIKE '%GE Area: E%';
 
 
---Extra B1 Courses
+-- Extra B1 Courses
 UPDATE courses SET ge='B1' WHERE dept_short_name = 'CHEM' AND course_number='001A';
 UPDATE courses SET ge='B1' WHERE dept_short_name = 'CHEM' AND course_number='001B';
 UPDATE courses SET ge='B1' WHERE dept_short_name = 'GEOL' AND course_number='007';
@@ -10748,7 +10748,7 @@ UPDATE courses SET ge='B1' WHERE dept_short_name = 'PHYS' AND course_number='002
 UPDATE courses SET ge='B1' WHERE dept_short_name = 'PHYS' AND course_number='050';
 UPDATE courses SET ge='B1' WHERE dept_short_name = 'PHYS' AND course_number='051';
 
---Extra B2 Courses
+-- Extra B2 Courses
 UPDATE courses SET ge='B2' WHERE dept_short_name = 'BIOL' AND course_number='030';
 UPDATE courses SET ge='B2' WHERE dept_short_name = 'BIOL' AND course_number='031';
 UPDATE courses SET ge='B2' WHERE dept_short_name = 'BIOL' AND course_number='065';
@@ -10756,7 +10756,7 @@ UPDATE courses SET ge='B2' WHERE dept_short_name = 'BIOL' AND course_number='065
 UPDATE courses SET ge='B2' WHERE dept_short_name = 'BIOL' AND course_number='066';
 UPDATE courses SET ge='B2' WHERE dept_short_name = 'MICR' AND course_number='020';
 
---Extra B4 Courses
+-- Extra B4 Courses
 UPDATE courses SET ge ='B4' WHERE dept_short_name = 'MATH' AND course_number = '031';
 UPDATE courses SET ge ='B4' WHERE dept_short_name = 'MATH' AND course_number = '032';
 UPDATE courses SET ge ='B4' WHERE dept_short_name = 'MATH' AND course_number = '060';
@@ -10765,17 +10765,17 @@ UPDATE courses SET ge ='B4' WHERE dept_short_name = 'MATH' AND course_number = '
 UPDATE courses SET ge ='B4' WHERE dept_short_name = 'UNVS' AND course_number = '015C';
 UPDATE courses SET ge ='B4' WHERE dept_short_name = 'UNVS' AND course_number = '016C';
 
---Extra C1 Courses
+-- Extra C1 Courses
 UPDATE courses SET ge='C1' WHERE dept_short_name = 'ARTH' AND course_number = '070A';
 
---Extra D1 Courses
+-- Extra D1 Courses
 UPDATE courses SET ge ='D1' WHERE dept_short_name = 'LING' AND course_number = '024';
 
---Extra E Courses
+-- Extra E Courses
 UPDATE courses SET ge ='E' WHERE dept_short_name = 'LING' AND course_number = '024';
 
 
---Combo GE Courses
+-- Combo GE Courses
 UPDATE courses SET ge='C1C2' WHERE dept_short_name = 'FORL' AND course_number = '025';
 UPDATE courses SET ge='C1D2' WHERE dept_short_name = 'AMS' AND course_number = '001A';
 UPDATE courses SET ge='C2D3' WHERE dept_short_name = 'AMS' AND course_number = '001B';
