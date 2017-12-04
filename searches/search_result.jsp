@@ -67,10 +67,10 @@
 				if (!time.equals("N/A")) {
 					String timeQuery = "";
 					if (user.getType().equals("Student")) {
-						timeQuery = "SELECT session_date, session_time FROM enrolled_in NATURAL JOIN students NATURAL JOIN users NATURAL JOIN taught_in WHERE username=?";
+						timeQuery = "SELECT session_date, session_time FROM enrolled_in NATURAL JOIN students NATURAL JOIN users NATURAL LEFT JOIN taught_in WHERE username=?";
 					}
 					else if (user.getType().equals("Lecturer")) {
-						timeQuery = "SELECT session_date, session_time FROM teaches NATURAL JOIN professors NATURAL JOIN users NATURAL JOIN taught_in WHERE username=?";
+						timeQuery = "SELECT session_date, session_time FROM teaches NATURAL JOIN professors NATURAL JOIN users NATURAL LEFT JOIN taught_in WHERE username=?";
 					}
 					
 					PreparedStatement timeStmt = con.prepareStatement(timeQuery);
@@ -90,7 +90,7 @@
 				}
 				else if (user.getType().equals("Lecturer") && !collisionFound) {
 					
-					String profQuery = "SELECT * FROM professors NATURAL JOIN hired_by NATURAL JOIN users WHERE username = ?";
+					String profQuery = "SELECT * FROM professors NATURAL LEFT JOIN hired_by NATURAL JOIN users WHERE username = ?";
 					PreparedStatement profStmt = con.prepareStatement(profQuery);
 					profStmt.setString(1, user.getUsername());
 					ResultSet profResult = profStmt.executeQuery();
