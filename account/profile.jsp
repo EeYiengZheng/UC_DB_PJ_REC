@@ -9,11 +9,11 @@
     <c:choose>
         <c:when test="${user.loggedIn}">
 <%
-    String query = "SELECT * FROM Users_Detail WHERE user_id IN(SELECT user_id FROM Users WHERE username=?)";
-    PreparedStatement stmt = con.prepareStatement(query);
-    stmt.setString(1, user.getUsername());
-    ResultSet rs = stmt.executeQuery();
-	stmt.close();
+//    String query = "SELECT * FROM Users_Detail WHERE user_id IN(SELECT user_id FROM Users WHERE username=?)";
+//    PreparedStatement stmt = con.prepareStatement(query);
+//    stmt.setString(1, user.getUsername());
+//    ResultSet rs = stmt.executeQuery();
+//	stmt.close();
 
    out.println("<p style='font-size: 150%;'>Welcome back, " + user.getUsername() + "! You are using a <b style='color: #ff9;'>" + user.getType() + "</b> account. <br><br> You can do the following things with your account: </p>");
    if (user.getType().equals("Student")) {

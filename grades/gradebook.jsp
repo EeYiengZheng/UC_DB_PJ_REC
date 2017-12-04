@@ -43,7 +43,7 @@
             <%
 				if (request.getParameter("course") != null) {
 					String course = request.getParameter("course");
-					String gradeQuery = "SELECT * FROM enrolled_in NATURAL JOIN students NATURAL JOIN users NATURAL JOIN users_detail WHERE course_id=" + course;
+					String gradeQuery = "SELECT * FROM enrolled_in NATURAL JOIN students NATURAL JOIN users WHERE course_id=" + course;
 					PreparedStatement studentGradeStatement = con.prepareStatement(gradeQuery);
 					ResultSet studentGrades = studentGradeStatement.executeQuery();
 					studentGradeStatement.close();

@@ -88,7 +88,7 @@
 
     <%
         if (user.getType().equals("Student")) {
-            String query = "SELECT * FROM courses NATURAL JOIN enrolled_in NATURAL JOIN teaches NATURAL JOIN professors NATURAL JOIN users NATURAL JOIN users_detail WHERE student_id IN (SELECT student_id FROM students NATURAL JOIN users WHERE username=?)";
+            String query = "SELECT * FROM courses NATURAL JOIN enrolled_in NATURAL JOIN teaches NATURAL JOIN professors NATURAL JOIN users WHERE student_id IN (SELECT student_id FROM students NATURAL JOIN users WHERE username=?)";
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, user.getUsername());
             ResultSet courseList = stmt.executeQuery();

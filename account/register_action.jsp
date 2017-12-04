@@ -39,11 +39,21 @@
     String pass2 = request.getParameter("conf_password");
 
     if (pass1 != null && pass2 != null && pass1.equals(pass2)) {
-        String query = "INSERT INTO users(username, password) VALUES(?, sha2(?, 256))";
+        String query = "INSERT INTO users(username, password, email, first_name, last_name, birthday, nickname) VALUES(?, sha2(?, 256), ?, ?, ?, ?, ?)";
         String username = request.getParameter("username");
         PreparedStatement stmt = con.prepareStatement(query);
         stmt.setString(1, username);
         stmt.setString(2, pass1);
+        String email = request.getParameter("email").equals("") ? null : request.getParameter("email");
+        String fname = request.getParameter("fname").equals("") ? null : request.getParameter("fname");
+        String lname = request.getParameter("lname").equals("") ? null : request.getParameter("lname");
+        String birthday = request.getParameter("birthday").equals("") ? null : request.getParameter("birthday");
+        String nickname = request.getParameter("nickname").equals("") ? null : request.getParameter("nickname");
+        stmt.setString(3, email);
+        stmt.setString(4, fname);
+        stmt.setString(5, lname);
+        stmt.setString(6, birthday);
+        stmt.setString(7, nickname);
         stmt.executeUpdate();
         stmt.close();
 
@@ -66,24 +76,6 @@
         subclassStmt.setInt(1, userID);
         subclassStmt.executeUpdate();
         subclassStmt.close();
-
-
-        query = "INSERT INTO users_detail(user_id, email, first_name, last_name, birthday, nickname) VALUES(?, ?, ?, ?, ?, ?)";
-        PreparedStatement detailStmt = con.prepareStatement(query);
-        detailStmt.setInt(1, userID);
-        String email = request.getParameter("email").equals("") ? null : request.getParameter("email");
-        String fname = request.getParameter("fname").equals("") ? null : request.getParameter("fname");
-        String lname = request.getParameter("lname").equals("") ? null : request.getParameter("lname");
-        String birthday = request.getParameter("birthday").equals("") ? null : request.getParameter("birthday");
-        String nickname = request.getParameter("nickname").equals("") ? null : request.getParameter("nickname");
-
-        detailStmt.setString(2, email);
-        detailStmt.setString(3, fname);
-        detailStmt.setString(4, lname);
-        detailStmt.setString(5, birthday);
-        detailStmt.setString(6, nickname);
-        detailStmt.executeUpdate();
-        detailStmt.close();
 
         con.close();
         response.sendRedirect("login.jsp");

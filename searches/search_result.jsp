@@ -15,10 +15,10 @@
             String query = "";
             String btnName = "";
             if (user.getType().equals("Student")) {
-                query = "SELECT *, COUNT(student_id) as count FROM courses NATURAL LEFT JOIN enrolled_in NATURAL LEFT JOIN taught_in NATURAL JOIN teaches NATURAL JOIN professors NATURAL JOIN users NATURAL JOIN users_detail WHERE dept_short_name LIKE ? AND course_number LIKE ? AND ge LIKE ? GROUP BY course_id";
+                query = "SELECT *, COUNT(student_id) as count FROM courses NATURAL LEFT JOIN enrolled_in NATURAL LEFT JOIN taught_in NATURAL JOIN teaches NATURAL JOIN professors NATURAL JOIN users WHERE dept_short_name LIKE ? AND course_number LIKE ? AND ge LIKE ? GROUP BY course_id";
                 btnName = "Enroll";
             } else if (user.getType().equals("Lecturer")) {
-                query = "SELECT *, COUNT(student_id) AS count FROM courses NATURAL LEFT JOIN enrolled_in NATURAL LEFT JOIN taught_in NATURAL LEFT JOIN teaches NATURAL LEFT JOIN professors NATURAL LEFT JOIN users NATURAL LEFT JOIN users_detail WHERE dept_short_name LIKE ? AND course_number LIKE ? AND ge LIKE ? GROUP BY course_id";
+                query = "SELECT *, COUNT(student_id) AS count FROM courses NATURAL LEFT JOIN enrolled_in NATURAL LEFT JOIN taught_in NATURAL LEFT JOIN teaches NATURAL LEFT JOIN professors NATURAL LEFT JOIN users WHERE dept_short_name LIKE ? AND course_number LIKE ? AND ge LIKE ? GROUP BY course_id";
                 btnName = "Teach";
             } else {
             }

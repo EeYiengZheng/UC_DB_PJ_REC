@@ -5,7 +5,7 @@
 <jsp:setProperty name='user' property='*'/>
 
 <%
-    String query = "SELECT * FROM Users_Detail WHERE user_id IN(SELECT user_id FROM Users WHERE username=?)";
+    String query = "SELECT * FROM users WHERE username=?";
     PreparedStatement stmt = con.prepareStatement(query);
     stmt.setString(1, user.getUsername());
     ResultSet rs = stmt.executeQuery();
