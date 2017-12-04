@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="../databases.jsp" %>
 <%@include file="../taglibs.jsp" %>
+<%@include file="../constants.jsp" %>
 <jsp:useBean id='user' scope='session' class='main.java.beans.UserBean'/>
 <jsp:setProperty name='user' property='*'/>
 
@@ -24,10 +25,10 @@
             String query = "";
             String btnName = "";
             if (user.getType().equals("Student")) {
-                query = "SELECT * FROM Courses NATURAL JOIN taught_in NATURAL JOIN teaches NATURAL JOIN professors NATURAL JOIN users NATURAL JOIN users_detail WHERE dept_short_name LIKE ? AND course_number LIKE ?";
+                query = "SELECT *, COUNT(student_id) as count FROM courses NATURAL LEFT JOIN enrolled_in NATURAL JOIN taught_in NATURAL JOIN teaches NATURAL JOIN professors NATURAL JOIN users NATURAL JOIN users_detail WHERE dept_short_name LIKE ? AND course_number LIKE ? GROUP BY course_id";
                 btnName = "Enroll";
             } else if (user.getType().equals("Lecturer")) {
-                query = "SELECT * FROM Courses NATURAL LEFT JOIN taught_in NATURAL LEFT JOIN teaches NATURAL LEFT JOIN professors NATURAL LEFT JOIN users NATURAL LEFT JOIN users_detail WHERE dept_short_name LIKE ? AND course_number LIKE ?";
+                query = "SELECT *, COUNT(student_id) AS count FROM courses NATURAL LEFT JOIN enrolled_in NATURAL LEFT JOIN taught_in NATURAL LEFT JOIN teaches NATURAL LEFT JOIN professors NATURAL LEFT JOIN users NATURAL LEFT JOIN users_detail WHERE dept_short_name LIKE ? AND course_number LIKE ? GROUP BY course_id";
                 btnName = "Teach";
             } else {
             }
@@ -47,6 +48,8 @@
                 String courseDescription = rs.getString("course_description");
                 String buildingName = rs.getString("building_name");
                 String roomNum = rs.getString("room_num");
+				String count = rs.getString("count");
+				
                 String location = "N/A";
                 if (buildingName != null && roomNum != null) {
                     location = buildingName + " " + roomNum;
@@ -58,7 +61,7 @@
                     time = sessionDate + " " + sessionTime;
                 }
                 String professorName = rs.getString("first_name") == null ? "None" : rs.getString("first_name") + " " + rs.getString("last_name");
-                out.println("<tr><td><p id='" + anchID + "'><b>" + departmentShortName + " " + courseNumber + "<br>" + courseName + "</b><br>" + courseDescription + "<br>Instructor: " + professorName + "<br>" + "Classroom: " + location + "<br>" + "Time: " + time + "</p></td>");
+                out.println("<tr><td><p id='" + anchID + "'><b>" + departmentShortName + " " + courseNumber + "<br>" + courseName + "</b><br>" + courseDescription + "<br>Instructor: " + professorName + "<br>" + "Classroom: " + location + "<br>" + "Time: " + time + "<br>Class capacity: " + count + "/" +CLASS_CAP + "</p></td>");
                 out.println("<td><form action='add_course.jsp' method='POST'><input type='hidden' name='courseID' value='" + courseID + "'><input type='hidden' name='time' value='" + time + "'><input type='hidden' name='rd_url' value='" +
                         request.getRequestURL() + "?" + request.getQueryString() + "#" + anchID + "'><input class='action_btn_anchor btn btn-danger' type='Submit' value='" + btnName + "'></form></td></tr><br>");
                 out.println("<br>");

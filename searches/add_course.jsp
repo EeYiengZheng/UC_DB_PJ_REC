@@ -36,8 +36,9 @@
 				if (user.getType().equals("Student")) {
 					//Check for time collisions
 					if (!classTime.equals("N/A")) {
-						query = "SELECT session_date, session_time FROM enrolled_in NATURAL JOIN taught_in";
+						query = "SELECT session_date, session_time FROM enrolled_in NATURAL JOIN students NATURAL JOIN users NATURAL JOIN taught_in WHERE username=?";
 						stmt = con.prepareStatement(query);
+						stmt.setString(1, user.getUsername());
 						ResultSet rs = stmt.executeQuery();
 						while (!collisionFound && rs.next()) {
 							String time = rs.getString("session_date") + " " + rs.getString("session_time");
@@ -56,8 +57,9 @@
                 } else {
 					//Check for time collisions
 					if (!classTime.equals("N/A")) {
-						query = "SELECT session_date, session_time FROM teaches NATURAL JOIN taught_in";
+						query = "SELECT session_date, session_time FROM teaches NATURAL JOIN professors NATURAL JOIN users NATURAL JOIN taught_in WHERE username=?";
 						stmt = con.prepareStatement(query);
+						stmt.setString(1, user.getUsername());
 						ResultSet rs = stmt.executeQuery();
 						while (!collisionFound && rs.next()) {
 							String time = rs.getString("session_date") + " " + rs.getString("session_time");
