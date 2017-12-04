@@ -25,12 +25,20 @@
                     id = idResult.getInt("student_id");
                     stmt.close();
                 } else {
-                    query = "SELECT professor_id FROM professors NATURAL JOIN users WHERE username=?";
+                    query = "SELECT professor_id, dept_short_name FROM professors NATURAL JOIN users NATURAL LEFT JOIN hired_by WHERE username=?";
                     PreparedStatement stmt = con.prepareStatement(query);
                     stmt.setString(1, user.getUsername());
-                    ResultSet idResult = stmt.executeQuery();
-                    idResult.next();
-                    id = idResult.getInt("professor_id");
+                    ResultSet profResult = stmt.executeQuery();
+                    profResult.next();
+					String classDepartment = request.getParameter("dept_short_name");
+					String profDepartment = profResult.getString("dept_short_name");
+					if (profDepartment == null || !classDepartment.equals(profDepartment)) {
+						stmt.close();
+						con.close();
+						request.setAttribute("resultMessage", "<p>You are not authorized to teach a class in this department.</p>");
+					}
+					
+                    id = profResult.getInt("professor_id");
                     stmt.close();
                 }
 				
