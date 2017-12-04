@@ -203,20 +203,3 @@ CREATE TABLE head_of (
 
 -- ------------------------------------
 
--- ---------- NEW NEW NEW NEW ---------
-
---
--- enrollment_capacity
---
-DROP TABLE IF EXISTS enroll_capacity;
-CREATE TABLE enroll_capacity (
-  course_id        INT UNSIGNED NOT NULL,
-  capacity_current TINYINT UNSIGNED DEFAULT 0,
-  capacity_max     TINYINT UNSIGNED DEFAULT 30, -- for now
-  PRIMARY KEY (course_id),
-  FOREIGN KEY (course_id) REFERENCES courses (course_id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
-)
-  ENGINE = InnoDB;
-
