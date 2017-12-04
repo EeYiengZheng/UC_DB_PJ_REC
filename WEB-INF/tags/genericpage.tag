@@ -34,11 +34,11 @@
         }
 
         body {
-            background-color: #011F4B
+            background-color: #011f52
         }
 
         h1, h2, h3, p, footer, small, .nav-link, .navbar-toggler-icon {
-            color: white !important;
+            color: white;
         }
 
         label {
@@ -55,7 +55,7 @@
         }
 
         .bg-dark {
-            background-color: #011f4b !important;
+            background-color: #011f52 !important;
         }
 
         #pagefooter {
