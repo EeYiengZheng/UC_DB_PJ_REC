@@ -13,6 +13,7 @@
     PreparedStatement stmt = con.prepareStatement(query);
     stmt.setString(1, user.getUsername());
     ResultSet rs = stmt.executeQuery();
+	stmt.close();
 
    out.println("<p style='font-size: 150%;'>Welcome back, " + user.getUsername() + "! You are using a <b style='color: #ff9;'>" + user.getType() + "</b> account. <br><br> You can do the following things with your account: </p>");
    if (user.getType().equals("Student")) {
@@ -21,11 +22,27 @@
    }
    else if (user.getType().equals("Lecturer")) {
    out.println("<li>Edit your personal information</li><li>Search for courses</li><li>Pick courses to teach</li><li>Edit grades</li>");
+   
+   PreparedStatement departmentStatement = con.prepareStatement("SELECT * FROM professors NATURAL JOIN users NATURAL JOIN hired_by WHERE username = ?");
+   departmentStatement.setString(1, user.getUsername());
+   ResultSet departmentSet = departmentStatement.executeQuery();
+   departmentStatement.close();
+   
+   out.println("<br><div class='row justify-content-center'>");
+   if (departmentSet.next()) {
+		String department = departmentSet.getString("dept_short_name");   
+   		out.println("<p style='font-size: 150%;'>You are in the " + department + " department.</p>");
+   }
+   else {
+		out.println("<p style='font-size: 150%;'>You are not in a department.</p>");
+   }
+   out.println("</div>");
    }
    else { //"admin"
    out.println("<li>Edit your personal information</li><li>Find available employees</li><li>Hire and fire employees</li><li> View employee data</li>");
    }
    out.print("</ul>");
+   con.close();
 %>
         </c:when>
         <c:otherwise>
