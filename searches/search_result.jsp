@@ -32,7 +32,6 @@
             stmt.setString(2, "%" + courseNum.trim() + "%");
 			stmt.setString(3, "%" + ge + "%");
             ResultSet rs = stmt.executeQuery();
-            stmt.close();
             int i = 1;
             while (rs.next()) {
                 String anchID = "anchID" + i;
@@ -123,6 +122,7 @@
                 out.println("<br>");
             }
 
+            stmt.close();
             con.close();
         %>
     </table>

@@ -26,17 +26,17 @@
    PreparedStatement departmentStatement = con.prepareStatement("SELECT * FROM professors NATURAL JOIN users NATURAL JOIN hired_by WHERE username = ?");
    departmentStatement.setString(1, user.getUsername());
    ResultSet departmentSet = departmentStatement.executeQuery();
-   departmentStatement.close();
    
    out.println("<br><div class='row justify-content-center'>");
    if (departmentSet.next()) {
-		String department = departmentSet.getString("dept_short_name");   
+		  String department = departmentSet.getString("dept_short_name");   
    		out.println("<p style='font-size: 150%;'>You are in the " + department + " department.</p>");
    }
    else {
 		out.println("<p style='font-size: 150%;'>You are not in a department.</p>");
    }
    out.println("</div>");
+     departmentStatement.close();
    }
    else { //"admin"
    out.println("<li>Edit your personal information</li><li>Find available employees</li><li>Hire and fire employees</li><li> View employee data</li>");

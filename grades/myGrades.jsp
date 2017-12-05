@@ -13,7 +13,6 @@
 				PreparedStatement stmt = con.prepareStatement(query);
 				stmt.setString(1, user.getUsername());
 				ResultSet currentGrades = stmt.executeQuery();
-				stmt.close();
 			%>
             <h3>Currently Taking</h3>
             <%
@@ -26,11 +25,11 @@
 					out.println("<tr><td><p>" + dept_short_name + " " + courseNum + ": " + courseName + "</td><td><p>" + grade + "</td></tr></p>");
 				}
 				
+				stmt.close();
 				query = "SELECT * FROM enrolled_in NATURAL JOIN courses NATURAL JOIN students NATURAL JOIN users WHERE username=? AND is_taking=false";
 				stmt = con.prepareStatement(query);
 				stmt.setString(1, user.getUsername());
 				ResultSet pastGrades = stmt.executeQuery();
-				stmt.close();
                %>
             <%
                out.println("<table style='width:100%'><tr><th><p>Class</th><th><p>Grade</th></tr>");
@@ -42,6 +41,7 @@
 					out.println("<tr><td><p>" + dept_short_name + " " + courseNum + ": " + courseName + "</td><td><p>" + grade + "</td></tr></p>");
 				}
 				
+				stmt.close();
 				con.close();
 			%>
         </c:when>
