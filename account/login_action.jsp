@@ -57,7 +57,7 @@
         stmt.close();
         con.close();
         RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-        request.setAttribute("errorMessage", "Invalid ID or password");
+   request.setAttribute("errorMessage", "<p style='color: #cc0000;'>Error: Invalid ID or password.</p>");
         rd.forward(request, response);
     }
 %>

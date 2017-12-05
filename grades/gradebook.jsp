@@ -51,7 +51,8 @@
 					while (studentGrades.next()) {
 						String studentName = studentGrades.getString("first_name") + " " + studentGrades.getString("last_name");
 						String studentGrade = studentGrades.getString("grade") == null ? "N/A" : studentGrades.getString("grade");
-						out.print(studentName + "---Grade:" + studentGrade + "<br>");
+              
+               out.print("<div class='col-75'><p>" + studentName + "</p></div><div class='col-75'><p>Grade: " + studentGrade + "</p></div>");
 						out.print("<form action='set_grade.jsp' method='POST'><select name='grade'><option value='A+'>A+</option><option value='A'>A</option><option value='A-'>A-</option><option value='B+'>B+</option><option value='B'>B</option><option value='B-'>B-</option><option value='C+'>C+</option><option value='C'>C</option><option value='C-'>C-</option><option value='D+'>D+</option><option value='D'>D</option><option value='D-'>D-</option><option value='F'>F</option><option value='W'>W</option><option value='NC'>NC</option><option value='CR'>CR</option><option value='I'>I</option></select><input type='hidden' name='student_id' value='" + studentGrades.getInt("student_id") + "'><input type='hidden' name='course_id' value='" + course + "'><input type='Submit' value='Set Grade'></form>");
 						out.print("<form action='drop_student.jsp' method='POST'><input type='hidden' name='student_id' value='" + studentGrades.getInt("student_id") + "'><input type='hidden' name='course_id' value='" + course + "'><input type='Submit' value='Drop Student'></form>");
 					}

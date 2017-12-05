@@ -13,6 +13,10 @@
                         <h3 class="panel-title">Login<br>
                         </h3>
                     </div>
+                     <% if (request.getAttribute("errorMessage") != null) {
+                        out.println(request.getAttribute("errorMessage"));
+                    }
+                    %>
                     <div class="panel-body">
                         <form role="form" action="login_action.jsp">
                             <div class="form-group">
@@ -32,10 +36,6 @@
             </div>
         </div>
     </div>
-    <% if (request.getAttribute("errorMessage") != null) {
-        out.println(request.getAttribute("errorMessage"));
-    }
-    %>
 </c:set>
 
 <t:genericpage>
