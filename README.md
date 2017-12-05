@@ -3,8 +3,6 @@ UC_DB_PJ_REC stands for University Database Project, Raymond, Ee, Christine.
 
 See proposal for project information (located under /Documentation/Proposal).
 
-## Project Design
-
 ## Live Demo
 Live demo located at: https://ucdb-rec.herokuapp.com/
 (may not be up all the time)
@@ -12,6 +10,7 @@ Live demo located at: https://ucdb-rec.herokuapp.com/
 ## Requirements for Use
 This project requires Apache Tomcat as a web server to run.
 If on Windows: Tomcat is automatically installed when installing XAMPP. Install XAMPP here: https://www.apachefriends.org/download.html/ Pick 7.1.11 with PHP 7.1.11 for Windows.
+
 If on Mac: To use Tomcat, you need XAMPP server and MySQL running in the background. Download XAMPP here: https://www.apachefriends.org/download.html/ for OS X 7.1.11 with PHP 7.1.11. Download Tomcat separately here: https://tomcat.apache.org/download-90.cgi/
 Unzip the file.
 
@@ -51,14 +50,17 @@ After registering, you will be redirected to Login, where you can enter in your 
 
 ##### Student
 U/N: 1
+
 P/W: 1
 
 ##### Lecturer
 U/N: 951
+
 P/W: 951
 
 ##### Head of Department
 U/N: EE
+
 P/W: powerful
 
 ### Dashboard
@@ -94,4 +96,5 @@ Upon clicking this, you will be logged out back to the home page and have to sig
 ***
 
 Thanks, that's all, folks!
+
 Made with ♥ Team 5
