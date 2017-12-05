@@ -18,13 +18,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <input type="text" name="fname" id="first_name" class="form-control input-sm"
-                                               placeholder="First Name">
+                                               placeholder="First Name" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <input type="text" name="lname" id="last_name" class="form-control input-sm"
-                                               placeholder="Last Name">
+                                               placeholder="Last Name" required>
                                     </div>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <input type="date" name="birthday" id="date" class="form-control input-sm"
-                                               placeholder="Date of Birth">
+                                               placeholder="Date of Birth" required>
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
         <style>
             input[type="date"]:before {
                 content: attr(placeholder) !important;
-                color: #aaa;
+                color: #f66;
                 margin-right: 0.5em;
             }
 
@@ -120,6 +120,15 @@
             input[type="date"]:valid:before {
                 content: "";
             }
+            
+            #last_name::placeholder {
+                color: #f66;
+            }
+            
+            #first_name::placeholder {
+                color: #f66;
+            }
+            
 
             #user_name::placeholder {
                 color: #f66;
